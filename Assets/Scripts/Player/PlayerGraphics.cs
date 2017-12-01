@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerVisuals : MonoBehaviour
+public class PlayerGraphics : MonoBehaviour
 {
     //Use for animations, models, effects.
 	

@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Controls all movement related to the character.
-
+    public enum PlayerMode {Idle, Walking, Sprinting, Jumping, Falling, Climbing, Attacking};
+    public PlayerMode ApeMode;
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
     public float moveForce = 365f;
-    public float maxSpeed = 5f;
+    public float maxSpeed = 10f;
     public float jumpForce = 2000f;
     public Transform groundCheck;
 
@@ -27,11 +28,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = true;
-
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
+
         }
     }
 
