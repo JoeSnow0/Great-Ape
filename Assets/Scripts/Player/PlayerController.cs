@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    //Controls all movement related to the character.
 
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
