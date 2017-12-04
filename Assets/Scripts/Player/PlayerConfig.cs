@@ -1,23 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
+[RequireComponent(typeof(PlayerController))]
 public class PlayerConfig : MonoBehaviour
 {
-    //A collection of all scripts for the player character
-    public PlayerController playerController;
-    public PlayerGraphics playerGraphics;
-    public bool isActive;
-    public CreateUnitStats unitStats;
 
-    //Add failsafes here
-    private void Start()
+    float moveSpeed = 6;
+    float gravity = -20;
+    Vector3 velocity;
+
+    PlayerController controller;
+
+    void Start()
     {
+        controller = GetComponent<PlayerController>();
     }
 
-    public void ToggleApe()
+    void Update()
     {
-        isActive = !isActive;
+
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        velocity.x = input.x * moveSpeed;
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 }
-
