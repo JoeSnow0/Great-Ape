@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEditor;
 
 
-public class LevelEditor : EditorWindow
+public class LevelEditorWindow : EditorWindow
 {
     // The size of the Texture2D returned from the method AssetPreview.GetAssetPreview()
     const int PREVIEW_SIZE_X = 128;
@@ -52,8 +52,11 @@ public class LevelEditor : EditorWindow
     [MenuItem("Window/Level Editor")]
     static void Init()
     {
-        LevelEditor editor = (LevelEditor)EditorWindow.GetWindow<LevelEditor>();
+        LevelEditorWindow editor = (LevelEditorWindow)EditorWindow.GetWindow<LevelEditorWindow>();
         editor.titleContent = new GUIContent("Level Editor");
+
+        // Refreshes the AssetDataBase so we get the correct changes and preview images made
+        //AssetDatabase.ImportAsset()
 
         editor.m_levelDictionary.Clear();
         editor.m_previewTextures.Clear();
@@ -148,14 +151,14 @@ public class LevelEditor : EditorWindow
                 }
                 break;
 
-            // Creates the selected object
+            // Handles left and right clicks in the editor window
             case EventType.MouseUp:
-
-                if(currentEvent.button == 0)
-                    LeftMouseClick();
+                if(currentEvent.button == 0 || currentEvent.button == 1)
+                    MouseClick();
 
                 break;
 
+            // "Zooms" using orthographic size on the camera
             case EventType.ScrollWheel:
                 m_cam.orthographicSize += currentEvent.delta.y;
                 m_cam.orthographicSize = Mathf.Clamp(m_cam.orthographicSize, 1, 100);
@@ -163,10 +166,19 @@ public class LevelEditor : EditorWindow
                 break;
 
             case EventType.KeyDown:
-                if (currentEvent.keyCode == KeyCode.R && m_cameraObject.transform.position != m_orgPos)
+
+                if (currentEvent.keyCode == KeyCode.R)
                 {
+                    // If we're also holding CTRL
+                    if (currentEvent.control)
+                    {
+                        // TODO: Implement some kind of complete refresh for the editor
+                    }
                     // Resets the camera to it's original position
-                    m_cameraObject.transform.position = m_orgPos;
+                    else if (m_cameraObject.transform.position != m_orgPos)
+                    {
+                        m_cameraObject.transform.position = m_orgPos;
+                    }
                 }
                 else
                     return;
@@ -179,21 +191,41 @@ public class LevelEditor : EditorWindow
         Repaint();
     }
 
-    // Method for handling left mouse clicks in the editor window
-    private void LeftMouseClick()
+    // Method for handling mouse clicks in the editor window
+    private void MouseClick()
     {
-        Camera.SetupCurrent(m_cam);
+        // TODO: Fix so the mouse always clicks on the correct position, probably camera that screws it up
+        // Shoots a ray from the screen with the mouse position
+        Ray mouseRay = m_cam.ScreenPointToRay(new Vector2(currentEvent.mousePosition.x, position.height - currentEvent.mousePosition.y));
+        RaycastHit hit;
+        // Checks if the ray hit an object
+        if (Physics.Raycast(mouseRay, out hit, 1 << 10))
+        {
+            ClickOnObject(hit);
+        }
+        // If we don't click on an object
+        else
+        {
+            ClickInView(mouseRay);
+        }
+        
+        m_createObject = false;
+    }
+
+    // For handling mouse clicks that are aimed at objects in the level
+    private void ClickOnObject(RaycastHit hit)
+    {
+
+    }
+
+    // For handling mouse clicks that are not aimed at any objects 
+    private void ClickInView(Ray mouseRay)
+    {
         if (m_createObject && m_currentBlockKey.Length > 0)
         {
-            // Shoots a ray from the screen with the mouse position
-            //Ray mouseRay = HandleUtility.GUIPointToWorldRay(new Vector2(currentEvent.mousePosition.x, position.height - currentEvent.mousePosition.y));
-            Ray mouseRay = m_cam.ScreenPointToRay(new Vector2(currentEvent.mousePosition.x, position.height - currentEvent.mousePosition.y));
             // Creates a plane which has a normal towards the camera and we place it on the level's position
             Plane rayPlane = new Plane(-m_cam.transform.forward, level.transform.position);
             float enter;
-            RaycastHit hit;
-            // TODO: Select objects with mouseRay
-            //if (Physics.Raycast(mouseRay, out hit, 1 << 8))
             if (rayPlane.Raycast(mouseRay, out enter))
             {
                 // Gets the position where the ray hit the point
@@ -202,11 +234,11 @@ public class LevelEditor : EditorWindow
                 Object prefab = Resources.Load(m_currentBlockKey, typeof(GameObject));
                 // Instantiates the prefab and sets the level as it's parent
                 GameObject block = Instantiate(prefab, spawnPos, Quaternion.identity) as GameObject;
-                block.layer = 8;
+                // The LevelEditor layer
+                block.layer = 10;
                 block.transform.SetParent(level.transform);
             }
         }
-        m_createObject = false;
     }
 
     // Displays a scroll view with all the available level blocks
@@ -246,10 +278,11 @@ public class LevelEditor : EditorWindow
                 continue;
 
             // Creates a button with the current preview image
-            if(GUI.Button(new Rect(0, yPos, PREVIEW_SIZE_X, PREVIEW_SIZE_Y), preview.Value))
+            if (GUI.Button(new Rect(0, yPos, PREVIEW_SIZE_X, PREVIEW_SIZE_Y), preview.Value))
             {
                 UpdateSelectedBlock(preview.Key);
             }
+
             yPos += preview.Value.height;
         }
 
@@ -262,11 +295,11 @@ public class LevelEditor : EditorWindow
     {
         // Gets all the GameObjects in the folder at "Resources/Level Blocks"
         Object[] blockPrefabs = Resources.LoadAll<GameObject>("Level Blocks");
-
         foreach(Object block in blockPrefabs)
         {
             // We save the path for later when we want to instantiate that level block
             string path = "Level Blocks/" + block.name;
+            AssetDatabase.ImportAsset("Assets/Resources/" + path + ".prefab");
             // Gets a preview of the asset that showcases it like in the project view
             Texture2D preview = AssetPreview.GetAssetPreview(block);
 
@@ -342,7 +375,8 @@ public class LevelEditor : EditorWindow
             // Sets the new Level
             level = selectedLevel;
             levelLayer = level.gameObject.layer;
-            level.gameObject.layer = 8;
+            // The LevelEditor layer
+            level.gameObject.layer = 10;
             for (int i = 0; i < level.transform.childCount; i++)
             {
                 level.transform.transform.GetChild(i).gameObject.layer = level.gameObject.layer;
@@ -371,7 +405,8 @@ public class LevelEditor : EditorWindow
         m_cam = m_cameraObject.AddComponent<Camera>();
         m_cam.clearFlags = CameraClearFlags.Color;
         m_cam.backgroundColor = Color.grey;
-        m_cam.cullingMask = 1 << 8;
+        // The LevelEditor layer
+        m_cam.cullingMask = 1 << 10;
         m_cam.orthographic = true;
         m_cam.orthographicSize = orthoSize;
 
