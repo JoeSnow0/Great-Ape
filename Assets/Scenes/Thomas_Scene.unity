@@ -482,7 +482,7 @@ Prefab:
     - target: {fileID: 114186913075915978, guid: cc88d26a5c93902449df8284f24be5ef,
         type: 2}
       propertyPath: timeToJumpApex
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 114186913075915978, guid: cc88d26a5c93902449df8284f24be5ef,
         type: 2}
