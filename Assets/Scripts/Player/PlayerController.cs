@@ -4,16 +4,16 @@ using System.Collections;
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-
+    //What you collide with
     public LayerMask collisionMask;
-
+    //Collision dectectors
     const float skinWidth = .015f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
-
+    //Space between rays
     float horizontalRaySpacing;
     float verticalRaySpacing;
-
+    //Refs
     BoxCollider2D collider;
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
