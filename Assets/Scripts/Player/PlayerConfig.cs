@@ -6,18 +6,21 @@ public class PlayerConfig : MonoBehaviour
 {
     //Jumping Height
     [Range(1, 10)]
-    public float jumpHeight = 4;
+    public float maxJumpHeight = 4;
+    public float minJumpHeight = 1;
     //Jumping speed
     [Range (0, 1)]
     public float timeToJumpApex = .4f;
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     //Movement
-    float moveSpeed = 10;
+    [Header("Movement"),Range(1, 10)]
+    public float moveSpeed = 10;
 
     float gravity;
-    float jumpVelocity;
-    public Vector3 velocity;
+    float maxJumpVelocity;
+    float minJumpVelocity;
+    Vector3 velocity;
     float velocityXSmoothing;
 
     PlayerController controller;
@@ -25,8 +28,10 @@ public class PlayerConfig : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
-        gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        //Calculate gravity based on jump height and time to apex.
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
     }
 
     void Update()
@@ -42,19 +47,31 @@ public class PlayerConfig : MonoBehaviour
         //Jumping input
         if(Input.GetButtonDown("Jump") && controller.collisions.below)
         {
-            velocity.y = jumpVelocity;
+            velocity.y = maxJumpVelocity;
         }
         //Different acceleration for running in air and on ground
         float targetVelocityX = input.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+        
+        //If the player lets go of the jump button start falling earlier.
+        if (Input.GetButtonUp("Jump"))
+        {
+            if(velocity.y > minJumpVelocity)
+            {
+                velocity.y = minJumpVelocity;
+            }
+        }
+
         //Gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        //Flip player sprite
-        FlipPlayer();
+        //Check if player sprite needs to be flipped
+        FlipPlayer(velocity.x);
     }
-    void FlipPlayer()
+    void FlipPlayer(float direction)
     {
-
+        if (direction == 0)
+            return;
+        GetComponent<SpriteRenderer>().flipX = direction < 0;
     }
 }
