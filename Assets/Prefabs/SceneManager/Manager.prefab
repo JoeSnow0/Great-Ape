@@ -52,15 +52,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4196207647589150}
   - component: {fileID: 212370000612749566}
-  - component: {fileID: 95017294404177910}
   - component: {fileID: 61088769510270926}
-  - component: {fileID: 114856449436550574}
   - component: {fileID: 114186913075915978}
-  - component: {fileID: 114145135098457004}
   - component: {fileID: 114314220809399576}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ape_Big
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1277072059332980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 5.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4196207647589150}
@@ -129,36 +126,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.05}
+  m_Size: {x: 2.56, y: 2}
   m_EdgeRadius: 0
---- !u!95 &95017294404177910
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588275686837928}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aaa81b7321555e64999f9abad8030448, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114145135098457004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588275686837928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 518f105b8d16b27408dd7309edcc5e0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114186913075915978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,20 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b363d8687c724f4e92c25418df0a3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  playerRigidbody: {fileID: 0}
-  playerGraphics: {fileID: 114856449436550574}
-  unitStats: {fileID: 11400000, guid: ab1c18b7d4e0b4c4d87e05e0935f5f1b, type: 2}
-  isActive: 0
-  horizontalRayCount: 4
-  verticalRayCount: 4
-  ApeMode: 0
-  jumpVelocity: 0
+  jumpHeight: 5
   timeToJumpApex: 0.4
-  jumpHeight: 4
-  playerSpeed: 10
-  facingRight: 1
-  moveX: 0
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &114314220809399576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,7 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822805d5251bfcb44808f39e8b05cb6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerConfig: {fileID: 114186913075915978}
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  horizontalRayCount: 4
+  verticalRayCount: 4
 --- !u!114 &114534912354880556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcbb8e91328804458e4817cf9fa09c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  apeList: []
 --- !u!114 &114539421773483558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,17 +181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apeSelectionController: {fileID: 114534912354880556}
---- !u!114 &114856449436550574
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588275686837928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 518f105b8d16b27408dd7309edcc5e0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212370000612749566
 SpriteRenderer:
   m_ObjectHideFlags: 1
