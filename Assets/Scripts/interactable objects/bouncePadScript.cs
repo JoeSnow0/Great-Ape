@@ -5,12 +5,12 @@ using UnityEngine;
 public class bouncePadScript : MonoBehaviour {
 
     // Use this for initialization
-    GameObject player;
     public PlayerConfig playerConfig;
-    public float bouncePower;
+    public float bouncePower = 600;
     
 	void Start () {
-		
+        bouncePower= bouncePower * 0.11f;
+        
 	}
 	
 	// Update is called once per frame
@@ -18,13 +18,16 @@ public class bouncePadScript : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.tag == "Player")
         {
-            player = other.gameObject;
-            playerConfig = player.GetComponent<PlayerConfig>();
-            playerConfig.velocity.y= bouncePower;
+
+            //  player = other.gameObject;
+            other.GetComponent<PlayerConfig>().velocity.y =
+-1 * other.GetComponent<PlayerConfig>().velocity.y;//bouncePower;
+           
         }
     }
 }
