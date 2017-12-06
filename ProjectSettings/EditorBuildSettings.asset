@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 83d03cb69cce3854397964a87666f41a
+  - enabled: 1
+    path: Assets/Scenes/Oskar's Test Scene.unity
+    guid: 8f8c3916217aa08478bae23f5b87f518
