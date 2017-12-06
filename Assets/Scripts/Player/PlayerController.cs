@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //What you collide with
     public LayerMask collisionMask;
-    //Collision dectectors
+    //Collision detectors
     const float skinWidth = .015f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;

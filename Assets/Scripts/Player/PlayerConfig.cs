@@ -7,6 +7,7 @@ public class PlayerConfig : MonoBehaviour
     //Jumping Height
     [Range(1, 10)]
     public float maxJumpHeight = 4;
+    [Range(1, 10)]
     public float minJumpHeight = 1;
     //Jumping speed
     [Range (0, 1)]
@@ -22,7 +23,8 @@ public class PlayerConfig : MonoBehaviour
     float minJumpVelocity;
     Vector3 velocity;
     float velocityXSmoothing;
-
+    public bool isActive = false;
+    
     PlayerController controller;
 
     void Start()
@@ -41,26 +43,8 @@ public class PlayerConfig : MonoBehaviour
         {
             velocity.y = 0;
         }
-
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        //Jumping input
-        if(Input.GetButtonDown("Jump") && controller.collisions.below)
-        {
-            velocity.y = maxJumpVelocity;
-        }
-        //Different acceleration for running in air and on ground
-        float targetVelocityX = input.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
-        
-        //If the player lets go of the jump button start falling earlier.
-        if (Input.GetButtonUp("Jump"))
-        {
-            if(velocity.y > minJumpVelocity)
-            {
-                velocity.y = minJumpVelocity;
-            }
-        }
+        //Accept inputs
+        Inputs();
 
         //Gravity
         velocity.y += gravity * Time.deltaTime;
@@ -73,5 +57,29 @@ public class PlayerConfig : MonoBehaviour
         if (direction == 0)
             return;
         GetComponent<SpriteRenderer>().flipX = direction < 0;
+    }
+
+    void Inputs()
+    {
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        //Jumping input
+        if (Input.GetButtonDown("Jump") && controller.collisions.below && isActive)
+        {
+            velocity.y = maxJumpVelocity;
+        }
+        //Different acceleration for running in air and on ground
+        float targetVelocityX = input.x * moveSpeed * ((isActive) ? 1 : 0);
+        
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+
+        //If the player lets go of the jump button start falling earlier.
+        if (Input.GetButtonUp("Jump") && isActive)
+        {
+            if (velocity.y > minJumpVelocity)
+            {
+                velocity.y = minJumpVelocity;
+            }
+        }
     }
 }
