@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour {
     int thisIndex;
@@ -52,5 +53,15 @@ public class MenuButtons : MonoBehaviour {
     public void ExitApplication()
     {
         Application.Quit();
+    }
+
+    public void StartLevel()
+    {
+        if(LevelSelect.lastIndexWithScore > 0)
+            LevelSelect.LoadScene(LevelSelect.lastIndexWithScore);
+        else
+        {
+            LevelSelect.LoadScene(0);
+        }
     }
 }
