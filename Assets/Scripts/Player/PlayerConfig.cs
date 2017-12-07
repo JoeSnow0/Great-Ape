@@ -35,7 +35,6 @@ public class PlayerConfig : MonoBehaviour
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        apeAnimator.Play("State", 0);
     }
 
     void Update()
@@ -47,7 +46,7 @@ public class PlayerConfig : MonoBehaviour
         }
         //Accept inputs
         Inputs();
-        
+
         //Gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
