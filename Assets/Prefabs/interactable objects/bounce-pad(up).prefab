@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 33437316754473404}
   - component: {fileID: 23983708722195940}
   - component: {fileID: 61603761847391620}
-  - component: {fileID: 114328283271141566}
+  - component: {fileID: 114440299347346224}
   m_Layer: 0
   m_Name: bounce-pad-trigger
   m_TagString: Untagged
@@ -305,7 +305,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114328283271141566
+--- !u!114 &114440299347346224
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -313,8 +313,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1872672888958840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44be475ec84550149a8dffa4c1e687ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b95a8c2e007cd842ae3e89e1412d44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerConfig: {fileID: 0}
-  bouncePower: 10
