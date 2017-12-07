@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(PlayerConfig))]
-public class BouncePadScript : MonoBehaviour {
-
-  
+public class BouncePadSettings : MonoBehaviour
+{
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,10 +11,10 @@ public class BouncePadScript : MonoBehaviour {
         {
 
             //if player reverce the speed of the player if the speed is downward
-            if (other.GetComponent<PlayerConfig>().velocity.y <=0)
-            other.GetComponent<PlayerConfig>().velocity.y =
--1 * other.GetComponent<PlayerConfig>().velocity.y;
-           
+            if (other.GetComponent<PlayerConfig>().velocity.y <= 0)
+                other.GetComponent<PlayerConfig>().velocity.y =
+    -1 * other.GetComponent<PlayerConfig>().velocity.y;
+
         }
     }
 }
