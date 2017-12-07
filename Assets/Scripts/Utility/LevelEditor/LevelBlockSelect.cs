@@ -34,6 +34,9 @@ public class LevelBlockSelect : MonoBehaviour
     [SerializeField]
     private GameObject m_buttonPrefab;
 
+    [SerializeField]
+    private EventSystem m_eventSystem;
+
     private string m_currentBlockPath;
 
     private void Awake()
@@ -67,6 +70,7 @@ public class LevelBlockSelect : MonoBehaviour
             // Creates a button from a prefab
             GameObject buttonObj = Instantiate(m_buttonPrefab, m_buttonHolder.transform);
             buttonObj.name = blockPrefabs[i].name + "_btn";
+            buttonObj.transform.GetComponentInChildren<Text>().text = blockPrefabs[i].name;
 
             // Loads a preview sprite of the object that is saved in the Resources folder
             buttonObj.GetComponent<Image>().sprite = Sprite.Create(previewTextures[i], new Rect(0, 0, previewTextures[i].width, previewTextures[i].height), Vector2.zero);
@@ -83,11 +87,26 @@ public class LevelBlockSelect : MonoBehaviour
     // Sets the currently selected block
     private void SetCurrentBlock(string path)
     {
+        // If you press the button for the block already selected, it gets deselected
+        if(m_currentBlockPath == path)
+        {
+            // If the button was highlighted, it is now not highlighted 
+            if (m_eventSystem.currentSelectedGameObject == m_buttons[path].gameObject)
+                m_eventSystem.SetSelectedGameObject(null);
+
+            // Deactivates level block preview image
+            m_blockPreview.transform.parent.gameObject.SetActive(false);
+            m_currentBlockPath = null;
+
+            return;
+        }
+
         m_currentBlockPath = path;
 
-        m_blockPreview.transform.parent.gameObject.SetActive(true);
+        // Activates image showcasing the selected block
         m_blockPreview.GetComponent<Image>().sprite = m_buttons[path].image.sprite;
         m_blockPreview.transform.GetChild(0).GetComponent<Text>().text = path;
+        m_blockPreview.transform.parent.gameObject.SetActive(true);
     }
 
     // Sets the size of the button holder to be based on the amount of active children

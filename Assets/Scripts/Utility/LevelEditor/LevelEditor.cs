@@ -40,6 +40,7 @@ public class LevelEditor : MonoBehaviour
     private Vector3 mouseDelta = Vector3.zero;
     private Vector3 mousePos;
 
+
     private void Awake()
     {
         if (currentEditor == null)
@@ -106,9 +107,10 @@ public class LevelEditor : MonoBehaviour
             {
                 // Gets the position where the ray hit the point
                 Vector3 spawnPos = mouseRay.GetPoint(enter);
-                Debug.Log("Mouse Pos: " + mousePos + ", Spawn Pos: " + levelCamera.WorldToScreenPoint(spawnPos));
+                Debug.Log("Spawn Pos: " + spawnPos);
                 Object blockPrefab = Resources.Load("Level Blocks/" + currentBlock, typeof(GameObject));
                 GameObject newBlock = Instantiate(blockPrefab, spawnPos, Quaternion.identity, m_currentLevel.transform) as GameObject;
+                newBlock.layer = 10;
             }
         }
 
@@ -131,7 +133,7 @@ public class LevelEditor : MonoBehaviour
     private void MiddleMouseDown()
     {
         Vector2 mDelta = (mouseDelta / 50);
-        levelCamera.transform.position -= new Vector3(-mDelta.x, mDelta.y, 0);
+        levelCamera.transform.position -= new Vector3(mDelta.x, -mDelta.y, 0);
     }
 
     // Handles when the mouse was scrolled
