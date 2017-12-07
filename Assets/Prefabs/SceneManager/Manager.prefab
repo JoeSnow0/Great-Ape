@@ -188,8 +188,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   managerConfig: {fileID: 114539421773483558}
   apeList: []
-  apePrefab: {fileID: 114910998024255510, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3,
-    type: 2}
+  apePrefabs:
+  - {fileID: 114910998024255510, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
+  - {fileID: 114238213544543018, guid: 2731ef3e4f196544bac21ce9130f814c, type: 2}
 --- !u!114 &114539421773483558
 MonoBehaviour:
   m_ObjectHideFlags: 1
