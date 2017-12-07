@@ -1421,6 +1421,7 @@ MonoBehaviour:
     m_Bits: 256
   horizontalRayCount: 4
   verticalRayCount: 4
+  playerConfig: {fileID: 0}
 --- !u!114 &114826823595925356
 MonoBehaviour:
   m_ObjectHideFlags: 1
