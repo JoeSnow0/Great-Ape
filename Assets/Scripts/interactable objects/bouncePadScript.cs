@@ -2,31 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerConfig))]
-public class bouncePadScript : MonoBehaviour {
+public class BouncePadScript : MonoBehaviour {
 
-    // Use this for initialization
-    public PlayerConfig playerConfig;
-    public float bouncePower = 600;
-    
-	void Start () {
-        bouncePower= bouncePower * 0.11f;
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+  
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        //checks if player
         if (other.tag == "Player")
         {
 
-            //  player = other.gameObject;
+            //if player reverce the speed of the player if the speed is downward
+            if (other.GetComponent<PlayerConfig>().velocity.y <=0)
             other.GetComponent<PlayerConfig>().velocity.y =
--1 * other.GetComponent<PlayerConfig>().velocity.y;//bouncePower;
+-1 * other.GetComponent<PlayerConfig>().velocity.y;
            
         }
     }
