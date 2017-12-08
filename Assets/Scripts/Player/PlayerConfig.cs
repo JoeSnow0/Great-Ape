@@ -26,6 +26,7 @@ public class PlayerConfig : MonoBehaviour
     public bool isActive = false;
     
     PlayerController controller;
+    public Animator apeAnimator;
 
     void Start()
     {
@@ -49,27 +50,35 @@ public class PlayerConfig : MonoBehaviour
         //Gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        //Check if player sprite needs to be flipped
-        FlipPlayer(velocity.x);
+
     }
     void FlipPlayer(float direction)
     {
         if (direction == 0)
             return;
-        GetComponent<SpriteRenderer>().flipX = direction < 0;
+        apeAnimator.transform.rotation = Quaternion.Euler(apeAnimator.transform.eulerAngles.x, (direction > 0) ? 0 : 180, apeAnimator.transform.eulerAngles.z);
     }
 
     void Inputs()
     {
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        //Jumping input
-        if (Input.GetButtonDown("Jump") && controller.collisions.below && isActive)
+        Vector2 input = Vector2.zero;
+        if (isActive)
         {
-            velocity.y = maxJumpVelocity;
+            input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+            //Jumping input
+            if (Input.GetButtonDown("Jump") && controller.collisions.below && isActive)
+            {
+                velocity.y = maxJumpVelocity;
+            }
         }
+
+        //Check if player sprite needs to be flipped
+        FlipPlayer(input.x);
+
         //Different acceleration for running in air and on ground
-        float targetVelocityX = input.x * moveSpeed * ((isActive) ? 1 : 0);
+        float targetVelocityX = input.x * moveSpeed;
         
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
@@ -80,6 +89,15 @@ public class PlayerConfig : MonoBehaviour
             {
                 velocity.y = minJumpVelocity;
             }
+        }
+        //Animations
+        if (input.x != 0)
+        {
+            apeAnimator.Play("Walking");
+        }
+        else
+        {
+            apeAnimator.Play("Idle");
         }
     }
 }

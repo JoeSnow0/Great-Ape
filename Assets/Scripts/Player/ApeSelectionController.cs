@@ -7,7 +7,7 @@ public class ApeSelectionController : MonoBehaviour
     public ManagerConfig managerConfig;
     public List<PlayerConfig> apeList = new List<PlayerConfig>();
     static public PlayerConfig activeApe;
-    public PlayerConfig apePrefab;
+    public PlayerConfig[] apePrefabs;
     //public PlayerConfig[] apeList;
     private void Start()
     {
@@ -25,22 +25,26 @@ public class ApeSelectionController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Joystick1Button2))
         {
-            AddApe(managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
+            AddApe(0, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton3))
+        {
+            AddApe(1, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
         }
     }
     public void InitializeApes()
     {
         //Update list of apes, add all available apes in the scene
-        AddApe(managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
+        AddApe(0, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
         //Target first ape in list
         apeList[0].isActive = true;
         activeApe = apeList[0];
         DeselectAllOtherApes();
     }
-    public void AddApe(Vector3 SpawnPosition, Quaternion spawnRotation)
+    public void AddApe(int apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
     {
         //Instansiate new ape, assign stats, animation etc
-        PlayerConfig newApe = Instantiate<PlayerConfig>(apePrefab, SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
+        PlayerConfig newApe = Instantiate<PlayerConfig>(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
         //disable ape
         newApe.isActive = false;
         //Add it to the ape list

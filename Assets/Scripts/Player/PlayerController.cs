@@ -12,13 +12,14 @@ public class PlayerController : MonoBehaviour
     public int verticalRayCount = 4;
 
     //Slopes
-    float maxClimbAngle = 80;
-    float maxDescendAngle = 80;
+    float maxClimbAngle = 50;
+    float maxDescendAngle = 50;
 
     //Space between rays
     float horizontalRaySpacing;
     float verticalRaySpacing;
     //Refs
+    public PlayerConfig playerConfig;
     BoxCollider2D collider;
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
@@ -132,6 +133,7 @@ public class PlayerController : MonoBehaviour
 
                 collisions.below = directionY == -1;
                 collisions.above = directionY == 1;
+                
             }
         }
 
@@ -155,6 +157,7 @@ public class PlayerController : MonoBehaviour
     }
     void ClimbSlope(ref Vector3 velocity, float slopeAngle)
     {
+        float directionX = Mathf.Sign(velocity.x);
         float moveDistance = Mathf.Abs(velocity.x);
         float climbVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
         if(velocity.y <= climbVelocityY)
@@ -164,8 +167,10 @@ public class PlayerController : MonoBehaviour
             collisions.below = true;
             collisions.climbingSlope = true;
             collisions.slopeAngle = slopeAngle;
+            
         }
     }
+
     void DescendSlope(ref Vector3 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
