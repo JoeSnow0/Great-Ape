@@ -50,9 +50,12 @@ public class LevelEditor : MonoBehaviour
 
         CreateNewLevel();
 
-        YesNoDialog.current.mainCanvas = transform.root.GetComponent<Canvas>();
-
         mousePos = Input.mousePosition;
+    }
+
+    private void Start()
+    {
+        YesNoDialog.current.mainCanvas = transform.root.gameObject;
     }
 
     private void Update()

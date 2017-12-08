@@ -13,8 +13,8 @@ public class YesNoDialog : MonoBehaviour
         get { return currentDialog; }
     }
 
-    private Canvas m_mainCanvas;
-    public Canvas mainCanvas
+    private GameObject m_mainCanvas;
+    public GameObject mainCanvas
     {
         get { return m_mainCanvas; }
         set { m_mainCanvas = value; }
@@ -22,7 +22,6 @@ public class YesNoDialog : MonoBehaviour
 
     Canvas dialogCanvas;
 
-    [SerializeField]
     Image screenshotImage;
 
     [SerializeField]
@@ -58,7 +57,7 @@ public class YesNoDialog : MonoBehaviour
         // TODO: Fix screenshot in background
         //screenshotImage = 
         // Deactivates main canvas
-        m_mainCanvas.gameObject.SetActive(false);
+        m_mainCanvas.SetActive(false);
 
         // Removes the old listener call
         yesButton.onClick.RemoveAllListeners();
@@ -76,6 +75,6 @@ public class YesNoDialog : MonoBehaviour
     void OnCancelButtonPress()
     {
         dialogCanvas.enabled = false;
-        m_mainCanvas.gameObject.SetActive(true);
+        m_mainCanvas.SetActive(true);
     }
 }
