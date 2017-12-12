@@ -31,15 +31,15 @@ public class MenuButtons : MonoBehaviour {
             targetWindow.SetActive(true);
         }
 
-        EventSystem.current.SetSelectedGameObject(targetWindow.GetComponentInChildren<Button>().gameObject);
+        //EventSystem.current.SetSelectedGameObject(targetWindow.GetComponentInChildren<Button>().gameObject);
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Back"))
+        /*if (Input.GetButtonDown("Back"))
         {
             EventSystem.current.currentSelectedGameObject.GetComponentInParent<MenuButtons>().DisableWindows();
-        }
+        }*/
     }
 
     private void DisableWindows()// Disables all windows
@@ -75,5 +75,9 @@ public class MenuButtons : MonoBehaviour {
         {
             LevelSelect.LoadScene(0);
         }
+    }
+    public void LoadLevelByIndex(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }
