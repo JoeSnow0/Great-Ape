@@ -7,4 +7,5 @@ public class ManagerConfig : MonoBehaviour {
     //Manager has references to everything in the scene
     //Its essencially god, worship it!
     public ApeSelectionController apeSelectionController;
+    public GameObject apeHolder;
 }
