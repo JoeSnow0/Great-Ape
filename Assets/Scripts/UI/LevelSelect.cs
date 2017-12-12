@@ -57,9 +57,16 @@ public class LevelSelect : MonoBehaviour {
 
         playText.text = (lastIndexWithScore > 0) ? "Continue" : "Play";// Set play button text
 
-        scrollContent.sizeDelta = new Vector2(scrollContent.rect.width, (worlds.Count * 100) * 1.3333f);
+        scrollContent.sizeDelta = new Vector2(scrollContent.rect.width, (worlds.Count * 100) * 1.23400f);
 	}
-	
+
+    private void Update()
+    {
+        
+    }
+
+
+
     static public void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
