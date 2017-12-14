@@ -59,6 +59,9 @@ public class YesNoDialog : MonoBehaviour
         // Deactivates main canvas
         m_mainCanvas.SetActive(false);
 
+        // Changes description text
+        descriptionText.text = description;
+
         // Removes the old listener call
         yesButton.onClick.RemoveAllListeners();
         // Adds the specified call to the button
@@ -76,5 +79,10 @@ public class YesNoDialog : MonoBehaviour
     {
         dialogCanvas.enabled = false;
         m_mainCanvas.SetActive(true);
+    }
+
+    public void CloseDialog()
+    {
+        OnCancelButtonPress();
     }
 }

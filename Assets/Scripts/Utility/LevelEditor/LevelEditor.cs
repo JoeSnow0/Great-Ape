@@ -25,6 +25,10 @@ public class LevelEditor : MonoBehaviour
     private GameObject levelHolder;
 
     private Level m_currentLevel;
+    public Level currentLevel
+    {
+        get { return m_currentLevel; }
+    }
 
     private Camera canvasCamera;
     [SerializeField]
@@ -60,7 +64,6 @@ public class LevelEditor : MonoBehaviour
 
     private void Update()
     {
-        
         UpdateMouseDelta();
 
         // If the mouse is hovering over the main editor view
@@ -115,6 +118,9 @@ public class LevelEditor : MonoBehaviour
                 Object blockPrefab = Resources.Load("Level Blocks/" + currentBlock, typeof(GameObject));
                 GameObject newBlock = Instantiate(blockPrefab, spawnPos, Quaternion.identity, m_currentLevel.transform) as GameObject;
                 newBlock.layer = 10;
+
+                // Save functionality for the object
+                //newBlock.AddComponent<ObjectIdentifier>().prefabName = newBlock.name;
             }
         }
 
@@ -124,7 +130,7 @@ public class LevelEditor : MonoBehaviour
     // Handles Right mouse clicking inside of the editor view
     private void RightMouseDown()
     {
-
+        
     }
 
     // Handles Middle mouse clicking inside of the editor view
@@ -172,10 +178,31 @@ public class LevelEditor : MonoBehaviour
         }
 
         // Creates new Level and sets a parent to it
-        m_currentLevel = new GameObject("New Level").AddComponent<Level>();
-        m_currentLevel.transform.SetParent(levelHolder.transform);
-
+        GameObject levelObj = Instantiate(Resources.Load("Level Prefabs/Empty Level", typeof(Object)) as GameObject);
+        m_currentLevel = levelObj.AddComponent<Level>();
+        levelObj.transform.SetParent(levelHolder.transform);
+       
         // Resets the position of the level to be at 0,0,0 locally
         m_currentLevel.transform.localPosition = Vector3.zero;
+
+        // Records that a new level has been created
+        LevelSaveManager.RecordNewLevel();
+    }
+
+    // Switches the current level to the one loaded in
+    public void LoadLevel(Level loadLevel)
+    {
+        // Destroys the old level
+        foreach (Transform levelBlock in m_currentLevel.transform)
+        {
+            Destroy(levelBlock.gameObject);
+        }
+        Destroy(m_currentLevel.gameObject);
+
+        // Sets the loaded level to be held by the levelholder at the local position (0,0,0)
+        loadLevel.transform.SetParent(levelHolder.transform);
+        loadLevel.transform.localPosition = Vector3.zero;
+
+        m_currentLevel = loadLevel;
     }
 }

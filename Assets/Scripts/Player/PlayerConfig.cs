@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerConfig : MonoBehaviour
 {
     //Jumping Height
-    [Range(1, 10)]
+    [Range(1, 100)]
     public float maxJumpHeight = 4;
     [Range(1, 10)]
     public float minJumpHeight = 1;
@@ -15,7 +15,7 @@ public class PlayerConfig : MonoBehaviour
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     //Movement
-    [Header("Movement"),Range(1, 10)]
+    [Header("Movement"),Range(1, 100)]
     public float moveSpeed = 10;
 
     float gravity;

@@ -52,6 +52,5 @@ public class LevelEditorInspector : Editor
             AssetDatabase.AddObjectToAsset(previewSpr, assetPath);
             AssetDatabase.SaveAssets();
         }
-        AssetDatabase.Refresh();
     }
 }
