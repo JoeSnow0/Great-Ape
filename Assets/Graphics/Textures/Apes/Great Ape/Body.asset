@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Body
   m_EditorClassIdentifier: 
   m_ApiVersion: 4
-  m_Sprite: {fileID: 21300000, guid: 8e74215d8173c2e4495949a004085b86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6aad8790128696f4fab1aee32dc691fd, type: 3}
   m_SharedMesh: {fileID: 43646856967691260}
   pivotPoint: {x: 0, y: 0}
   texVertices: []
