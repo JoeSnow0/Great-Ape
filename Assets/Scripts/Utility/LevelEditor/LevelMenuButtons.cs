@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 // Used for importing .dll for Windows Forms
-//using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 public class LevelMenuButtons : MonoBehaviour
 {
@@ -82,8 +82,10 @@ public class LevelMenuButtons : MonoBehaviour
     }
 
     // Imports System.Windows.Forms.dll
-    //[DllImport("user32.dll")]
-    //private static extern void SaveFileDialog();
+    [DllImport("user32.dll")]
+    private static extern void SaveFileDialog();
+    [DllImport("user32.dll")]
+    private static extern void OpenFileDialog();
 
     // When you press the "Save Level as..." button
     public void OnSaveLevelAsButtonPressed()
