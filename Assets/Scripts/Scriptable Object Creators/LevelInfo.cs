@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LevelInfo", menuName = "Level Info", order = 1)]
+[CreateAssetMenu(fileName = "LevelInfo", menuName = "Levels/Level Info", order = 1)]
 public class LevelInfo : ScriptableObject
 {
     public string levelName;

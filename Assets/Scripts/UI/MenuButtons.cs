@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MenuButtons : MonoBehaviour {
     int thisIndex;
+
 
 	void Start () {
         DisableWindows();// Makes sure all windows are closed in the beginning
@@ -28,6 +30,16 @@ public class MenuButtons : MonoBehaviour {
         {
             targetWindow.SetActive(true);
         }
+
+        //EventSystem.current.SetSelectedGameObject(targetWindow.GetComponentInChildren<Button>().gameObject);
+    }
+
+    private void Update()
+    {
+        /*if (Input.GetButtonDown("Back"))
+        {
+            EventSystem.current.currentSelectedGameObject.GetComponentInParent<MenuButtons>().DisableWindows();
+        }*/
     }
 
     private void DisableWindows()// Disables all windows
@@ -63,5 +75,9 @@ public class MenuButtons : MonoBehaviour {
         {
             LevelSelect.LoadScene(0);
         }
+    }
+    public void LoadLevelByIndex(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }

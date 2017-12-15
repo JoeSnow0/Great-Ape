@@ -25,8 +25,11 @@ public class LevelEditor : MonoBehaviour
     private GameObject levelHolder;
 
     private Level m_currentLevel;
+    public Level currentLevel
+    {
+        get { return m_currentLevel; }
+    }
 
-    [SerializeField]
     private Camera canvasCamera;
     [SerializeField]
     private Camera levelCamera;
@@ -34,30 +37,40 @@ public class LevelEditor : MonoBehaviour
     private RenderTexture levelTexture;
 
     private RectTransform m_RT;
-    private Rect m_rect;
-    List<RectTransform> list = new List<RectTransform>();
 
     private Vector3 mouseDelta = Vector3.zero;
     private Vector3 mousePos;
 
+    [SerializeField]
+    DropdownMenu dropDown;
 
     private void Awake()
     {
         if (currentEditor == null)
             currentEditor = this;
 
-        m_RT = GetComponent<RectTransform>();
-        m_rect = m_RT.rect;
+        // Gets the canvas of the camera
+        canvasCamera = transform.root.GetComponent<Canvas>().worldCamera;
 
-        m_currentLevel = levelHolder.transform.GetChild(0).GetComponent<Level>();
+        m_RT = GetComponent<RectTransform>();
+
+        CreateNewLevel();
 
         mousePos = Input.mousePosition;
     }
 
+    private void Start()
+    {
+        YesNoDialog.current.mainCanvas = transform.root.gameObject;
+    }
+
     private void Update()
     {
-        
         UpdateMouseDelta();
+
+        // You should not be able to interact with the editor while the dropdown is open
+        if (dropDown.isDropdownActive)
+            return;
 
         // If the mouse is hovering over the main editor view
         if (!RectTransformUtility.RectangleContainsScreenPoint(m_RT, mousePos, canvasCamera))
@@ -65,15 +78,15 @@ public class LevelEditor : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            LeftMouseClick();
+            LeftMouseDown();
         }
         else if (Input.GetMouseButtonDown(1))
         {
-            RightMouseClick();
+            RightMouseDown();
         }
         else if (Input.GetMouseButton(2))
         {
-            MiddleMouseDown();
+            MiddleMouse();
         }
 
         float scrollDelta = Input.mouseScrollDelta.y;
@@ -82,7 +95,7 @@ public class LevelEditor : MonoBehaviour
     }
 
     // Handles Left mouse clicking inside of the editor view
-    private void LeftMouseClick()
+    private void LeftMouseDown()
     {
         // Get the currently selected block
         currentBlock = LevelBlockSelect.current.GetCurrentBlock();
@@ -107,10 +120,13 @@ public class LevelEditor : MonoBehaviour
             {
                 // Gets the position where the ray hit the point
                 Vector3 spawnPos = mouseRay.GetPoint(enter);
-                Debug.Log("Spawn Pos: " + spawnPos);
+
                 Object blockPrefab = Resources.Load("Level Blocks/" + currentBlock, typeof(GameObject));
                 GameObject newBlock = Instantiate(blockPrefab, spawnPos, Quaternion.identity, m_currentLevel.transform) as GameObject;
                 newBlock.layer = 10;
+
+                // Records that their has been a change in the level
+                LevelSaveManager.RecordChange();
             }
         }
 
@@ -118,19 +134,19 @@ public class LevelEditor : MonoBehaviour
     }
 
     // Handles Right mouse clicking inside of the editor view
-    private void RightMouseClick()
+    private void RightMouseDown()
     {
-
+        
     }
 
     // Handles Middle mouse clicking inside of the editor view
-    private void MiddleMouseClick()
+    private void MiddleMouseDown()
     {
 
     }
 
     // Handles when the Middle mouse button is down
-    private void MiddleMouseDown()
+    private void MiddleMouse()
     {
         Vector2 mDelta = (mouseDelta / 50);
         levelCamera.transform.position -= new Vector3(mDelta.x, -mDelta.y, 0);
@@ -148,5 +164,51 @@ public class LevelEditor : MonoBehaviour
         Vector3 newMousePos = Input.mousePosition;
         mouseDelta = mousePos - newMousePos;
         mousePos = newMousePos;
+    }
+
+    // Creates a new level
+    public void CreateNewLevel()
+    {   
+        //HACK: We should only set the currentlevel while debugging the level editor, remove this line when building
+        m_currentLevel = levelHolder.transform.GetComponentInChildren<Level>();
+        
+        // Destroys the old level first
+        // The old level should already be saved by this point
+        if (m_currentLevel != null)
+        {
+            foreach(Transform levelBlock in m_currentLevel.transform)
+            {
+                Destroy(levelBlock.gameObject);
+            }
+            Destroy(m_currentLevel.gameObject);
+        }
+
+        // Creates new Level and sets a parent to it
+        GameObject levelObj = Instantiate(Resources.Load("Level Prefabs/Empty Level", typeof(Object)) as GameObject);
+        m_currentLevel = levelObj.AddComponent<Level>();
+        levelObj.transform.SetParent(levelHolder.transform);
+       
+        // Resets the position of the level to be at 0,0,0 locally
+        m_currentLevel.transform.localPosition = Vector3.zero;
+
+        // Records that a new level has been created
+        LevelSaveManager.RecordNewLevel();
+    }
+
+    // Switches the current level to the one loaded in
+    public void LoadLevel(Level loadLevel)
+    {
+        // Destroys the old level
+        foreach (Transform levelBlock in m_currentLevel.transform)
+        {
+            Destroy(levelBlock.gameObject);
+        }
+        Destroy(m_currentLevel.gameObject);
+
+        // Sets the loaded level to be held by the levelholder at the local position (0,0,0)
+        loadLevel.transform.SetParent(levelHolder.transform);
+        loadLevel.transform.localPosition = Vector3.zero;
+
+        m_currentLevel = loadLevel;
     }
 }

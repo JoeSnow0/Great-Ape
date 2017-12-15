@@ -24,10 +24,13 @@ public class PlayerController : MonoBehaviour
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
 
+    private Rigidbody2D rb2D;
+
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     public void Move(Vector3 velocity)
@@ -51,7 +54,8 @@ public class PlayerController : MonoBehaviour
             VerticalCollisions(ref velocity);
         }
         //Move the player based on input, after collision checks
-        transform.Translate(velocity);
+        //transform.Translate(velocity);
+        rb2D.MovePosition(transform.position + velocity);
     }
 
     void HorizontalCollisions(ref Vector3 velocity)
@@ -69,6 +73,16 @@ public class PlayerController : MonoBehaviour
 
             if (hit)
             {
+                if(hit.collider.gameObject.layer == 11)
+                {
+                    Vector2 normVelocity = rb2D.velocity.normalized;
+                    Vector2 direction = (new Vector2(transform.position.x, transform.position.y) - hit.point).normalized;
+
+                    float angle = (Vector2.Dot(normVelocity, direction));
+                    velocity.x += directionX * angle;
+
+                    break;
+                }
                 //Check slope collision
                 float SlopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if(i == 0 && SlopeAngle <= maxClimbAngle)

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33624451369270890}
   - component: {fileID: 65917125856053286}
   - component: {fileID: 23923659090413846}
+  - component: {fileID: 114506936731039970}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -95,3 +96,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114506936731039970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1288003329663308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c19f3e134862e74dbc98cb514a82ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabName: Bar
+  id: 
+  idParent: 
+  dontSave: 0
+  componentSaveMode: 3
+  componentTypesToSave: []

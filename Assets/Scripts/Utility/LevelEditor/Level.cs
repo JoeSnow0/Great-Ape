@@ -13,4 +13,8 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    void OnLoad()
+    {
+        LevelEditor.current.LoadLevel(this);
+    }
 }
