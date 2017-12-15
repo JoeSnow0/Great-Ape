@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEditor;
 
 public class LevelSelect : MonoBehaviour {
-    //static public List<KeyValuePair<int, LevelInfo>> levels = new List<KeyValuePair<int, LevelInfo>>();
     [Header("Objects")]
     [SerializeField] Text playText;
     [SerializeField] Transform worldsParent;
@@ -26,6 +25,12 @@ public class LevelSelect : MonoBehaviour {
     static public int lastIndexWithScore;
 
     void Start () {
+        string[] levelFolders = AssetDatabase.FindAssets("Resources/Levels");
+        foreach (var i in levelFolders)
+        {
+            print(i);
+        }
+
         levels = Resources.LoadAll<LevelInfo>("Levels");
 
         for (int i = 0; i < worldNames.Length; i++)// Create the worlds
@@ -54,12 +59,20 @@ public class LevelSelect : MonoBehaviour {
         }
 
         lastIndexWithScore = GetLast();
+        
+        if(playText != null)
+            playText.text = (lastIndexWithScore > 0) ? "Continue" : "Play";// Set play button text
 
-        playText.text = (lastIndexWithScore > 0) ? "Continue" : "Play";// Set play button text
-
-        scrollContent.sizeDelta = new Vector2(scrollContent.rect.width, (worlds.Count * 100) * 1.3333f);
+        scrollContent.sizeDelta = new Vector2(scrollContent.rect.width, (worlds.Count * 100) * 1.3f);
 	}
-	
+
+    private void Update()
+    {
+        
+    }
+
+
+
     static public void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
