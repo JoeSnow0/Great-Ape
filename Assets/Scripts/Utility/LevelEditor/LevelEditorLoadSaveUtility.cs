@@ -88,10 +88,11 @@ public class LevelEditorLoadSaveUtility : SaveLoadUtility
         }
 
         //Call the static method that serializes our SaveGame instance and writes the data to a file.
-        SaveLoad.SaveScene(newSaveGame, path);
+        // Note: This is calling a method made by the author of this inherited class
+        SaveLoad.SaveLevel(newSaveGame, path);
         if (debugController.gameSaved)
         {
-            Debug.Log("Game Saved: " + newSaveGame.savegameName + " (" + newSaveGame.saveDate + ").");
+            //Debug.Log("Game Saved: " + newSaveGame.savegameName + " (" + newSaveGame.saveDate + ").");
         }
     }
 
@@ -100,7 +101,7 @@ public class LevelEditorLoadSaveUtility : SaveLoadUtility
     {
         if (string.IsNullOrEmpty(path))
         {
-            Debug.Log("[LoadGame] " + "SaveGameName is null or empty!");
+            Debug.Log("[LoadGame] path is null or empty!");
             return;
         }
 
@@ -360,7 +361,7 @@ public class LevelEditorLoadSaveUtility : SaveLoadUtility
 
         if (debugController.gameLoaded)
         {
-            Debug.Log("Game Loaded: " + loadedGame.savegameName + " (" + loadedGame.saveDate + ").");
+            //Debug.Log("Game Loaded: " + loadedGame.savegameName + " (" + loadedGame.saveDate + ").");
         }
     }
 }

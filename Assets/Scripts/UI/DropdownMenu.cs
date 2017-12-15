@@ -7,6 +7,10 @@ using UnityEngine.EventSystems;
 public class DropdownMenu : MonoBehaviour
 {
     private bool showDropdown = false;
+    public bool isDropdownActive
+    {
+        get { return showDropdown; }
+    }
 
     [SerializeField]
     private GameObject content;

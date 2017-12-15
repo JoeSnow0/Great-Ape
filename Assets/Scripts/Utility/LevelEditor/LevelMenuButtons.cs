@@ -17,7 +17,7 @@ public class LevelMenuButtons : MonoBehaviour
     public void OnNewLevelButtonPressed()
     {
         // Checks if we want to save first
-        UnityAction yesAction = () => OnSaveLevelAsButtonPressed();
+        UnityAction yesAction = () => OnSaveLevelButtonPressed();
         UnityAction noAction = () => LevelEditor.current.CreateNewLevel();
         if (CheckForUnsavedChanges("You have unsaved changes.\n Do you want to save before you create a new level?", yesAction, noAction))
             return;
@@ -30,10 +30,12 @@ public class LevelMenuButtons : MonoBehaviour
     public void OnLoadLevelButtonPressed()
     {
         // Checks if we want to save first
-        UnityAction yesAction = (LevelSaveManager.loadedFromPath) ? new UnityAction(() => OnSaveLevelButtonPressed()) : new UnityAction(() => OnSaveLevelAsButtonPressed());
+        UnityAction yesAction = () => OnSaveLevelButtonPressed();
         UnityAction noAction = () => LoadLevel();
         if (CheckForUnsavedChanges("You have unsaved changes.\n Do you want to save before you load a level?", yesAction, noAction))
             return;
+
+        LoadLevel();
     }
 
     private void LoadLevel()
@@ -52,6 +54,12 @@ public class LevelMenuButtons : MonoBehaviour
             string path = dialog.FileName;
             loadSaveUtility.LoadGame(path);
 
+            LevelSaveManager.RecordSave(path);
+
+            YesNoDialog.current.CancelDialog();
+        }
+        else
+        {
             YesNoDialog.current.CloseDialog();
         }
     }
@@ -61,9 +69,16 @@ public class LevelMenuButtons : MonoBehaviour
     {
         // Checks if the level has a path already or if we need to set a location and name first
         if (!LevelSaveManager.loadedFromPath)
+        {
             OnSaveLevelAsButtonPressed();
+            return;
+        }
+        string fileName = Path.GetFileNameWithoutExtension(LevelSaveManager.levelSaveFullPath);
+        //Debug.Log("Full Path: " + LevelSaveManager.levelSaveFullPath + ", Filename only: " + fileName);
+        loadSaveUtility.SaveGame(LevelSaveManager.levelSaveFullPath, fileName);
+        LevelSaveManager.RecordSave(LevelSaveManager.levelSaveFullPath);
 
-        //loadSaveUtility.SaveGame
+        YesNoDialog.current.CancelDialog();
     }
 
     // Imports System.Windows.Forms.dll
@@ -73,19 +88,43 @@ public class LevelMenuButtons : MonoBehaviour
     // When you press the "Save Level as..." button
     public void OnSaveLevelAsButtonPressed()
     {
+        // Initializes SaveFileDialog with some values 
         SaveFileDialog dialog = new SaveFileDialog();
-
-        // Asks for .sav files only
         dialog.Filter = "Level Save Files (*.sav)|*.sav";
+        dialog.FileName = "newLevel.sav";
         dialog.RestoreDirectory = true;
+        dialog.InitialDirectory = UnityEngine.Application.dataPath + "/Saved Levels";
+
+        DialogResult result = dialog.ShowDialog();
+        switch(result)
+        { 
+            case DialogResult.OK:
+                loadSaveUtility.SaveGame(dialog.FileName, Path.GetFileNameWithoutExtension(dialog.FileName));
+                //Debug.Log("Save filed as: " + dialog.FileName);
+                LevelSaveManager.RecordSave(dialog.FileName);
+
+                YesNoDialog.current.CancelDialog();
+            break;
+
+            case DialogResult.Cancel:
+                YesNoDialog.current.CloseDialog();
+            break;
+        }
     }
 
     // When you press the "Exit to main menu" button
     public void OnExitToMainMenuButtonPressed()
     {
-        //Debug.Log("Do you want to save your changes?");
-        YesNoDialog.current.NewYesNoDialog("Do you really want to end the blog post?",
-            () => Debug.Log("asdasd"), () => LevelEditor.current.CreateNewLevel());
+        UnityAction yesAction = () => OnSaveLevelButtonPressed();
+        UnityAction noAction = () => ExitToMainMenu();
+        if (CheckForUnsavedChanges("You have unsaved changes.\n Do you want to save before exiting?", yesAction, noAction))
+            return;
+    }
+
+    void ExitToMainMenu()
+    {
+        // Loads the main menu
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     // Checks if we have unsaved changes
@@ -94,7 +133,7 @@ public class LevelMenuButtons : MonoBehaviour
         if (LevelSaveManager.changed)
         {
             // Asks if the user wants to save their changes first
-            YesNoDialog.current.NewYesNoDialog("You have unsaved changes.\n Do you want to save before you create a new level?", yesAction, noAction);
+            YesNoDialog.current.NewYesNoDialog(dialogText, yesAction, noAction);
         }
 
         return LevelSaveManager.changed;

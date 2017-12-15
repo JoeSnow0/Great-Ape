@@ -31,9 +31,33 @@ public static class SaveLoad {
 		FileStream file = File.Create (saveGamePath + saveGame.savegameName + ".sav"); //you can call it anything you want including the file extension
 		bf.Serialize(file, saveGame);
 		file.Close();
-	}	
-	
-	public static SaveGame LoadScene(string gameToLoad, string saveGamePath) {
+	}
+
+    // Method ADDED BY OSKAR
+    // Modified by LoadScene method above
+    public static void SaveLevel(SaveGame saveGame, string saveGamePath)
+    {
+
+        BinaryFormatter bf = new BinaryFormatter();
+
+        // 1. Construct a SurrogateSelector object
+        SurrogateSelector ss = new SurrogateSelector();
+        // 2. Add the ISerializationSurrogates to our new SurrogateSelector
+        AddSurrogates(ref ss);
+        // 3. Have the formatter use our surrogate selector
+        bf.SurrogateSelector = ss;
+
+        //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
+        //You can also use any path you like
+        //CheckDirectory(saveGamePath);
+        //saveGamePath = CheckPath(saveGamePath, false);
+
+        FileStream file = File.Create(saveGamePath); //you can call it anything you want including the file extension
+        bf.Serialize(file, saveGame);
+        file.Close();
+    }
+
+    public static SaveGame LoadScene(string gameToLoad, string saveGamePath) {
 
 		saveGamePath = CheckPath(saveGamePath, false);
 

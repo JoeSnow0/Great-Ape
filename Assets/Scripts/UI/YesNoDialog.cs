@@ -34,6 +34,10 @@ public class YesNoDialog : MonoBehaviour
     [SerializeField]
     Button cancelButton;
 
+    UnityAction noAction;
+
+    bool wasYesPressed = false;
+
     private void Awake()
     {
         if (currentDialog == null)
@@ -65,17 +69,36 @@ public class YesNoDialog : MonoBehaviour
         // Removes the old listener call
         yesButton.onClick.RemoveAllListeners();
         // Adds the specified call to the button
+        yesButton.onClick.AddListener(() => SetWasYesPressed(true));
         yesButton.onClick.AddListener(yesButtonCall);
 
         // The same as for the yes button
         noButton.onClick.RemoveAllListeners();
+        noButton.onClick.AddListener(() => SetWasYesPressed(false));
         noButton.onClick.AddListener(noButtonCall);
+
+        // Saves the action for the no button
+        noAction = noButtonCall;
 
         dialogCanvas.enabled = true;
     }
 
+    // Completely cancels the dialog's actions
+    public void CancelDialog()
+    {
+        if (!dialogCanvas.enabled)
+            return;
+
+        OnCancelButtonPress();
+
+        // If yes was pressed (to save the current level probably), 
+        // we still want to do the other thing (like creating or loading a level)
+        if (wasYesPressed)
+            noAction();
+    }
+
     // Cancel Button
-    void OnCancelButtonPress()
+    public void OnCancelButtonPress()
     {
         dialogCanvas.enabled = false;
         m_mainCanvas.SetActive(true);
@@ -84,5 +107,16 @@ public class YesNoDialog : MonoBehaviour
     public void CloseDialog()
     {
         OnCancelButtonPress();
+    }
+
+    // Is the dialog active or not
+    public bool DialogActive()
+    {
+        return dialogCanvas.enabled;
+    }
+
+    private void SetWasYesPressed(bool yes)
+    {
+        wasYesPressed = yes;
     }
 }

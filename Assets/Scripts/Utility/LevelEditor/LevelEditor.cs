@@ -41,6 +41,8 @@ public class LevelEditor : MonoBehaviour
     private Vector3 mouseDelta = Vector3.zero;
     private Vector3 mousePos;
 
+    [SerializeField]
+    DropdownMenu dropDown;
 
     private void Awake()
     {
@@ -65,6 +67,10 @@ public class LevelEditor : MonoBehaviour
     private void Update()
     {
         UpdateMouseDelta();
+
+        // You should not be able to interact with the editor while the dropdown is open
+        if (dropDown.isDropdownActive)
+            return;
 
         // If the mouse is hovering over the main editor view
         if (!RectTransformUtility.RectangleContainsScreenPoint(m_RT, mousePos, canvasCamera))
@@ -119,8 +125,8 @@ public class LevelEditor : MonoBehaviour
                 GameObject newBlock = Instantiate(blockPrefab, spawnPos, Quaternion.identity, m_currentLevel.transform) as GameObject;
                 newBlock.layer = 10;
 
-                // Save functionality for the object
-                //newBlock.AddComponent<ObjectIdentifier>().prefabName = newBlock.name;
+                // Records that their has been a change in the level
+                LevelSaveManager.RecordChange();
             }
         }
 
