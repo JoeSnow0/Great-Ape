@@ -7,7 +7,7 @@ public class PlayerConfig : MonoBehaviour
     //Jumping Height
     [Range(1, 100)]
     public float maxJumpHeight = 4;
-    [Range(1, 10)]
+    [Range(1, 100)]
     public float minJumpHeight = 1;
     //Jumping speed
     [Range (0, 1)]
@@ -31,10 +31,12 @@ public class PlayerConfig : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        apeAnimator = GetComponentInChildren<Animator>();
         //Calculate gravity based on jump height and time to apex.
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
     }
 
     void Update()
@@ -97,7 +99,7 @@ public class PlayerConfig : MonoBehaviour
         }
         else
         {
-            apeAnimator.Play("Idle");
+            //apeAnimator.Play("Idle");
         }
     }
 }
