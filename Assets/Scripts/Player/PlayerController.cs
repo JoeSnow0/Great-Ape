@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour
             VerticalCollisions(ref velocity);
         }
         //Move the player based on input, after collision checks
-        //transform.Translate(velocity);
-        rb2D.MovePosition(transform.position + velocity);
+        transform.Translate(velocity);
+        //rb2D.MovePosition(transform.position + velocity);
     }
 
     void HorizontalCollisions(ref Vector3 velocity)
