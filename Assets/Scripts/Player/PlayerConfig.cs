@@ -70,10 +70,14 @@ public class PlayerConfig : MonoBehaviour
             input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             //Jumping input
-            if (Input.GetButtonDown("Jump") && controller.collisions.below && isActive)
+            if (Input.GetButtonDown("Jump") && isActive)
             {
-                velocity.y = maxJumpVelocity;
-                apeAnimator.Play("Jump");
+                print(controller.collisions.below);
+                if(controller.collisions.below)
+                {
+                    velocity.y = maxJumpVelocity;
+                    apeAnimator.Play("Jump");
+                }
             }
         }
 

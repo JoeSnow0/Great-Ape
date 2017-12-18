@@ -8,6 +8,7 @@ public class ApeSelectionController : MonoBehaviour
     public List<PlayerConfig> apeList = new List<PlayerConfig>();
     static public PlayerConfig activeApe;
     public PlayerConfig[] apePrefabs;
+    public GameObject spawnPoint;
 
     public GameObject arrowObject;
     //public PlayerConfig[] apeList;
@@ -28,17 +29,17 @@ public class ApeSelectionController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
         {
-            AddApe(0, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
+            AddApe(0, spawnPoint.transform.position, spawnPoint.transform.rotation);
         }
         if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            AddApe(1, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
+            AddApe(1, spawnPoint.transform.position, spawnPoint.transform.rotation);
         }
     }
     public void InitializeApes()
     {
         //Update list of apes, add all available apes in the scene
-        AddApe(0, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
+        AddApe(0, spawnPoint.transform.position, spawnPoint.transform.rotation);
         //Target first ape in list
         apeList[0].isActive = true;
         activeApe = apeList[0];
@@ -83,6 +84,6 @@ public class ApeSelectionController : MonoBehaviour
     private void MoveArrowToApe()
     {
         arrowObject.transform.SetParent(activeApe.transform);
-        arrowObject.transform.localPosition = Vector3.up * 2;
+        arrowObject.transform.localPosition = Vector3.up * 4;
     }
 }
