@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1729923414627820}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -40}
   m_LocalScale: {x: 1.6075839, y: 1.6075855, z: 0.16075855}
   m_Children: []
   m_Father: {fileID: 4995044635850162}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   managerConfig: {fileID: 114889110199956322}
-  arrowOffset: {x: 0, y: 2, z: -20}
+  arrowOffset: {x: 0, y: 2, z: -40}
   cameraLerpScale: 0.1
 --- !u!114 &114429358570309122
 MonoBehaviour:
@@ -203,8 +203,8 @@ MonoBehaviour:
   managerConfig: {fileID: 114889110199956322}
   apeList: []
   apePrefabs:
-  - {fileID: 114910998024255510, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
-  - {fileID: 114238213544543018, guid: 2731ef3e4f196544bac21ce9130f814c, type: 2}
+  - {fileID: 114241091999127660, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
+  - {fileID: 114241091999127660, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
   arrowObject: {fileID: 1306698533840064}
 --- !u!114 &114889110199956322
 MonoBehaviour:

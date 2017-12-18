@@ -73,6 +73,7 @@ public class PlayerConfig : MonoBehaviour
             if (Input.GetButtonDown("Jump") && controller.collisions.below && isActive)
             {
                 velocity.y = maxJumpVelocity;
+                apeAnimator.Play("Jump");
             }
         }
 
@@ -93,13 +94,13 @@ public class PlayerConfig : MonoBehaviour
             }
         }
         //Animations
-        if (input.x != 0)
+        if (input.x != 0 && controller.collisions.below)
         {
             apeAnimator.Play("Walking");
         }
-        else
+        else if (controller.collisions.below)
         {
-            //apeAnimator.Play("Idle");
+            apeAnimator.Play("Idle");
         }
     }
 }
