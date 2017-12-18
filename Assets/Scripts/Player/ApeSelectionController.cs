@@ -8,6 +8,8 @@ public class ApeSelectionController : MonoBehaviour
     public List<PlayerConfig> apeList = new List<PlayerConfig>();
     static public PlayerConfig activeApe;
     public PlayerConfig[] apePrefabs;
+
+    public GameObject arrowObject;
     //public PlayerConfig[] apeList;
     private void Start()
     {
@@ -15,19 +17,20 @@ public class ApeSelectionController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button5))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button5) || Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Tab))
         {
-            SelectNextApe(activeApe);
+            SwitchApe(activeApe, true);
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+        else if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.Tab))
         {
-            SelectPreviousApe(activeApe);
+            SwitchApe(activeApe, false);
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
         {
             AddApe(0, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
         }
-        if (Input.GetKeyDown(KeyCode.JoystickButton3))
+        if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             AddApe(1, managerConfig.apeHolder.transform.position, managerConfig.apeHolder.transform.rotation);
         }
@@ -40,6 +43,7 @@ public class ApeSelectionController : MonoBehaviour
         apeList[0].isActive = true;
         activeApe = apeList[0];
         DeselectAllOtherApes();
+        MoveArrowToApe();
     }
     public void AddApe(int apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
     {
@@ -50,30 +54,22 @@ public class ApeSelectionController : MonoBehaviour
         //Add it to the ape list
         apeList.Add(newApe);
     }
-    public void SelectNextApe(PlayerConfig apeTargetOld)
-    {
-        //Select the next ape in the list
-        int tempIndex = apeList.IndexOf(apeTargetOld) + 1;
 
+    // Switches ape to the next or previous depending on the bool "next"
+    public void SwitchApe(PlayerConfig apeTargetOld, bool next)
+    {
+        //Select the next or previous ape in the list
+        int tempIndex = apeList.IndexOf(apeTargetOld) + ((next)?1:-1);
+        tempIndex = (tempIndex < 0) ? apeList.Count - 1 : tempIndex;
 
         tempIndex = tempIndex % apeList.Count;
         activeApe = apeList[tempIndex];
         DeselectAllOtherApes();
+        MoveArrowToApe();
         print(tempIndex);
     }
-    public void SelectPreviousApe(PlayerConfig apeTargetOld)
-    {
-        //Select the previous ape in the list
-        int tempIndex = apeList.IndexOf(apeTargetOld) - 1;
-        if(tempIndex < 0)
-        {
-            tempIndex = apeList.Count - 1;
-        }
-        tempIndex = tempIndex % apeList.Count;
-        activeApe = apeList[tempIndex];
-        DeselectAllOtherApes();
-        print(tempIndex);
-    }
+
+
     public void DeselectAllOtherApes()
     {
         foreach (PlayerConfig ape in apeList)
@@ -81,5 +77,12 @@ public class ApeSelectionController : MonoBehaviour
             ape.isActive = false;
         }
         activeApe.isActive = true;
+    }
+
+    // Moves the indicator to be slightly above the current ape
+    private void MoveArrowToApe()
+    {
+        arrowObject.transform.SetParent(activeApe.transform);
+        arrowObject.transform.localPosition = Vector3.up * 2;
     }
 }
