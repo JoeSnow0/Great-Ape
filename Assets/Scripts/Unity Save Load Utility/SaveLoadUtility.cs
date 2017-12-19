@@ -867,6 +867,7 @@ public class SaveLoadUtility : MonoBehaviour {
 
 				Array a = (Array)fieldValue;
 				int i = 0;
+       
 				foreach(object o in a) {
 					if(o != null) {
 						GetCollectionElement(o.GetType(), i, o, ref dict, isField);
