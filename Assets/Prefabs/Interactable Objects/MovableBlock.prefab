@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23822695566595220}
   - component: {fileID: 61770150156172244}
   - component: {fileID: 50588583916409924}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: MovableBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262125301669790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.971468, y: 22.016994, z: 0}
+  m_LocalPosition: {x: 2.7, y: -5.87, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
