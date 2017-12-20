@@ -609,7 +609,7 @@ PlayerSettings:
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 3
+  apiCompatibilityLevel: 2
   cloudProjectId: 4838f25a-a6c9-4abd-9c47-8fb8a5773195
   projectName: Great_Ape
   organizationId: snow0

@@ -46,13 +46,13 @@ public class LevelButton : MonoBehaviour {
         }
     }
 
-    public void Initialize(string newName, Sprite image, int previousScore, int score, Color color, string sceneName, LevelSelect levelSelect, InterfaceAudio interfaceAudio, EventTrigger.Entry entry)
+    public void Initialize(string newName, Sprite image, int previousScore, int score, Color color, LevelSelect levelSelect, InterfaceAudio interfaceAudio, EventTrigger.Entry entry)
     {
         previous = previousScore;
         SetScore(score, color);
         levelName.text = newName;
         thumbnail.sprite = image;
-        button.onClick.AddListener(delegate { levelSelect.LoadScene(sceneName); });
+        button.onClick.AddListener(delegate { levelSelect.LoadScene(newName); });
         //button.onClick.AddListener(delegate { interfaceAudio.PlayAudioClip(1); });
         if (button.IsInteractable())
         {
