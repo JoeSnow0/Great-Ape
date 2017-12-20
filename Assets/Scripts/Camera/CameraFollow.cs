@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Vector3 arrowOffset;
     public float cameraLerpScale = 1f;
 
-    void Update()
+    void FixedUpdate()
     {
         if(ApeSelectionController.activeApe != null)
         {
