@@ -5,12 +5,11 @@ using System.Collections.Generic;
 public class ApeSelectionController : MonoBehaviour
 {
     public ManagerConfig managerConfig;
-    public List<PlayerConfig> apeList = new List<PlayerConfig>();
-    static public PlayerConfig activeApe;
-    public PlayerConfig[] apePrefabs;
-
+    public List<Controller2D> apeList = new List<Controller2D>();
+    static public Controller2D activeApe;
+    public Controller2D[] apePrefabs;
     public GameObject arrowObject;
-    //public PlayerConfig[] apeList;
+
     private void Start()
     {
         InitializeApes();
@@ -41,23 +40,26 @@ public class ApeSelectionController : MonoBehaviour
         //Update list of apes, add all available apes in the scene
         AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         //Target first ape in list
-        apeList[0].isActive = true;
+        apeList[0].SetActive();
         activeApe = apeList[0];
+        
         DeselectAllOtherApes();
+        //Assign Camera to active ape
+        managerConfig.mainCamera.target = activeApe;
         MoveArrowToApe();
     }
     public void AddApe(int apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
     {
         //Instansiate new ape, assign stats, animation etc
-        PlayerConfig newApe = Instantiate<PlayerConfig>(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
+        Controller2D newApe = Instantiate<Controller2D>(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
         //disable ape
-        newApe.isActive = false;
+        //newApe.isActive = false;
         //Add it to the ape list
         apeList.Add(newApe);
     }
 
     // Switches ape to the next or previous depending on the bool "next"
-    public void SwitchApe(PlayerConfig apeTargetOld, bool next)
+    public void SwitchApe(Controller2D apeTargetOld, bool next)
     {
         //Select the next or previous ape in the list
         int tempIndex = apeList.IndexOf(apeTargetOld) + ((next)?1:-1);
@@ -72,11 +74,11 @@ public class ApeSelectionController : MonoBehaviour
 
     public void DeselectAllOtherApes()
     {
-        foreach (PlayerConfig ape in apeList)
+        foreach (Controller2D ape in apeList)
         {
-            ape.isActive = false;
+            //ape.isActive = false;
         }
-        activeApe.isActive = true;
+        //activeApe.isActive = true;
     }
 
     // Moves the indicator to be slightly above the current ape

@@ -5,7 +5,7 @@ public class Controller2D : RaycastController
 {
 
     public float maxSlopeAngle = 80;
-
+    private bool isActive = false;
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;
@@ -15,6 +15,19 @@ public class Controller2D : RaycastController
         base.Start();
         collisions.faceDir = 1;
 
+    }
+
+    public void SetActive()
+    {
+        isActive = true;
+    }
+    public void SetInactive()
+    {
+        isActive = false;
+    }
+    public bool GetState()
+    {
+        return isActive;
     }
 
     public void Move(Vector2 moveAmount, bool standingOnPlatform)

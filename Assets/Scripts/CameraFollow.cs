@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour
 
     public Controller2D target;
     public float verticalOffset;
+    public float depthOffset;
     public float lookAheadDstX;
     public float lookSmoothTimeX;
     public float verticalSmoothTime;
@@ -55,7 +56,7 @@ public class CameraFollow : MonoBehaviour
 
         focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
         focusPosition += Vector2.right * currentLookAheadX;
-        transform.position = (Vector3)focusPosition + Vector3.forward * -10;
+        transform.position = (Vector3)focusPosition + Vector3.forward * depthOffset;
     }
 
     void OnDrawGizmos()

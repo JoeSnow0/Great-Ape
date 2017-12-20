@@ -11,6 +11,7 @@ public class ManagerConfig : MonoBehaviour {
     public GameObject apeStart;
     public GameObject apeGoal;
     public GameObject ingameMenu;
+    public CameraFollow mainCamera;
 
     private void Start()
     {
