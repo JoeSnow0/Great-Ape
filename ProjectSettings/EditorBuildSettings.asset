@@ -44,3 +44,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level 12.unity
     guid: 49f4b272186af224ea3dbfe0c312496f
+  - enabled: 1
+    path: Assets/Scenes/Test scenes/Thomas_Scene.unity
+    guid: 12198604e841d244ba538bee70cdcda8
