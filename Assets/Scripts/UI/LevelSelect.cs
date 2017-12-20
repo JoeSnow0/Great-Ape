@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class LevelSelect : MonoBehaviour {
     [Header("Objects")]
@@ -14,26 +14,43 @@ public class LevelSelect : MonoBehaviour {
     [SerializeField] GameObject levelsObject;
     [SerializeField] GameObject levelObject;
     [SerializeField] RectTransform scrollContent;
+    [SerializeField] WorldsInfo worldsInfo;
+    //[SerializeField] Animator transitionOverlay;
+    InterfaceAudio interfaceAudio;
 
 
     static public LevelInfo[] levels;
     List<Transform> worlds = new List<Transform>();
 
     [SerializeField] Color[] colors;
-    [SerializeField] string[] worldNames;
 
     static public int lastIndexWithScore;
+    List<string> worldNames = new List<string>();
+
+    private int levelLoadInt;
+    private string levelLoadString;
+    private bool loadLevel = false;
+    private bool isInt = true;
+    private float timestamp;
+    private float currentTime;
+
 
     void Start () {
-        string[] levelFolders = AssetDatabase.FindAssets("Resources/Levels");
-        foreach (var i in levelFolders)
-        {
-            print(i);
-        }
+        interfaceAudio = GetComponent<InterfaceAudio>();
 
+        EventTrigger.Entry entry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerEnter
+        };
+        entry.callback.AddListener(delegate { interfaceAudio.PlayAudioClip(0); });
+
+
+        worldNames = worldsInfo.worldNames;
+
+        
         levels = Resources.LoadAll<LevelInfo>("Levels");
 
-        for (int i = 0; i < worldNames.Length; i++)// Create the worlds
+        for (int i = 0; i < worldNames.Count; i++)// Create the worlds
         {
             worlds.Add(Instantiate(levelsObject, worldsParent).transform);
             Instantiate(nameObject, nameParent).GetComponent<Text>().text = worldNames[i];
@@ -55,7 +72,10 @@ public class LevelSelect : MonoBehaviour {
                 levels[i].thumbnail, 
                 levels[(i > 0) ? i - 1 : 0].score, 
                 levels[i].score, colors[0], 
-                levels[i].scene.name);
+                levels[i].scene.name,
+                this,
+                interfaceAudio, 
+                entry);
         }
 
         lastIndexWithScore = GetLast();
@@ -68,18 +88,60 @@ public class LevelSelect : MonoBehaviour {
 
     private void Update()
     {
-        
+        if (loadLevel)
+        {
+            if(currentTime >= timestamp)
+            {
+                if (isInt)
+                {
+                    SceneManager.LoadScene(levels[levelLoadInt].scene.name);
+                }
+                else
+                {
+                    SceneManager.LoadScene(levelLoadString);
+                }
+                if (Transition.animator != null)
+                {
+                    Transition.animator.SetBool("fade", false);
+                }
+                else
+                {
+                    Debug.Log("Loading completed");
+                }
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
+        }
     }
 
-
-
-    static public void LoadScene(string scene)
+    public void LoadScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        loadLevel = true;
+        levelLoadString = scene;
+        isInt = false;
+        currentTime = Time.time;
+        timestamp = Time.time + 1;
+        if (Transition.animator != null)
+        {
+            Transition.animator.SetBool("fade", true);
+        }
+        else
+        {
+            Debug.Log("Loading level");
+        }
+        //SceneManager.LoadScene(scene);
     }
-    static public void LoadScene(int scene)
+    public void LoadScene(int scene)
     {
-        SceneManager.LoadScene(levels[scene].scene.name);
+        loadLevel = true;
+        levelLoadInt = scene;
+        isInt = true;
+        currentTime = Time.time;
+        timestamp = Time.time + 1;
+        Transition.animator.SetBool("fade", true);
+        //SceneManager.LoadScene(levels[scene].scene.name);
     }
 
     public int GetLast()

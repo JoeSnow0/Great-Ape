@@ -7,10 +7,12 @@ using UnityEngine.EventSystems;
 
 public class MenuButtons : MonoBehaviour {
     int thisIndex;
+    LevelSelect levelSelect;
 
 
 	void Start () {
         DisableWindows();// Makes sure all windows are closed in the beginning
+        levelSelect = GetComponentInParent<LevelSelect>();
 	}
 
     public void EnableWindow(GameObject targetWindow)
@@ -42,7 +44,7 @@ public class MenuButtons : MonoBehaviour {
         }*/
     }
 
-    private void DisableWindows()// Disables all windows
+    public void DisableWindows()// Disables all windows
     {
         if (thisIndex == 0)// Gets the index of this gameobject relative to the parent
         {
@@ -70,14 +72,20 @@ public class MenuButtons : MonoBehaviour {
     public void StartLevel()
     {
         if(LevelSelect.lastIndexWithScore > 0)
-            LevelSelect.LoadScene(LevelSelect.lastIndexWithScore);
+            levelSelect.LoadScene(LevelSelect.lastIndexWithScore);
         else
         {
-            LevelSelect.LoadScene(0);
+            levelSelect.LoadScene(0);
         }
     }
+
     public void LoadLevelByIndex(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

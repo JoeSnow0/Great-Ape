@@ -22,9 +22,7 @@ public class KeybindingsMenu : MonoBehaviour {
 
         UpdateKeyValues(profiles[0]);
 	}
-
-
-
+    
     void Update () {
         
         if (binding)// Checks if a button has been pressed

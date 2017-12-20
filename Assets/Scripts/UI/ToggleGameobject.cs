@@ -1,21 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ToggleGameobject : MonoBehaviour {
     [SerializeField] Keybindings keybindings;
+    [SerializeField] Text levelName;
     private KeyCode escapeKey;
     GameObject childObject;
+    MenuButtons[] menuButtons;
 
     private void Start()
     {
+        levelName.text = SceneManager.GetActiveScene().name;
         escapeKey = keybindings.keybinding[keybindings.keybinding.Count - 1].keyValue;
         childObject = transform.GetChild(0).gameObject;
+        menuButtons = GetComponentsInChildren<MenuButtons>();
     }
     void Update () {
         if (Input.GetKeyDown(escapeKey))
         {
-            childObject.SetActive(!childObject.activeSelf);
+            Toggle();
         }
-	}
+    }
+
+    public void Toggle()
+    {
+        foreach (MenuButtons button in menuButtons)
+        {
+            button.DisableWindows();
+        }
+        childObject.SetActive(!childObject.activeSelf);
+    }
 }
