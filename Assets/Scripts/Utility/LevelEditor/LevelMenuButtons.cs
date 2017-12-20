@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/////////////////////
+///
+/// Authored by: Oskar Svensson (Dec 15, 2017)
+/// 
+/// oskar0svensson@gmail.com
+/// 
+////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -51,6 +59,8 @@ public class LevelMenuButtons : MonoBehaviour
         // Gets path from dialog
         if (dialog.ShowDialog() == DialogResult.OK)
         {
+            LevelObjectEditor.current.DeselectObject();
+
             string path = dialog.FileName;
             loadSaveUtility.LoadGame(path);
 
@@ -73,6 +83,8 @@ public class LevelMenuButtons : MonoBehaviour
             OnSaveLevelAsButtonPressed();
             return;
         }
+        LevelObjectEditor.current.DeselectObject();
+
         string fileName = Path.GetFileNameWithoutExtension(LevelSaveManager.levelSaveFullPath);
         //Debug.Log("Full Path: " + LevelSaveManager.levelSaveFullPath + ", Filename only: " + fileName);
         loadSaveUtility.SaveGame(LevelSaveManager.levelSaveFullPath, fileName);
@@ -101,6 +113,8 @@ public class LevelMenuButtons : MonoBehaviour
         switch(result)
         { 
             case DialogResult.OK:
+                LevelObjectEditor.current.DeselectObject();
+
                 loadSaveUtility.SaveGame(dialog.FileName, Path.GetFileNameWithoutExtension(dialog.FileName));
                 //Debug.Log("Save filed as: " + dialog.FileName);
                 LevelSaveManager.RecordSave(dialog.FileName);

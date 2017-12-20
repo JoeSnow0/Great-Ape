@@ -8,5 +8,12 @@ public class ManagerConfig : MonoBehaviour {
     //Its essencially god, worship it!
     public ApeSelectionController apeSelectionController;
     public GameObject apeHolder;
-    public GameObject apeSpawnPoint;
+    public GameObject apeStart;
+    public GameObject apeGoal;
+    public GameObject ingameMenu;
+
+    private void Start()
+    {
+
+    }
 }

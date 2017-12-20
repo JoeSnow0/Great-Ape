@@ -17,6 +17,7 @@ public class ApeSelectionController : MonoBehaviour
     }
     private void Update()
     {
+        //For testing
         if (Input.GetKeyDown(KeyCode.Joystick1Button5) || Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Tab))
         {
             SwitchApe(activeApe, true);
@@ -28,17 +29,17 @@ public class ApeSelectionController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
         {
-            AddApe(0, managerConfig.apeSpawnPoint.transform.position, managerConfig.apeSpawnPoint.transform.rotation);
+            AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         }
         if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            AddApe(1, managerConfig.apeSpawnPoint.transform.position, managerConfig.apeSpawnPoint.transform.rotation);
+            AddApe(1, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         }
     }
     public void InitializeApes()
     {
         //Update list of apes, add all available apes in the scene
-        AddApe(0, managerConfig.apeSpawnPoint.transform.position, managerConfig.apeSpawnPoint.transform.rotation);
+        AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         //Target first ape in list
         apeList[0].isActive = true;
         activeApe = apeList[0];
@@ -68,7 +69,6 @@ public class ApeSelectionController : MonoBehaviour
         MoveArrowToApe();
         print(tempIndex);
     }
-
 
     public void DeselectAllOtherApes()
     {
