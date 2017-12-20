@@ -102,8 +102,8 @@ public class ComponentManager : MonoBehaviour
             if (!float.TryParse(s, out z)) return;
             trans.rotation = Quaternion.Euler(trans.eulerAngles.x, trans.eulerAngles.y, z);
         });
-        field.transform.SetParent(componentEntry.transform);
         field.GetComponentInChildren<Text>().text = "Rotation";
+        field.transform.SetParent(componentEntry.transform);
         field.transform.localScale = Vector3.one;
         field.transform.localPosition = Vector3.zero;
         #endregion
@@ -147,7 +147,7 @@ public class ComponentManager : MonoBehaviour
         field.text = value.ToString();
         field.onEndEdit.AddListener(action);
 
-        return singleLineInputPrefab;
+        return singleLineInput;
     }
 
     // Creates an instance of the Vector2 input field prefab
