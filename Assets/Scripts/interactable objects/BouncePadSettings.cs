@@ -7,14 +7,15 @@ public class BouncePadSettings : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
         
     {
-        //checks if player
+        ////checks if player
         if (other.tag == "Player")
         {
-
             //if player reverce the speed of the player if the speed is downward
-            if (other.GetComponent<PlayerConfig>().velocity.y <= 0)
-                other.GetComponent<PlayerConfig>().velocity.y = -1* other.GetComponent<PlayerConfig>().velocity.y;
-
+            other.GetComponent<PlayerConfig>().velocity.y = bouncePower;
+        }
+        else if(other.GetComponent<Rigidbody2D>() != null)
+        {
+            other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * bouncePower * 5, ForceMode2D.Force);
         }
     }
 }

@@ -5,9 +5,9 @@ using System.Collections;
 public class PlayerConfig : MonoBehaviour
 {
     //Jumping Height
-    [Range(1, 10)]
+    [Range(1, 100)]
     public float maxJumpHeight = 4;
-    [Range(1, 10)]
+    [Range(1, 100)]
     public float minJumpHeight = 1;
     //Jumping speed
     [Range (0, 1)]
@@ -15,7 +15,7 @@ public class PlayerConfig : MonoBehaviour
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     //Movement
-    [Header("Movement"),Range(1, 10)]
+    [Header("Movement"),Range(1, 100)]
     public float moveSpeed = 10;
 
     float gravity;
@@ -31,10 +31,12 @@ public class PlayerConfig : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        apeAnimator = GetComponentInChildren<Animator>();
         //Calculate gravity based on jump height and time to apex.
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
     }
 
     void Update()
@@ -68,9 +70,14 @@ public class PlayerConfig : MonoBehaviour
             input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             //Jumping input
-            if (Input.GetButtonDown("Jump") && controller.collisions.below && isActive)
+            if (Input.GetButtonDown("Jump") && isActive)
             {
-                velocity.y = maxJumpVelocity;
+                print(controller.collisions.below);
+                if(controller.collisions.below)
+                {
+                    velocity.y = maxJumpVelocity;
+                    apeAnimator.Play("Jump");
+                }
             }
         }
 
@@ -91,11 +98,11 @@ public class PlayerConfig : MonoBehaviour
             }
         }
         //Animations
-        if (input.x != 0)
+        if (input.x != 0 && controller.collisions.below)
         {
             apeAnimator.Play("Walking");
         }
-        else
+        else if (controller.collisions.below)
         {
             apeAnimator.Play("Idle");
         }

@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //What you collide with
     public LayerMask collisionMask;
+    public LayerMask collisionMaskMovable;
     //Collision detectors
     const float skinWidth = .015f;
     public int horizontalRayCount = 4;
@@ -24,10 +25,13 @@ public class PlayerController : MonoBehaviour
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
 
+    private Rigidbody2D rb2D;
+
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     public void Move(Vector3 velocity)
@@ -52,6 +56,7 @@ public class PlayerController : MonoBehaviour
         }
         //Move the player based on input, after collision checks
         transform.Translate(velocity);
+        //rb2D.MovePosition(transform.position + velocity);
     }
 
     void HorizontalCollisions(ref Vector3 velocity)
@@ -69,6 +74,19 @@ public class PlayerController : MonoBehaviour
 
             if (hit)
             {
+                //
+                //Collisions with static ground
+                //
+                if(hit.collider.gameObject.layer == 11)
+                {
+                    Vector2 normVelocity = rb2D.velocity.normalized;
+                    Vector2 direction = (new Vector2(transform.position.x, transform.position.y) - hit.point).normalized;
+
+                    float angle = (Vector2.Dot(normVelocity, direction));
+                    velocity.x += directionX * angle;
+
+                    break;
+                }
                 //Check slope collision
                 float SlopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if(i == 0 && SlopeAngle <= maxClimbAngle)
@@ -104,6 +122,57 @@ public class PlayerController : MonoBehaviour
                 }
                 
             }
+            //
+            //Collisions with movable objects with rigidbodies
+            //
+            RaycastHit2D hit2 = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            if (hit2)
+            {
+                if (hit2.collider.gameObject.layer == 11)
+                {
+                    Vector2 normVelocity = rb2D.velocity.normalized;
+                    Vector2 direction = (new Vector2(transform.position.x, transform.position.y) - hit.point).normalized;
+
+                    float angle = (Vector2.Dot(normVelocity, direction));
+                    velocity.x += directionX * angle;
+
+                    break;
+                }
+                //Check slope collision
+                float SlopeAngle = Vector2.Angle(hit2.normal, Vector2.up);
+                if (i == 0 && SlopeAngle <= maxClimbAngle)
+                {
+                    //Prevents "skipping" when going downwards
+                    if (collisions.descendingSlope)
+                    {
+                        collisions.descendingSlope = false;
+                        velocity = collisions.velocityOld;
+                    }
+                    float distanceToSlopeStart = 0;
+                    if (SlopeAngle != collisions.slopeAngleOld)
+                    {
+                        distanceToSlopeStart = hit2.distance - skinWidth;
+                        velocity.x -= distanceToSlopeStart * directionX;
+                    }
+                    ClimbSlope(ref velocity, SlopeAngle);
+                    velocity.x += distanceToSlopeStart * directionX;
+                }
+                //If not climbing slopes or slope is too steep, do normal collision checks
+                if (!collisions.climbingSlope || SlopeAngle > maxClimbAngle)
+                {
+                    velocity.x = (hit2.distance - skinWidth) * directionX;
+                    rayLength = hit2.distance;
+                    //Prevents you from moving vertically when colliding horizontally on a slope
+                    if (collisions.climbingSlope)
+                    {
+                        velocity.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(velocity.x);
+                    }
+
+                    collisions.left = directionX == -1;
+                    collisions.right = directionX == 1;
+                }
+
+            }
         }
     }
 
@@ -115,6 +184,9 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
+            //
+            //Collision with static ground
+            //
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
@@ -134,6 +206,24 @@ public class PlayerController : MonoBehaviour
                 collisions.below = directionY == -1;
                 collisions.above = directionY == 1;
                 
+            }
+            //
+            //Collisions with movable objects with rigidbodies
+            //
+            RaycastHit2D hit2 = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMaskMovable);
+            if (hit2)
+            {
+                velocity.y = (hit.distance - skinWidth) * directionY;
+                rayLength = hit.distance;
+
+                if (collisions.climbingSlope)
+                {
+                    velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
+                }
+
+                collisions.below = directionY == -1;
+                collisions.above = directionY == 1;
+
             }
         }
 
