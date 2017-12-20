@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/////////////////////
+///
+/// Authored by: Oskar Svensson (Dec 15, 2017)
+/// 
+/// oskar0svensson@gmail.com
+/// 
+////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

@@ -29,9 +29,6 @@ public class LevelBlockSelect : MonoBehaviour
     private RectTransform m_buttonHolderRT;
 
     [SerializeField]
-    private GameObject m_blockPreview;
-
-    [SerializeField]
     private GameObject m_buttonPrefab;
 
     [SerializeField]
@@ -87,26 +84,35 @@ public class LevelBlockSelect : MonoBehaviour
     // Sets the currently selected block
     private void SetCurrentBlock(string path)
     {
+        // Gets the button we pressed from our Dictionary of buttons
+        Button pressedButton = m_buttons[path];
+
         // If you press the button for the block already selected, it gets deselected
-        if(m_currentBlockPath == path)
+        if (m_currentBlockPath == path)
         {
             // If the button was highlighted, it is now not highlighted 
-            if (m_eventSystem.currentSelectedGameObject == m_buttons[path].gameObject)
+            if (m_eventSystem.currentSelectedGameObject == pressedButton.gameObject)
                 m_eventSystem.SetSelectedGameObject(null);
 
-            // Deactivates level block preview image
-            m_blockPreview.transform.parent.gameObject.SetActive(false);
-            m_currentBlockPath = null;
+            // The backdrop image is deactivated on the button
+            pressedButton.transform.GetChild(1).gameObject.SetActive(false);
 
+            // The selection is set to null
+            m_currentBlockPath = null;
             return;
+        }
+        
+        // Deselects the other selected object
+        if(m_currentBlockPath != null && m_currentBlockPath.Length > 0)
+        {
+            Button oldButton = m_buttons[m_currentBlockPath];
+            oldButton.transform.GetChild(1).gameObject.SetActive(false);
         }
 
         m_currentBlockPath = path;
 
-        // Activates image showcasing the selected block
-        m_blockPreview.GetComponent<Image>().sprite = m_buttons[path].image.sprite;
-        m_blockPreview.transform.GetChild(0).GetComponent<Text>().text = path;
-        m_blockPreview.transform.parent.gameObject.SetActive(true);
+        // The backdrop image is activated on the button
+        pressedButton.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     // Sets the size of the button holder to be based on the amount of active children

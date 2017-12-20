@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxJumpHeight: 20
-  minJumpHeight: 10
+  minJumpHeight: 5
   timeToJumpApex: 0.4
   moveSpeed: 30
   velocity: {x: 0, y: 0, z: 0}
@@ -1846,6 +1846,9 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
+  collisionMaskMovable:
+    serializedVersion: 2
+    m_Bits: 2048
   horizontalRayCount: 4
   verticalRayCount: 4
   playerConfig: {fileID: 0}

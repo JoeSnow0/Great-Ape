@@ -7,6 +7,7 @@ public class ConfigUI : EditorWindow {
     Color newColor;
     Font newFont;
     Transform target;
+    string searchName;
 
     [MenuItem("UI/Config UI")]
     static void Init()
@@ -19,6 +20,8 @@ public class ConfigUI : EditorWindow {
     private void OnGUI()
     {
         target = (Transform)EditorGUILayout.ObjectField(target, typeof(Transform));
+        searchName = EditorGUILayout.TextField(searchName);
+
         GUILayout.Label("Color");
         newColor = EditorGUILayout.ColorField(newColor);
         GUILayout.Label("Font");
@@ -38,6 +41,12 @@ public class ConfigUI : EditorWindow {
         if(GUILayout.Button("Update all"))
         {
 
+        }
+
+        if(GUILayout.Button("Select search"))
+        {
+            GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag(searchName);
+            Selection.objects = selectedObjects;
         }
 
     }
