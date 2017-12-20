@@ -1250,6 +1250,9 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
+  collisionMaskMovable:
+    serializedVersion: 2
+    m_Bits: 0
   horizontalRayCount: 4
   verticalRayCount: 4
   playerConfig: {fileID: 0}
@@ -1299,12 +1302,8 @@ MonoBehaviour:
   maxJumpHeight: 4
   minJumpHeight: 1
   timeToJumpApex: 0.4
-  gravityJumping: 1
-  gravityFalling: 4
   moveSpeed: 10
-  maxClimbAngle: 50
-  maxDescendAngle: 50
-  velocity: {x: 0, y: 0}
+  velocity: {x: 0, y: 0, z: 0}
   isActive: 0
   apeAnimator: {fileID: 0}
 --- !u!114 &114648338746197708

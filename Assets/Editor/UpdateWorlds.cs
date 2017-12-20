@@ -28,7 +28,6 @@ public class UpdateWorlds : EditorWindow {
                 string folderName = split[split.Length - 1];
                 string folderPath = split[0];
                 worldNames.Add(folderName);
-
                 LevelInfo[] l = Resources.LoadAll<LevelInfo>("Levels/" + folderName);
                 for (int li = 0; li < l.Length; li++)
                 {
@@ -36,6 +35,7 @@ public class UpdateWorlds : EditorWindow {
                 }
             }
             worlds.worldNames = worldNames;
+            AssetDatabase.SaveAssets();
         }
     }
 }
