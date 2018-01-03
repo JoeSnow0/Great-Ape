@@ -71,8 +71,8 @@ public class LevelSelect : MonoBehaviour {
                 Initialize(levels[i].levelName, 
                 levels[i].thumbnail, 
                 levels[(i > 0) ? i - 1 : 0].score, 
-                levels[i].score, colors[0], 
-                levels[i].scene.name,
+                levels[i].score,
+                colors[0],
                 this,
                 interfaceAudio, 
                 entry);
@@ -94,7 +94,7 @@ public class LevelSelect : MonoBehaviour {
             {
                 if (isInt)
                 {
-                    SceneManager.LoadScene(levels[levelLoadInt].scene.name);
+                    SceneManager.LoadScene(levels[levelLoadInt].levelName);
                 }
                 else
                 {
