@@ -58,6 +58,10 @@ public class ApeSelectionController : MonoBehaviour
     // Switches ape to the next or previous depending on the bool "next"
     public void SwitchApe(Player apeTargetOld, bool next)
     {
+        if(!apeTargetOld.playerInput.GetApeState())
+        {
+            return;
+        }
         //Select the next or previous ape in the list
         int tempIndex = apeList.IndexOf(apeTargetOld) + ((next)?1:-1);
         tempIndex = (tempIndex < 0) ? apeList.Count - 1 : tempIndex;
@@ -79,7 +83,13 @@ public class ApeSelectionController : MonoBehaviour
         }
         activeApe.playerInput.SetApeState(true);
     }
-
+    public void DeselectAllApes()
+    {
+        foreach (Player ape in apeList)
+        {
+            ape.playerInput.SetApeState(false);
+        }
+    }
     // Moves the indicator to be slightly above the current ape
     private void MoveArrowToApe()
     {

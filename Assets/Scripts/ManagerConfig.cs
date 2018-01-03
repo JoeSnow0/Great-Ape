@@ -9,12 +9,8 @@ public class ManagerConfig : MonoBehaviour {
     public ApeSelectionController apeSelectionController;
     public GameObject apeHolder;
     public GameObject apeStart;
-    public GameObject apeGoal;
+    public GoalTrigger apeGoal;
     public GameObject ingameMenu;
     public CameraFollow mainCamera;
-
-    private void Start()
-    {
-
-    }
+    public GameObject GameEnd;
 }

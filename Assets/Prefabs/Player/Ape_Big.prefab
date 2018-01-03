@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 114652506493106154}
   - component: {fileID: 114534724101239146}
   - component: {fileID: 114090786626428392}
-  - component: {fileID: 114610284728183796}
   - component: {fileID: 114851206761550494}
   m_Layer: 9
   m_Name: Ape_Big
@@ -1592,25 +1591,6 @@ MonoBehaviour:
     m_RestoreDefaultPose: 1
     targetPosition: {x: -2.7, y: -0.80999994, z: 0}
     flip: 1
---- !u!114 &114610284728183796
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1157862958340940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3db5c9c1c18a0374cbf90f8aa5ec4b1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 256
-  horizontalRayCount: 0
-  verticalRayCount: 0
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  collider: {fileID: 0}
 --- !u!114 &114630718601335190
 MonoBehaviour:
   m_ObjectHideFlags: 1
