@@ -15,7 +15,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if (GetApeState() == true)
+        if (GetApeState())
         {
             Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             player.SetDirectionalInput(directionalInput);
