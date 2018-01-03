@@ -86,11 +86,11 @@ GameObject:
   - component: {fileID: 4961547240573018}
   - component: {fileID: 33147523758064380}
   - component: {fileID: 61078749736045076}
-  - component: {fileID: 50090938233293424}
   - component: {fileID: 114652506493106154}
   - component: {fileID: 114534724101239146}
   - component: {fileID: 114090786626428392}
   - component: {fileID: 114610284728183796}
+  - component: {fileID: 114851206761550494}
   m_Layer: 9
   m_Name: Ape_Big
   m_TagString: Player
@@ -1136,26 +1136,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1157862958340940}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50090938233293424
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1157862958340940}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 1
-  m_AngularDrag: 1
-  m_GravityScale: 8
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &61078749736045076
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1577,14 +1557,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa4d017e2206704887e242694ad4329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumpHeight: 20
-  minJumpHeight: 5
+  maxJumpHeight: 40
+  minJumpHeight: 20
   timeToJumpApex: 0.4
+  moveSpeed: 40
   wallJumpClimb: {x: 0, y: 0}
   wallJumpOff: {x: 0, y: 0}
   wallLeap: {x: 0, y: 0}
-  wallSlideSpeedMax: 3
-  wallStickTime: 0.25
+  wallSlideSpeedMax: 0
+  wallStickTime: 0
+  controller: {fileID: 114652506493106154}
+  playerInput: {fileID: 114090786626428392}
 --- !u!114 &114538910655355124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1886,6 +1869,17 @@ MonoBehaviour:
   - {fileID: 4961561724707708}
   - {fileID: 4635439717140780}
   - {fileID: 4681677144630326}
+--- !u!114 &114851206761550494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157862958340940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4468fb244a6e2df4b834ccc43cf57c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114871518949013496
 MonoBehaviour:
   m_ObjectHideFlags: 1

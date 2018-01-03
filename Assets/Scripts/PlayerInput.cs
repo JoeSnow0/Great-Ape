@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Player))]
 public class PlayerInput : MonoBehaviour
 {
+    private bool m_isActive = false;
 
     Player player;
 
@@ -14,16 +15,33 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        player.SetDirectionalInput(directionalInput);
+        if (GetApeState() == true)
+        {
+            Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            player.SetDirectionalInput(directionalInput);
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
-        {
-            player.OnJumpInputDown();
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+            {
+                player.OnJumpInputDown();
+            }
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonDown("Jump"))
+            {
+                player.OnJumpInputUp();
+            }
         }
-        if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        else
         {
-            player.OnJumpInputUp();
+            //Stop input if player has selected another ape
+            player.SetDirectionalInput(new Vector2(0,0));
         }
+    }
+
+    public void SetApeState(bool state)
+    {
+        m_isActive = state;
+    }
+    public bool GetApeState()
+    {
+        return m_isActive;
     }
 }

@@ -2,15 +2,18 @@
 using System.Collections;
 
 [RequireComponent(typeof(Controller2D))]
+[RequireComponent(typeof(PlayerAnimation))]
 public class Player : MonoBehaviour
 {
-
+    [Range(0, 100)]
     public float maxJumpHeight = 4;
+    [Range(0, 100)]
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    float moveSpeed = 6;
+    [Range(0, 100)]
+    public float moveSpeed;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -26,7 +29,9 @@ public class Player : MonoBehaviour
     Vector3 velocity;
     float velocityXSmoothing;
 
-    Controller2D controller;
+    public Controller2D controller;
+    public PlayerInput playerInput;
+    PlayerAnimation playerAnimation;
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -34,7 +39,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
         controller = GetComponent<Controller2D>();
+        playerAnimation = GetComponent<PlayerAnimation>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -44,9 +51,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateVelocity();
-        HandleWallSliding();
+        //HandleWallSliding();
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
+        //Animate
+        //playerAnimation.animatesomething;
 
         if (controller.collisions.above || controller.collisions.below)
         {

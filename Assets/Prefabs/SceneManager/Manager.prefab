@@ -2342,7 +2342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1276155236769692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 122.3, y: 57.8, z: -2.28125}
+  m_LocalPosition: {x: -43.2, y: 56.4, z: -2.28125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4995044635850162}
@@ -2400,7 +2400,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5199,8 +5199,8 @@ MonoBehaviour:
   managerConfig: {fileID: 114889110199956322}
   apeList: []
   apePrefabs:
-  - {fileID: 114652506493106154, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
-  - {fileID: 114652506493106154, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
+  - {fileID: 114534724101239146, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
+  - {fileID: 114534724101239146, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
   arrowObject: {fileID: 1306698533840064}
 --- !u!114 &114434884940401168
 MonoBehaviour:
@@ -6567,13 +6567,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d057d208cd7ae604c8cb60405300142d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   verticalOffset: 1
   depthOffset: -40
   lookAheadDstX: 4
   lookSmoothTimeX: 0.2
   verticalSmoothTime: 0.2
-  focusAreaSize: {x: 16, y: 10}
+  focusAreaSize: {x: 16, y: 16}
 --- !u!114 &114667957614075320
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class ApeSelectionController : MonoBehaviour
 {
     public ManagerConfig managerConfig;
-    public List<Controller2D> apeList = new List<Controller2D>();
-    static public Controller2D activeApe;
-    public Controller2D[] apePrefabs;
+    public List<Player> apeList = new List<Player>();
+    static public Player activeApe;
+    public Player[] apePrefabs;
     public GameObject arrowObject;
 
     private void Start()
@@ -40,26 +40,23 @@ public class ApeSelectionController : MonoBehaviour
         //Update list of apes, add all available apes in the scene
         AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         //Target first ape in list
-        apeList[0].SetActive();
+        apeList[0].playerInput.SetApeState(true);
         activeApe = apeList[0];
-        
         DeselectAllOtherApes();
         //Assign Camera to active ape
-        managerConfig.mainCamera.target = activeApe;
+        managerConfig.mainCamera.SetTarget(activeApe.controller);
         MoveArrowToApe();
     }
     public void AddApe(int apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
     {
         //Instansiate new ape, assign stats, animation etc
-        Controller2D newApe = Instantiate<Controller2D>(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
-        //disable ape
-        //newApe.isActive = false;
+        Player newApe = Instantiate(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
         //Add it to the ape list
         apeList.Add(newApe);
     }
 
     // Switches ape to the next or previous depending on the bool "next"
-    public void SwitchApe(Controller2D apeTargetOld, bool next)
+    public void SwitchApe(Player apeTargetOld, bool next)
     {
         //Select the next or previous ape in the list
         int tempIndex = apeList.IndexOf(apeTargetOld) + ((next)?1:-1);
@@ -67,18 +64,20 @@ public class ApeSelectionController : MonoBehaviour
 
         tempIndex = tempIndex % apeList.Count;
         activeApe = apeList[tempIndex];
+        managerConfig.mainCamera.SetTarget(activeApe.controller);
         DeselectAllOtherApes();
         MoveArrowToApe();
-        print(tempIndex);
+        //Activate ape
+        activeApe.playerInput.SetApeState(true);
     }
 
     public void DeselectAllOtherApes()
     {
-        foreach (Controller2D ape in apeList)
+        foreach (Player ape in apeList)
         {
-            //ape.isActive = false;
+            ape.playerInput.SetApeState(false);
         }
-        //activeApe.isActive = true;
+        activeApe.playerInput.SetApeState(true);
     }
 
     // Moves the indicator to be slightly above the current ape
