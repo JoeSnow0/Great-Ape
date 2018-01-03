@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4354703348057784}
   - component: {fileID: 58266307369772742}
   - component: {fileID: 114850176764316744}
+  - component: {fileID: 50349410198578904}
   m_Layer: 0
   m_Name: GreatCoin
   m_TagString: Untagged
@@ -52,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1429423666492282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -87.4, y: -3.76, z: 0}
+  m_LocalPosition: {x: -153.9, y: 45, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 4771598312808788}
@@ -72,6 +73,26 @@ Transform:
   m_Father: {fileID: 4354703348057784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50349410198578904
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429423666492282}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58266307369772742
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -149,7 +170,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e8434de22f7200a4fb4a2708f8d60ee5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 51eea83cf7b9374498a5798db690977a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
