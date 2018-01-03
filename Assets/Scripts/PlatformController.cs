@@ -94,18 +94,6 @@ public class PlatformController : RaycastController
     {
         foreach (PassengerMovement passenger in passengerMovement)
         {
-            //PlayerInput pInput = passenger.transform.GetComponent<PlayerInput>();
-            //if (pInput != null)
-            //{
-            //    if (!pInput.GetApeState())
-            //    {
-            //        passenger.transform.SetParent(transform);
-            //        passenger.transform.GetComponent<Controller2D>().enabled = false;
-            //        passenger.transform.GetComponent<Player>().enabled = false;
-            //        continue;
-            //    }
-            //}
-
             if (!passengerDictionary.ContainsKey(passenger.transform))
             {
                 passengerDictionary.Add(passenger.transform, passenger.transform.GetComponent<Controller2D>());
