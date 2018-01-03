@@ -4126,8 +4126,7 @@ MonoBehaviour:
   profiles:
   - {fileID: 11400000, guid: 4bd7c8673a1768b4ab47df2345ea395b, type: 2}
   - {fileID: 11400000, guid: 857e76ada23c87645b61d8d50b97d494, type: 2}
-  keybindingText: {fileID: 114623565732322466, guid: 0c1173121aee88147acb154a78d5aef0,
-    type: 2}
+  keybindingText: {fileID: 0}
   button: {fileID: 114238517815202266, guid: de763c5c8de699f489a7520fbdba4ffe, type: 2}
 --- !u!114 &114085604830576966
 MonoBehaviour:
@@ -9644,7 +9643,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: success
+  m_Text: Level Complete
 --- !u!114 &114970462468546904
 MonoBehaviour:
   m_ObjectHideFlags: 1
