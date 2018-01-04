@@ -7,7 +7,7 @@ public class KeybindingsMenu : MonoBehaviour {
     List<Text> keybindingTexts = new List<Text>();
     [SerializeField] Keybindings[] profiles;
 
-    public Text keybindingText;
+    public GameObject keybindingText;
     public Button button;
     bool binding = false;
     int currentKey;
@@ -22,9 +22,7 @@ public class KeybindingsMenu : MonoBehaviour {
 
         UpdateKeyValues(profiles[0]);
 	}
-
-
-
+    
     void Update () {
         
         if (binding)// Checks if a button has been pressed
@@ -74,12 +72,12 @@ public class KeybindingsMenu : MonoBehaviour {
         {
             for (int i = 0; i < profile.keybinding.Count; i++)// Create all buttons and text fields
             {
-                GameObject newButton = Instantiate(button, transform).gameObject;
-                newButton.GetComponentInChildren<Text>().text = profile.keybinding[i].actionName.ToString();
+                GameObject newButton = Instantiate(button, transform.parent.GetChild(transform.parent.childCount - 1)).gameObject;
+                Text buttonText = newButton.GetComponentInChildren<Text>();
+                buttonText.text = profile.keybinding[i].keyValue.ToString();
                 newButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { PressButton(newButton.gameObject); });
-                keybindingTexts.Add(Instantiate(keybindingText, transform.parent.GetChild(transform.parent.childCount - 1)));
-
-                keybindingTexts[i].text = profile.keybinding[i].keyValue.ToString();
+                keybindingTexts.Add(buttonText);
+                Instantiate(keybindingText, transform).GetComponentInChildren<Text>().text = profile.keybinding[i].actionName.ToString();
             }
         }
         else

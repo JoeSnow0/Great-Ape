@@ -16,6 +16,6 @@ public class MovingPlatform : MonoBehaviour {
 	}
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        velocity.x *= -1;
+        velocity *= -1;
     }
 }

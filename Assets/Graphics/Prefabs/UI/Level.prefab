@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 114813054226161250}
   - component: {fileID: 95198950197434220}
   - component: {fileID: 114025050019891740}
+  - component: {fileID: 114560321360920766}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -303,6 +304,25 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114560321360920766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562897687112886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &114738369170804202
 MonoBehaviour:
   m_ObjectHideFlags: 1

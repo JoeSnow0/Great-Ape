@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour {
@@ -10,6 +11,9 @@ public class LevelButton : MonoBehaviour {
     [SerializeField] Transform scoreParent;
     [SerializeField] Image[] scoreImages;
     int previous;
+    EventTrigger eventTrigger;
+
+
 
     public void SetScore(int score, Color color)
     {
@@ -42,12 +46,18 @@ public class LevelButton : MonoBehaviour {
         }
     }
 
-    public void Initialize(string newName, Sprite image, int previousScore, int score, Color color, string sceneName)
+    public void Initialize(string newName, Sprite image, int previousScore, int score, Color color, LevelSelect levelSelect, InterfaceAudio interfaceAudio, EventTrigger.Entry entry)
     {
         previous = previousScore;
         SetScore(score, color);
         levelName.text = newName;
         thumbnail.sprite = image;
-        button.onClick.AddListener(delegate { LevelSelect.LoadScene(sceneName); });
+        button.onClick.AddListener(delegate { levelSelect.LoadScene(newName); });
+        //button.onClick.AddListener(delegate { interfaceAudio.PlayAudioClip(1); });
+        if (button.IsInteractable())
+        {
+            eventTrigger = GetComponent<EventTrigger>();
+            eventTrigger.triggers.Add(entry);
+        }
     }
 }
