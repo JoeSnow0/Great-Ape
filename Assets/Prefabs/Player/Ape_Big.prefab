@@ -1527,8 +1527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa4d017e2206704887e242694ad4329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumpHeight: 40
-  minJumpHeight: 20
+  maxJumpHeight: 20
+  minJumpHeight: 10
   timeToJumpApex: 0.4
   moveSpeed: 40
   wallJumpClimb: {x: 0, y: 0}
