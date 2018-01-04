@@ -207,7 +207,7 @@ public static class SaveLoad {
 			}
 			
 			// Try to create the directory.
-			DirectoryInfo dir = Directory.CreateDirectory(path);
+			//DirectoryInfo dir = Directory.CreateDirectory(path);
 			Debug.Log("The directory was created successfully at " + path);
 
 		} 

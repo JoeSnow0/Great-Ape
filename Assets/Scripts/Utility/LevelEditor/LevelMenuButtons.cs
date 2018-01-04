@@ -27,7 +27,7 @@ public class LevelMenuButtons : MonoBehaviour
         // Checks if we want to save first
         UnityAction yesAction = () => OnSaveLevelButtonPressed();
         UnityAction noAction = () => LevelEditor.current.CreateNewLevel();
-        if (CheckForUnsavedChanges("You have unsaved changes.\n Do you want to save before you create a new level?", yesAction, noAction))
+        if ( CheckForUnsavedChanges("You have unsaved changes.\n Do you want to save before you create a new level?", yesAction, noAction))
             return;
 
         // If we didn't have any unsaved changes we create a new level
@@ -153,5 +153,13 @@ public class LevelMenuButtons : MonoBehaviour
         }
 
         return LevelSaveManager.changed;
+    }
+
+    void foo(params int[] bar)
+    {
+        foreach(int b in bar)
+        {
+
+        }
     }
 }

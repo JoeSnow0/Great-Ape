@@ -1089,7 +1089,7 @@ public class SaveLoadUtility : MonoBehaviour {
 						*/
 
 						string propertyName = property.Name;
-						object propertyValue = property.GetValue(baseInstance, null);
+						//object propertyValue = property.GetValue(baseInstance, null);
 						ReadFromDictionary(propertyType, pair.Key, pair.Value, null, property, baseInstance);
 					}
 				}
@@ -1151,7 +1151,7 @@ public class SaveLoadUtility : MonoBehaviour {
 		}
 		*/
 
-		Type baseInstanceType = baseInstance.GetType();
+		//Type baseInstanceType = baseInstance.GetType();
 		Dictionary<string,object> fieldValueDict = fieldValue as Dictionary<string,object>;
 
 		if(surrogateTypes.Contains(fieldType.Name)) {

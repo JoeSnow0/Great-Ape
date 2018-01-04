@@ -1538,6 +1538,7 @@ MonoBehaviour:
   wallStickTime: 0
   controller: {fileID: 114652506493106154}
   playerInput: {fileID: 114090786626428392}
+  apeAnim: {fileID: 95705038220958136}
 --- !u!114 &114538910655355124
 MonoBehaviour:
   m_ObjectHideFlags: 1

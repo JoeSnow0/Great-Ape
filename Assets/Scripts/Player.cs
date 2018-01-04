@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     bool wallSliding;
     int wallDirX;
 
+    public Animator apeAnim;
+
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -50,6 +52,19 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        // Checks if we're currently not on the ground
+        bool oldBelow = controller.collisions.below;
+
+        // Sets animator values
+        apeAnim.SetBool("Walking", (Mathf.Abs(velocity.x) > 2 && controller.collisions.below));
+
+        if (velocity.x != 0)
+            transform.GetChild(0).rotation = Quaternion.Euler(transform.eulerAngles.x, (velocity.x > 0) ? 0 : 180, transform.eulerAngles.z);
+
+        apeAnim.SetBool("Falling", !controller.collisions.below && velocity.y < 0);
+
+        apeAnim.SetBool("Grounded", controller.collisions.below);
+
         CalculateVelocity();
         //HandleWallSliding();
 
@@ -68,6 +83,10 @@ public class Player : MonoBehaviour
                 velocity.y = 0;
             }
         }
+
+        // If we just landed we trigger the landing animation
+        if (controller.collisions.below && !oldBelow)
+            apeAnim.SetTrigger("Land");
     }
 
     public void SetDirectionalInput(Vector2 input)

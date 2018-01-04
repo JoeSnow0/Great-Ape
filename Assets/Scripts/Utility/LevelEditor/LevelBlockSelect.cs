@@ -14,10 +14,10 @@ using UnityEngine.EventSystems;
 
 public class LevelBlockSelect : MonoBehaviour
 {
-    private static LevelBlockSelect currentBlockSelect;
+    private static LevelBlockSelect m_currentBlockSelect;
     public static LevelBlockSelect current
     {
-        get { return currentBlockSelect; }
+        get { return m_currentBlockSelect; }
     }
 
     [SerializeField]
@@ -38,8 +38,8 @@ public class LevelBlockSelect : MonoBehaviour
 
     private void Awake()
     {
-        if (currentBlockSelect == null)
-            currentBlockSelect = this;
+        if (m_currentBlockSelect == null)
+            m_currentBlockSelect = this;
     }
 
 
