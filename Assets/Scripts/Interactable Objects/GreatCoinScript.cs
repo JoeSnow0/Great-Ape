@@ -22,7 +22,10 @@ public class GreatCoinScript : MonoBehaviour {
 
     private void CoinCollected()
     {
-        //Add score
+        //Update score with collected coin
+
+        //sound effect
+        
         //Remove Coin from game
         Destroy(gameObject);   
     }
