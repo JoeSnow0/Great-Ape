@@ -8,9 +8,12 @@ public class PlayerInput : MonoBehaviour
 
     Player player;
 
+    Animator anim;
+
     void Start()
     {
         player = GetComponent<Player>();
+        anim = player.apeAnim;
     }
 
     void Update()
@@ -23,6 +26,7 @@ public class PlayerInput : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
             {
                 player.OnJumpInputDown();
+                anim.SetTrigger("Jump");
             }
             if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonDown("Jump"))
             {
