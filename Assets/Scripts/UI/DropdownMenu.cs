@@ -14,26 +14,26 @@ using UnityEngine.EventSystems;
 
 public class DropdownMenu : MonoBehaviour
 {
-    private bool showDropdown = false;
+    private bool m_showDropdown = false;
     public bool isDropdownActive
     {
-        get { return showDropdown; }
+        get { return m_showDropdown; }
     }
 
     [SerializeField]
     private GameObject content;
-    private RectTransform content_RT;
+    private RectTransform m_content_RT;
 
-    private Camera canvasCamera;
+    private Camera m_canvasCamera;
 
-    private EventSystem eventSystem;
+    private EventSystem m_eventSystem;
 
     private void Awake()
     {
-        eventSystem = EventSystem.current;
+        m_eventSystem = EventSystem.current;
 
-        content_RT = content.GetComponent<RectTransform>();
-        canvasCamera = transform.root.GetComponent<Canvas>().worldCamera;
+        m_content_RT = content.GetComponent<RectTransform>();
+        m_canvasCamera = transform.root.GetComponent<Canvas>().worldCamera;
 
         // Adds it so when you click any of the buttons, the dropdown will be deactivated
         foreach(Button contentButton in content.GetComponentsInChildren<Button>())
@@ -41,15 +41,15 @@ public class DropdownMenu : MonoBehaviour
             contentButton.onClick.AddListener(() => ContentButtonClick(contentButton));
         }
 
-        content.SetActive(showDropdown);
+        content.SetActive(m_showDropdown);
     }
 
     private void Update()
     {
         // If the dropdown is active and the mouse was clicked outside of the dropdown, we close it down
-        if (showDropdown)
+        if (m_showDropdown)
         {
-            if (Input.GetMouseButtonDown(0) && !RectTransformUtility.RectangleContainsScreenPoint(content_RT, Input.mousePosition, canvasCamera))
+            if (Input.GetMouseButtonDown(0) && !RectTransformUtility.RectangleContainsScreenPoint(m_content_RT, Input.mousePosition, m_canvasCamera))
                 Dropdown(false);
         }
     }
@@ -57,21 +57,21 @@ public class DropdownMenu : MonoBehaviour
     public void OnButtonClick()
     {
         LevelObjectEditor.current.DeselectObject();
-        if(!showDropdown)
+        if(!m_showDropdown)
             Dropdown(true);
     }
 
     // Sets the dropdown menu to be active or not
     private void Dropdown(bool active)
     {
-        showDropdown = active;
+        m_showDropdown = active;
 
         // Removes focus from the level menu button if it was pressed
-        if (gameObject == eventSystem.currentSelectedGameObject)
-            eventSystem.SetSelectedGameObject(null);
+        if (gameObject == m_eventSystem.currentSelectedGameObject)
+            m_eventSystem.SetSelectedGameObject(null);
 
         // Sets the content to be shown or hidden
-        content.SetActive(showDropdown);
+        content.SetActive(m_showDropdown);
     }
 
     // When we press a button in the content list, we deactivate the dropdown menu
@@ -79,6 +79,6 @@ public class DropdownMenu : MonoBehaviour
     {
         // TODO: Fix so the buttons will become normal when you press away the dropdown menu, they are currently going to stay permanently pressed right now
         Dropdown(false);
-        eventSystem.SetSelectedGameObject(null);
+        m_eventSystem.SetSelectedGameObject(null);
     }
 }

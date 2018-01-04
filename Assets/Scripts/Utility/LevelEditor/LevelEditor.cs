@@ -13,10 +13,10 @@ using UnityEngine;
 public class LevelEditor : MonoBehaviour
 {
     // The currently used LevelEditor
-    private static LevelEditor currentEditor;
+    private static LevelEditor m_currentEditor;
     public static LevelEditor current
     {
-        get { return currentEditor; }
+        get { return m_currentEditor; }
     }
 
     // The currently selected block prefab
@@ -48,9 +48,6 @@ public class LevelEditor : MonoBehaviour
 
     private RectTransform m_RT;
 
-    private Vector3 mouseDelta = Vector3.zero;
-    private Vector3 mousePos;
-
     // The object that's currently being edited
     private GameObject currentObject;
     public GameObject currentSelection
@@ -61,10 +58,11 @@ public class LevelEditor : MonoBehaviour
     [SerializeField]
     DropdownMenu dropDown;
 
+
     private void Awake()
     {
-        if (currentEditor == null)
-            currentEditor = this;
+        if (m_currentEditor == null)
+            m_currentEditor = this;
 
         // Gets the canvas of the camera
         canvasCamera = transform.root.GetComponent<Canvas>().worldCamera;
@@ -74,8 +72,6 @@ public class LevelEditor : MonoBehaviour
         m_RT = GetComponent<RectTransform>();
 
         CreateNewLevel();
-
-        mousePos = Input.mousePosition;
     }
 
     private void Start()
@@ -84,14 +80,12 @@ public class LevelEditor : MonoBehaviour
     }
     private void Update()
     {
-        UpdateMouseDelta();
-
         // You should not be able to interact with the editor while the dropdown is open
         if (dropDown.isDropdownActive)
             return;
 
         // If the mouse is hovering over the main editor view
-        if (!RectTransformUtility.RectangleContainsScreenPoint(m_RT, mousePos, canvasCamera))
+        if (!RectTransformUtility.RectangleContainsScreenPoint(m_RT, MouseHelper.pos, canvasCamera))
             return;
 
         if (Input.GetMouseButtonDown(0))
@@ -107,7 +101,7 @@ public class LevelEditor : MonoBehaviour
             MiddleMouse();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.R))
             levelCamera.transform.position = m_orgCamerPos;
         else if (Input.GetKeyDown(KeyCode.F) && !m_followingObject)
         {
@@ -133,6 +127,9 @@ public class LevelEditor : MonoBehaviour
         // Checks if the ray hit an object
         if (Physics.Raycast(mouseRay, out hit))
         {
+            // If we hit a gizmo with our ray, we do nothing
+            if (hit.collider.gameObject.layer == 12)
+                return;
             currentObject = hit.collider.gameObject;
             LevelObjectEditor.current.ChangeSelection(currentObject);
         }
@@ -187,7 +184,7 @@ public class LevelEditor : MonoBehaviour
     // Handles when the Middle mouse button is down
     private void MiddleMouse()
     {
-        Vector2 mDelta = (mouseDelta / 75f);
+        Vector2 mDelta = MouseHelper.delta / 75;
         levelCamera.transform.position -= new Vector3(-mDelta.x, -mDelta.y, 0);
         m_followingObject = false;
     }
@@ -224,13 +221,6 @@ public class LevelEditor : MonoBehaviour
         }
         m_followingObject = false;
         yield return null;
-    }
-
-    private void UpdateMouseDelta()
-    {
-        Vector3 newMousePos = Input.mousePosition;
-        mouseDelta = mousePos - newMousePos;
-        mousePos = newMousePos;
     }
 
     // Creates a new level

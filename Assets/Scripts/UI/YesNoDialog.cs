@@ -15,10 +15,10 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Canvas))]
 public class YesNoDialog : MonoBehaviour
 {
-    private static YesNoDialog currentDialog;
+    private static YesNoDialog m_currentDialog;
     public static YesNoDialog current
     {
-        get { return currentDialog; }
+        get { return m_currentDialog; }
     }
 
     private GameObject m_mainCanvas;
@@ -30,6 +30,7 @@ public class YesNoDialog : MonoBehaviour
 
     Canvas dialogCanvas;
 
+    [SerializeField]
     Image screenshotImage;
 
     [SerializeField]
@@ -48,8 +49,8 @@ public class YesNoDialog : MonoBehaviour
 
     private void Awake()
     {
-        if (currentDialog == null)
-            currentDialog = this;
+        if (m_currentDialog == null)
+            m_currentDialog = this;
 
         // Sets the canvas and deactivates it
         dialogCanvas = GetComponent<Canvas>();

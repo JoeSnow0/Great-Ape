@@ -7,17 +7,28 @@ using UnityEngine.UI;
 public class ComponentManager : MonoBehaviour
 {
     // The currently used ComponentManager
-    private static ComponentManager currentManager;
+    private static ComponentManager m_currentManager;
     public static ComponentManager current
     {
-        get { return currentManager; }
+        get { return m_currentManager; }
     }
 
     // GameObject in the scene that holds the list of all the component values, i.e the custom built level editor Inspector
     [SerializeField]
     Transform componentValueListHolder;
 
+    GameObject currentObject;
+
+    delegate void TypeBindDelegate();
+    Dictionary<System.Type, TypeBindDelegate> typeBindFunctions = new Dictionary<System.Type, TypeBindDelegate>();
+
+    [SerializeField]
+    LevelEditorTransformGizmo transformGizmo;
+
 #region Inspector Prefabs
+    [SerializeField]
+    GameObject gameObjectEntryPrefab;
+
     [SerializeField]
     GameObject componentEntryPrefab;
 
@@ -37,8 +48,11 @@ public class ComponentManager : MonoBehaviour
 
     private void Awake()
     {
-        if (currentManager == null)
-            currentManager = this;
+        if (m_currentManager == null)
+            m_currentManager = this;
+
+        /* Adds binding functions to a dictionary with the relevant Type as key-value */
+        typeBindFunctions.Add(typeof(Transform), BindValuesTransform);
     }
 
     // Removes all of the components in the componentHolder UI list
@@ -50,25 +64,53 @@ public class ComponentManager : MonoBehaviour
         }
     }
 
-    public List<System.Type> GenerateComponentValueList(GameObject obj)
+    // Gets the components of the current GameObject and tries to create a list of most of them
+    public void GenerateComponentValueList(GameObject obj)
     {
-        List<System.Type> types = new List<System.Type>();
+        currentObject = obj;
 
-        // Tries to get a load of different components that are supported by the level editor
+        // Starts off by binding GameObject values at the top of the custom Inspector
+        BindValuesGameObject();
 
-        // All GameObjects have a Transform so we can assume it has one
-        types.Add(typeof(Transform));
-        BindValuesTransform(obj.transform);
+        // Loops through all the components of the current GameObject
+        foreach(Component c in currentObject.GetComponents<Component>())
+        {
+            // Identifies the spcific type of the component
+            System.Type t = c.GetType();
 
+            // Checks if the Level Editor has support for that specific type
+            if (!typeBindFunctions.ContainsKey(t))
+                continue;
 
-        return types;
+            // Calls the binding function for the current type
+            typeBindFunctions[t]();
+        }
     }
 
     // Methods for getting values and binding them to UI components so you can change them in the Level Editor
 #region Component Bind Methods
-
-    private void BindValuesTransform(Transform trans)
+    
+    // Creates input fields for the basic GameObject values
+    private void BindValuesGameObject()
     {
+        GameObject objEntry = Instantiate(gameObjectEntryPrefab, componentValueListHolder);
+        
+        // Gets the input field for changing the GameObject's name
+        InputField nameInput = objEntry.GetComponentInChildren<InputField>();
+        nameInput.onEndEdit.AddListener((string s) => currentObject.name = s);
+        // Sets the start value
+        nameInput.text = currentObject.name;
+
+        //TODO: Make it so you can deactivate object while still seeing it
+        //GameObject field = CreateBoolInputField(currentObject.activeSelf, (bool b) => currentObject.SetActive(b));
+        //SetupInputField(field, "Active", objEntry.transform);
+    }
+
+    // Creates input fields for the Transform class' position, rotation and scale values
+    private void BindValuesTransform()
+    {
+        Transform trans = currentObject.transform;
+
         GameObject componentEntry = Instantiate(componentEntryPrefab, componentValueListHolder);
         componentEntry.GetComponentInChildren<Text>().text = "Transform";
 
@@ -87,10 +129,7 @@ public class ComponentManager : MonoBehaviour
             if (!float.TryParse(s, out y)) return;
             trans.position = new Vector3(trans.position.x, y, trans.position.z);
         });
-        field.transform.SetParent(componentEntry.transform);
-        field.GetComponentInChildren<Text>().text = "Position";
-        field.transform.localScale = Vector3.one;
-        field.transform.localPosition = Vector3.zero;
+        SetupInputField(field, "Position", componentEntry.transform);
         #endregion
 
         // Binds the rotation of the selected object's transform and adds the vector3 input field as a child to the componentEntry
@@ -102,10 +141,7 @@ public class ComponentManager : MonoBehaviour
             if (!float.TryParse(s, out z)) return;
             trans.rotation = Quaternion.Euler(trans.eulerAngles.x, trans.eulerAngles.y, z);
         });
-        field.GetComponentInChildren<Text>().text = "Rotation";
-        field.transform.SetParent(componentEntry.transform);
-        field.transform.localScale = Vector3.one;
-        field.transform.localPosition = Vector3.zero;
+        SetupInputField(field, "Rotation", componentEntry.transform);
         #endregion
 
         // Binds the scale of the selected object's transform and adds the vector3 input field as a child to the componentEntry
@@ -123,10 +159,7 @@ public class ComponentManager : MonoBehaviour
             if (!float.TryParse(s, out y)) return;
             trans.localScale = new Vector3(trans.localScale.x, y, trans.localScale.z);
         });
-        field.transform.SetParent(componentEntry.transform);
-        field.GetComponentInChildren<Text>().text = "Scale";
-        field.transform.localScale = Vector3.one;
-        field.transform.localPosition = Vector3.zero;
+        SetupInputField(field, "Scale", componentEntry.transform);
         #endregion
     }
 
@@ -135,6 +168,15 @@ public class ComponentManager : MonoBehaviour
     // Methods for adding listeners to UI elements
 
     #region UI Listener Methods
+
+    // Method for setting parent of input field, scaling correctly and adding a label
+    private void SetupInputField(GameObject field, string label, Transform parent)
+    {
+        field.transform.SetParent(parent);
+        field.GetComponentInChildren<Text>().text = label;
+        field.transform.localScale = Vector3.one;
+        field.transform.localPosition = Vector3.zero;
+    }
 
     // Creates an instance of the Vector2 input field prefab
     private GameObject CreateSingleLineInputField(string value, UnityAction<string> action)
@@ -184,5 +226,15 @@ public class ComponentManager : MonoBehaviour
         return vector3Input;
     }
 
+    // Creates an instance of the bool input field prefab
+    private GameObject CreateBoolInputField(bool value, UnityAction<bool> action)
+    {
+        GameObject boolInput = Instantiate(boolInputPrefab);
+
+        Toggle toggle = boolInput.GetComponentInChildren<Toggle>();
+        toggle.onValueChanged.AddListener(action);
+
+        return boolInput;
+    }
     #endregion
 }
