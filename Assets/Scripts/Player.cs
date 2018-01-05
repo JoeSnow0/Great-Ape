@@ -57,20 +57,18 @@ public class Player : MonoBehaviour
 
         // Sets animator values
         apeAnim.SetBool("Walking", (Mathf.Abs(velocity.x) > 2 && controller.collisions.below));
+        apeAnim.SetBool("Falling", !controller.collisions.below && velocity.y < 0);
+        apeAnim.SetBool("Grounded", controller.collisions.below);
 
+        // Rotates the character mesh based on which way the player is facing
         if (velocity.x != 0)
             transform.GetChild(0).rotation = Quaternion.Euler(transform.eulerAngles.x, (velocity.x > 0) ? 0 : 180, transform.eulerAngles.z);
 
-        apeAnim.SetBool("Falling", !controller.collisions.below && velocity.y < 0);
-
-        apeAnim.SetBool("Grounded", controller.collisions.below);
 
         CalculateVelocity();
         //HandleWallSliding();
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
-        //Animate
-        //playerAnimation.animatesomething;
 
         if (controller.collisions.above || controller.collisions.below)
         {
@@ -87,6 +85,8 @@ public class Player : MonoBehaviour
         // If we just landed we trigger the landing animation
         if (controller.collisions.below && !oldBelow)
             apeAnim.SetTrigger("Land");
+
+        
     }
 
     public void SetDirectionalInput(Vector2 input)
