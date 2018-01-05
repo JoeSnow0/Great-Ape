@@ -36,7 +36,12 @@ namespace Anima2D
 			get { return m_SpriteMesh; }
 			set { m_SpriteMesh = value; }
 		}
-		
+
+		public int sortingOrder {
+			get { return m_SortingOrder; }
+			set { m_SortingOrder = value; }
+		}
+
 		public Material sharedMaterial {
 			get {
 				if(m_Materials.Length > 0)
@@ -83,10 +88,7 @@ namespace Anima2D
 			}
 		}
 
-		public int sortingOrder {
-			get { return m_SortingOrder; }
-			set { m_SortingOrder = value; }
-		}
+
 
 		List<Bone2D> m_CachedBones = new List<Bone2D>();
 

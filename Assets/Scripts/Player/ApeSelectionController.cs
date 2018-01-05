@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Anima2D;
 
 public class ApeSelectionController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ApeSelectionController : MonoBehaviour
     static public Player activeApe;
     public Player[] apePrefabs;
     public GameObject arrowObject;
+    static int apeCount = 0;
 
     private void Start()
     {
@@ -51,6 +53,12 @@ public class ApeSelectionController : MonoBehaviour
     {
         //Instansiate new ape, assign stats, animation etc
         Player newApe = Instantiate(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
+        Color newApeCol = new Color(Random.value, Random.value, Random.value, 1);
+        foreach (SpriteMeshInstance smi in newApe.GetComponentsInChildren<SpriteMeshInstance>())
+        {
+            smi.sortingOrder = ++apeCount;
+            smi.color = newApeCol;
+        }
         //Add it to the ape list
         apeList.Add(newApe);
     }
