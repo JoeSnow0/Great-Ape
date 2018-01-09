@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     float accelerationTimeGrounded = .1f;
     [Range(0, 100)]
     public float moveSpeed;
-
+    
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
