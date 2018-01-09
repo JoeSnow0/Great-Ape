@@ -6579,7 +6579,8 @@ MonoBehaviour:
   apeList: []
   apePrefabs:
   - {fileID: 114534724101239146, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
-  - {fileID: 114534724101239146, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3, type: 2}
+  - {fileID: 114534724101239146, guid: f2cf3c4f2a2ba6a45986b56bbe75488c, type: 2}
+  - {fileID: 114534724101239146, guid: 4876f199445544a4b8a275190dd93d0c, type: 2}
   arrowObject: {fileID: 1306698533840064}
 --- !u!114 &114434884940401168
 MonoBehaviour:
