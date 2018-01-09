@@ -27,11 +27,11 @@ public class ApeSelectionController : MonoBehaviour
         {
             SwitchApe(activeApe, false);
         }
-
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
-        {
-            AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
-        }
+        //For testing
+        //if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
+        //{
+        //    AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+        //}
         if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             AddApe(apePrefabs[1], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
