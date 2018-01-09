@@ -30,17 +30,17 @@ public class ApeSelectionController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
         {
-            AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+            AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         }
         if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            AddApe(1, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+            AddApe(apePrefabs[1], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         }
     }
     public void InitializeApes()
     {
         //Update list of apes, add all available apes in the scene
-        AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+        AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         //Target first ape in list
         apeList[0].playerInput.SetApeState(true);
         activeApe = apeList[0];
@@ -49,10 +49,10 @@ public class ApeSelectionController : MonoBehaviour
         managerConfig.mainCamera.SetTarget(activeApe.controller);
         MoveArrowToApe();
     }
-    public void AddApe(int apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
+    public void AddApe(Player apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
     {
         //Instansiate new ape, assign stats, animation etc
-        Player newApe = Instantiate(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
+        Player newApe = Instantiate(apeType, SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
         Color newApeCol = new Color(Random.value, Random.value, Random.value, 1);
         foreach (SpriteMeshInstance smi in newApe.GetComponentsInChildren<SpriteMeshInstance>())
         {
