@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4126519013732534}
   m_Layer: 0
-  m_Name: bounce-pad(up)
+  m_Name: bounce-pad_RED
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b268d00bc0cbffe49897808aefebb3a2, type: 2}
+  - {fileID: 2100000, guid: 6b0b0492ce43aea46874a8c06a3a66c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -340,5 +340,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b95a8c2e007cd842ae3e89e1412d44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBouncePower: 100
-  otherBouncePower: 50
+  playerBouncePower: 200
+  otherBouncePower: 100

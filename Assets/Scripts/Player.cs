@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
     float accelerationTimeGrounded = .1f;
     [Range(0, 100)]
     public float moveSpeed;
-    
+    [Range(0, 10)]
+    const float APE_WEIGHT = 0;
+
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
