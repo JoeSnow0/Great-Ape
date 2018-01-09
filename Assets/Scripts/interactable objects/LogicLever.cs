@@ -29,13 +29,13 @@ public class LogicLever : MonoBehaviour
         m_stickBase = transform.GetChild(0).gameObject;
 
         indicatorObj.SetActive(false);
+
+        m_stickBase.transform.Rotate(Vector3.forward, (on) ? -45 : 45);
     }
 
 
     private void Update()
     {
-        m_stickBase.transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(m_stickBase.transform.eulerAngles.z, (on) ? 330 : 390, 0.2f));
-
         if (!m_canPress)
             return;
 
@@ -44,29 +44,32 @@ public class LogicLever : MonoBehaviour
         {
             ToggleAvailability(false);
             return;
-        }  
+        }
 
         //TODO: Fix correct keybinding for interaction
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Trigger();   
+            Trigger();
         }
     }
 
-    public void Trigger ()
+    public void Trigger()
     {
         // Inverses the on-state
         on = !on;
 
+        // Rotates the lever based on the 'on'-state
+        m_stickBase.transform.Rotate(Vector3.forward, (on) ? -90 : 90);
+
         // Calls all the methods in the lever
         leverMethods.Invoke();
-	}
+    }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Checks if the colliding object was a player
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             m_currentApe = other.GetComponent<PlayerInput>();
             // Checks if it was the player in control
@@ -90,5 +93,20 @@ public class LogicLever : MonoBehaviour
     {
         indicatorObj.SetActive(toggle);
         m_canPress = toggle;
+    }
+
+    // TODO: properly interpolate z rotation to "animate" the lever
+    IEnumerator ShiftLever(float rotAmount)
+    {
+        while (rotAmount != 0)
+        {
+            // Rotation amount this iteration
+            float itRot = Mathf.Lerp(rotAmount, 0, 0.0001f);
+            m_stickBase.transform.Rotate(Vector3.forward, itRot);
+            rotAmount -= itRot;
+
+            yield return 0;
+        }
+        yield return 0;
     }
 }
