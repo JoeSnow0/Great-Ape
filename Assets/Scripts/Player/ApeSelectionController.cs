@@ -32,10 +32,10 @@ public class ApeSelectionController : MonoBehaviour
         //{
         //    AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         //}
-        if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            AddApe(apePrefabs[1], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
-        }
+        //if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
+        //{
+        //    AddApe(apePrefabs[1], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+        //}
     }
     public void InitializeApes()
     {

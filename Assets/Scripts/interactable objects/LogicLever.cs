@@ -47,7 +47,7 @@ public class LogicLever : MonoBehaviour
         }
 
         //TODO: Fix correct keybinding for interaction
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton1))
         {
             Trigger();
         }
