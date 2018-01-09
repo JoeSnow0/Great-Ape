@@ -62,6 +62,13 @@ public class ApeSelectionController : MonoBehaviour
         //Add it to the ape list
         apeList.Add(newApe);
     }
+    public void RemoveApe(Player ape)
+    {
+        //Remove ape from list
+        apeList.Remove(ape);
+        //Delete it from scene
+        Destroy(ape.gameObject);
+    }
 
     // Switches ape to the next or previous depending on the bool "next"
     public void SwitchApe(Player apeTargetOld, bool next)
