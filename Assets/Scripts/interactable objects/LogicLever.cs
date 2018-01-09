@@ -24,6 +24,11 @@ public class LogicLever : MonoBehaviour
     // The base of the stick on the lever 
     GameObject m_stickBase;
 
+    private void Start()
+    {
+        if (on)
+            leverMethods.Invoke();
+    }
     private void Awake()
     {
         m_stickBase = transform.GetChild(0).gameObject;
@@ -31,6 +36,8 @@ public class LogicLever : MonoBehaviour
         indicatorObj.SetActive(false);
 
         m_stickBase.transform.Rotate(Vector3.forward, (on) ? -45 : 45);
+
+        
     }
 
 

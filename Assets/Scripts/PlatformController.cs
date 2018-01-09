@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlatformController : RaycastController
 {
@@ -15,10 +16,13 @@ public class PlatformController : RaycastController
     public float waitTime;
     [Range(0, 2)]
     public float easeAmount;
+    public bool manualMovement = false;
 
     int fromWaypointIndex;
     float percentBetweenWaypoints;
     float nextMoveTime;
+
+    bool canMove = true;
 
     public List<PassengerMovement> passengerMovement;
     Dictionary<Transform, Controller2D> passengerDictionary = new Dictionary<Transform, Controller2D>();
@@ -36,7 +40,6 @@ public class PlatformController : RaycastController
 
     void Update()
     {
-
         UpdateRaycastOrigins();
 
         Vector3 velocity = CalculatePlatformMovement();
@@ -57,7 +60,7 @@ public class PlatformController : RaycastController
     Vector3 CalculatePlatformMovement()
     {
 
-        if (Time.time < nextMoveTime)
+        if (Time.time < nextMoveTime || !canMove)
         {
             return Vector3.zero;
         }
@@ -85,6 +88,9 @@ public class PlatformController : RaycastController
                 }
             }
             nextMoveTime = Time.time + waitTime;
+
+            if (manualMovement)
+                canMove = false;
         }
 
         return newPos - transform.position;
@@ -205,6 +211,17 @@ public class PlatformController : RaycastController
             standingOnPlatform = _standingOnPlatform;
             moveBeforePlatform = _moveBeforePlatform;
         }
+    }
+
+    public void TriggerNextMovement()
+    {
+        if (canMove)
+        {
+            List<Vector3> reversedWaypoints = globalWaypoints.ToList();
+            reversedWaypoints.Reverse();
+            globalWaypoints = reversedWaypoints.ToArray();
+        }
+        canMove = true;
     }
 
     void OnDrawGizmos()
