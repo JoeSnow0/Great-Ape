@@ -44,7 +44,16 @@ public class LogicLever : MonoBehaviour
     private void Update()
     {
         if (!m_canPress)
+        {
+            if(m_currentApe != null)
+            {
+                if(m_currentApe.GetApeState())
+                {
+                    ToggleAvailability(true);
+                }
+            }
             return;
+        }
 
         // If the ape that entered the collider is no longer in control, we remove the availability to use the lever
         if (!m_currentApe.GetApeState())
@@ -93,6 +102,7 @@ public class LogicLever : MonoBehaviour
         if (other.gameObject == m_currentApe.gameObject)
         {
             ToggleAvailability(false);
+            m_currentApe = null;
         }
     }
 

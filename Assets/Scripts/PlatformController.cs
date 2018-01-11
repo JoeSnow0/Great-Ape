@@ -217,6 +217,9 @@ public class PlatformController : RaycastController
     {
         if (canMove)
         {
+            if (globalWaypoints == null)
+                return;
+
             List<Vector3> reversedWaypoints = globalWaypoints.ToList();
             reversedWaypoints.Reverse();
             globalWaypoints = reversedWaypoints.ToArray();

@@ -88,6 +88,8 @@ public class ApeSelectionController : MonoBehaviour
         MoveArrowToApe();
         //Activate ape
         activeApe.playerInput.SetApeState(true);
+
+        //Activate any adjacent lever's triggers
     }
 
     public void DeselectAllOtherApes()
