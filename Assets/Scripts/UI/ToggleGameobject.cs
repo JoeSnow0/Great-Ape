@@ -14,11 +14,12 @@ public class ToggleGameobject : MonoBehaviour {
     private void Start()
     {
         levelName.text = SceneManager.GetActiveScene().name;
-        escapeKey = keybindings.keybinding[keybindings.keybinding.Count - 1].keyValue;
+        
         childObject = transform.GetChild(0).gameObject;
         menuButtons = GetComponentsInChildren<MenuButtons>();
     }
     void Update () {
+        escapeKey = keybindings.keybinding[keybindings.keybinding.Count - 1].keyValue;
         if (Input.GetKeyDown(escapeKey))
         {
             Toggle();

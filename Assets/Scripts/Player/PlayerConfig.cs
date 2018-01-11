@@ -4,6 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(PlayerController))]
 public class PlayerConfig : MonoBehaviour
 {
+    enum ApeStates {Idle, Walking, Sprinting, Jumping, Falling, Climbing, Swinging};
+    ApeStates apeState = ApeStates.Idle;
     //Jumping Height
     [Range(1, 100)]
     public float maxJumpHeight = 4;

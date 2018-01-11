@@ -13,20 +13,21 @@ using UnityEngine.UI;
 
 public class LevelObjectEditor : MonoBehaviour
 {
-    private static LevelObjectEditor currentEditor;
+    private static LevelObjectEditor m_currentEditor;
     public static LevelObjectEditor current
     {
-        get { return currentEditor; }
+        get { return m_currentEditor; }
     }
 
     private GameObject currentObject;
 
-    List<System.Type> currentComponents = new List<System.Type>();
+    [SerializeField]
+    LevelEditorTransformGizmo transformGizmo;
 
     private void Awake()
     {
-        if(currentEditor == null)
-            currentEditor = this;
+        if(m_currentEditor == null)
+            m_currentEditor = this;
     }
 
 
@@ -40,6 +41,14 @@ public class LevelObjectEditor : MonoBehaviour
             GameObject c = currentObject;
             DeselectObject();
             DestroyObject(c);
+            return;
+        }
+
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D))
+        {
+            GameObject copiedObj = Instantiate(currentObject, currentObject.transform.position + Vector3.right, currentObject.transform.rotation);
+            Destroy(copiedObj.GetComponent<cakeslice.Outline>());
+            return;
         }
     }
 
@@ -62,6 +71,8 @@ public class LevelObjectEditor : MonoBehaviour
         currentObject.AddComponent<cakeslice.Outline>();
         ComponentManager.current.GenerateComponentValueList(currentObject);
         ChangeName(newSelection.name);
+
+        transformGizmo.SetTransform(currentObject.transform);
     }
 
     // Deselects the currently selected object in the level
@@ -77,9 +88,11 @@ public class LevelObjectEditor : MonoBehaviour
         Destroy(currentObject.GetComponent<cakeslice.Outline>());
 
         ComponentManager.current.ClearComponentValueList();
+
+        transformGizmo.SetTransform(null);
     }
 
-    
+
     public void OnNameChanged(Text newName)
     {
         if (currentObject == null)

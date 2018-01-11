@@ -21,6 +21,8 @@ public class UpdateWorlds : EditorWindow {
         if(GUILayout.Button("Update worlds"))
         {
             string[] levelFolders = Directory.GetDirectories("Assets/Resources/Levels");
+
+
             List<string> worldNames = new List<string>();
             for (int i = 0; i < levelFolders.Length; i++)
             {
@@ -34,6 +36,8 @@ public class UpdateWorlds : EditorWindow {
                     l[li].world = i;
                 }
             }
+            //TODO: FIX scenename!!!!!!!
+
             worlds.worldNames = worldNames;
             AssetDatabase.SaveAssets();
         }

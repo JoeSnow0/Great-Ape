@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelInfo", menuName = "Levels/Level Info", order = 1)]
 public class LevelInfo : ScriptableObject
 {
+    // Ingame display name
     public string levelName;
     public Sprite thumbnail;
-    public Object scene;
     [HideInInspector] public int world;
     [Range(0, 3)] public int score;
 }

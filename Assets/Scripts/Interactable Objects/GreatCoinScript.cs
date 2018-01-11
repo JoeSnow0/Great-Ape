@@ -11,9 +11,10 @@ public class GreatCoinScript : MonoBehaviour {
         coinAnimator = GetComponentInChildren<Animator>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.gameObject.tag == "Player")
+
+        if (col.gameObject.CompareTag("Player"))
         {
             CoinCollected();
         }
@@ -21,8 +22,11 @@ public class GreatCoinScript : MonoBehaviour {
 
     private void CoinCollected()
     {
-        //Add score
+        //Update score with collected coin
+
+        //sound effect
+        
         //Remove Coin from game
-        Destroy(this);   
+        Destroy(gameObject);   
     }
 }
