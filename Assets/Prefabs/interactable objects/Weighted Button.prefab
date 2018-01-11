@@ -334,7 +334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredWeight: 4
-  rayAmount: 5
+  canTriggerOnce: 0
+  rayAmount: 3
   rayLength: 0.5
   mask:
     serializedVersion: 2
