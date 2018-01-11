@@ -1400,7 +1400,7 @@ MonoBehaviour:
   minJumpHeight: 15
   timeToJumpApex: 0.4
   moveSpeed: 60
-  weight: 0
+  weight: 2
   wallJumpClimb: {x: 0, y: 0}
   wallJumpOff: {x: 0, y: 0}
   wallLeap: {x: 0, y: 0}

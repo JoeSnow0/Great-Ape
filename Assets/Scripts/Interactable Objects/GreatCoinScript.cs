@@ -27,6 +27,6 @@ public class GreatCoinScript : MonoBehaviour {
         //sound effect
         
         //Remove Coin from game
-        Destroy(gameObject);   
+        Destroy(gameObject, 3);   
     }
 }
