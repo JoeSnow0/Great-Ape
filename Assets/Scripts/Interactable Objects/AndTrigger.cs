@@ -12,6 +12,8 @@ public class AndTrigger : MonoBehaviour
 
     public UnityEvent triggerMethod;
 
+    public bool canTriggerOnce = false;
+
     bool on;
 
     void Awake()
@@ -19,21 +21,25 @@ public class AndTrigger : MonoBehaviour
         requiredTriggers = triggers.Count;
         foreach(TriggerObject t in triggers)
         {
-            t.triggerMethods.AddListener(() => Trigger(t));
+            TriggerObject temp = t;
+            t.triggerMethods.AddListener(() => Trigger(temp));
 
-            Trigger(t);
+            if(t.on)
+                Trigger(t);
         }
     }
 
     private void Trigger(TriggerObject t)
     {
-        m_currentTriggers += (t.on) ? 1 : 0;
+        m_currentTriggers += (t.on) ? 1 : -1;
 
         if (m_currentTriggers >= requiredTriggers)
         {
             on = true;
 
             triggerMethod.Invoke();
+            if (canTriggerOnce)
+                enabled = false;
         }
         else if(on)
         {
