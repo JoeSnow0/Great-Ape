@@ -11,8 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28eaa22c41a03de45a996094f25f6c88, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  levelName: Test Lab
+  levelName: TheLab_ButtonRoom_01_02
   thumbnail: {fileID: 21300000, guid: 0c75ad79c20608d418c16becbbd2f078, type: 3}
-  scene: {fileID: 102900000, guid: 12198604e841d244ba538bee70cdcda8, type: 3}
   world: 0
   score: 2

@@ -32,7 +32,7 @@ public class CageTrigger : MonoBehaviour
     {
         if (collision.gameObject == ApeSelectionController.activeApe.gameObject)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.E))
             {
                 TriggerCage();
             }

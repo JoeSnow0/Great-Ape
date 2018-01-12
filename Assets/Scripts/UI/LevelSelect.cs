@@ -21,6 +21,7 @@ public class LevelSelect : MonoBehaviour {
 
     static public LevelInfo[] levels;
     List<Transform> worlds = new List<Transform>();
+    List<Text> names = new List<Text>();
 
     [SerializeField] Color[] colors;
 
@@ -53,7 +54,8 @@ public class LevelSelect : MonoBehaviour {
         for (int i = 0; i < worldNames.Count; i++)// Create the worlds
         {
             worlds.Add(Instantiate(levelsObject, worldsParent).transform);
-            Instantiate(nameObject, nameParent).GetComponent<Text>().text = worldNames[i];
+            names.Add(Instantiate(nameObject, nameParent).GetComponent<Text>());
+            names[i].text = worldNames[i];
         }
 
         for (int i = 0; i < levels.Length; i++)// Add the levels the the worlds
