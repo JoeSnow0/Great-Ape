@@ -55,7 +55,7 @@ public class ApeSelectionController : MonoBehaviour
         Player newApe = Instantiate(apeType, SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
 
         Gradient colRange = newApe.colorRange;
-        Color newApeCol = colRange.colorKeys[Random.Range(0, colRange.colorKeys.Length - 1)].color;
+        Color newApeCol = colRange.Evaluate(Random.value);
         foreach (SpriteMeshInstance smi in newApe.GetComponentsInChildren<SpriteMeshInstance>())
         {
             smi.sortingOrder = ++apeCount;

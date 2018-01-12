@@ -56,7 +56,7 @@ public class LogicLever : TriggerObject
         }
 
         //TODO: Fix correct keybinding for interaction
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton1))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton2))
         {
             Trigger();
         }
