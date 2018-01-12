@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 83d03cb69cce3854397964a87666f41a
   - enabled: 1
-    path: Assets/Scenes/Levels/02 Button Room.unity
-    guid: f600d6911c7665a4d9cf062bf1e8aefb
+    path: Assets/Scenes/Levels/00 Tutorial.unity
+    guid: 787193eee73f0f8498032043b71f825d
   - enabled: 1
     path: Assets/Scenes/Levels/01 House of the Rising Sun.unity
     guid: ff1f67d8800f1964891a2ab7387cbc11
+  - enabled: 1
+    path: Assets/Scenes/Levels/02 Button Room.unity
+    guid: f600d6911c7665a4d9cf062bf1e8aefb
   - enabled: 1
     path: Assets/Scenes/Levels/Underground.unity
     guid: 28200a9f66ea8904d8b23f15e9fca544
