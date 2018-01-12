@@ -18,7 +18,6 @@ public class LevelSelect : MonoBehaviour {
     //[SerializeField] Animator transitionOverlay;
     InterfaceAudio interfaceAudio;
 
-
     static public LevelInfo[] levels;
     List<Transform> worlds = new List<Transform>();
     List<Text> names = new List<Text>();
