@@ -395,6 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f735798348cffdf4d87d044a13b8c9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  coinIndex: 1
 --- !u!114 &114736565953945274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,6 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f735798348cffdf4d87d044a13b8c9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  coinIndex: 0
 --- !u!114 &114900479069489078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,6 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f735798348cffdf4d87d044a13b8c9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  coinIndex: 2
 --- !u!212 &212319052209595860
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -61,7 +61,7 @@ public class WeightedButton : TriggerObject
         UpdateRaycasts();
 
         float weightPercentage = (m_currentWeight / requiredWeight);
-        Debug.Log(weightPercentage);
+        //Debug.Log(weightPercentage);
         // Updates the text showcasing total weight on and needed for the button
         indicatorText.text = m_currentWeight + " / " + requiredWeight;
         indicatorText.color = new Color(1 - weightPercentage, weightPercentage, 0, 1);
