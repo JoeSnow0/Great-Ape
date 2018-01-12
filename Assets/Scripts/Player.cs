@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     [Range(0, 100)]
     public float moveSpeed;
 
+    [Range(0, 10)]
+    public float weight = 0;
+
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;

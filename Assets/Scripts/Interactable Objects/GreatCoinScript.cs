@@ -35,8 +35,8 @@ public class GreatCoinScript : MonoBehaviour {
         //Update score with collected coin
         mainMenu.AddScore(coinIndex);
         //sound effect
-        
+
         //Remove Coin from game
-        Destroy(gameObject);   
+        gameObject.SetActive(false);   
     }
 }
