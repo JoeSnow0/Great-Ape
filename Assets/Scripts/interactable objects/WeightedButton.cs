@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class WeightedButton : MonoBehaviour
+public class WeightedButton : TriggerObject
 {
     [SerializeField]
     float requiredWeight = 1;
@@ -25,11 +25,6 @@ public class WeightedButton : MonoBehaviour
 
     [SerializeField]
     TextMesh indicatorText;
-
-    [SerializeField]
-    UnityEvent buttonMethods; 
-
-    bool on = false;
 
     List<Ray2D> m_rays = new List<Ray2D>();
 
@@ -119,7 +114,7 @@ public class WeightedButton : MonoBehaviour
         on = !on;
 
         // Calls all the methods in the UnityEvent
-        buttonMethods.Invoke();
+        triggerMethods.Invoke();
 
         if (canTriggerOnce)
             enabled = false;

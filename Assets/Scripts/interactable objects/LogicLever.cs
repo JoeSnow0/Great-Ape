@@ -4,18 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
-public class LogicLever : MonoBehaviour
+public class LogicLever : TriggerObject
 {
-    [SerializeField]
-    bool on = false;
-
     // The image (like an 'E' or something) that pops up when the player can interact with the lever
     [SerializeField]
     GameObject indicatorObj;
-
-    // Here you can add all the methods that will be called when the lever is triggered
-    [SerializeField]
-    UnityEvent leverMethods;
 
     bool m_canPress = false;
 
@@ -27,7 +20,7 @@ public class LogicLever : MonoBehaviour
     private void Start()
     {
         if (on)
-            leverMethods.Invoke();
+            triggerMethods.Invoke();
     }
     private void Awake()
     {
@@ -78,7 +71,7 @@ public class LogicLever : MonoBehaviour
         m_stickBase.transform.Rotate(Vector3.forward, (on) ? -90 : 90);
 
         // Calls all the methods in the lever
-        leverMethods.Invoke();
+        triggerMethods.Invoke();
     }
 
 
@@ -99,6 +92,8 @@ public class LogicLever : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         // Checks if the collider exiting was the player that entered before
+        if (m_currentApe == null)
+            return;
         if (other.gameObject == m_currentApe.gameObject)
         {
             ToggleAvailability(false);
