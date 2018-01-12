@@ -6,9 +6,9 @@ using UnityEngine.Events;
 public class WeightedButton : MonoBehaviour
 {
     [SerializeField]
-    float requiredWeight = 1;
+    int requiredWeight = 1;
 
-    float m_currentWeight = 0;
+    int m_currentWeight = 0;
 
     [SerializeField]
     bool canTriggerOnce = false;
@@ -79,7 +79,7 @@ public class WeightedButton : MonoBehaviour
 
     void UpdateRaycasts()
     {
-        float totalWeight = 0;
+        int totalWeight = 0;
 
         // Loops through all the rays created in Awake
         foreach(Ray2D ray in m_rays)
