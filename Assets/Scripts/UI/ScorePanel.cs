@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScorePanel : MonoBehaviour {
     const int MAX_SCORE = 3;
+    int currentScore = 0;
     List<Animator> scoreTransforms = new List<Animator>();
 
 	void Start () {
@@ -20,5 +21,6 @@ public class ScorePanel : MonoBehaviour {
     public void AddScore(int score)
     {
         scoreTransforms[score].SetBool("collected", true);
+        currentScore++;
     }
 }
