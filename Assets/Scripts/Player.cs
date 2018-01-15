@@ -6,15 +6,18 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     [Range(0, 100)]
+    public float moveSpeed;
+
+    [Header("Jump Variables")]
+    [Range(0, 100)]
     public float maxJumpHeight = 4;
     [Range(0, 100)]
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    [Range(0, 100)]
-    public float moveSpeed;
 
+    [Header("Wall Variables")]
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -29,6 +32,8 @@ public class Player : MonoBehaviour
     Vector3 velocity;
     float velocityXSmoothing;
 
+    [Header("Components")]
+
     public Controller2D controller;
     public PlayerInput playerInput;
     PlayerAnimation playerAnimation;
@@ -38,6 +43,12 @@ public class Player : MonoBehaviour
     int wallDirX;
 
     public Animator apeAnim;
+
+    [Header("Ape Info")]
+    [Range(0, 10)]
+    public int weight = 0;
+
+    public Gradient colorRange;
 
     void Start()
     {

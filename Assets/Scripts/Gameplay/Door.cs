@@ -27,14 +27,14 @@ public class Door : MonoBehaviour
 
     public void ToggleDoor()
     {
-        if (m_isOpening)
-            return;
-
         // Bases the goal position based on if the door was open or not when we toggled it
         Vector3 goal;
         goal = (open) ? orgPos : (transform.position + new Vector3(openAmount.x, openAmount.y, 0));
 
         open = !open;
+
+        if (m_isOpening)
+            StopAllCoroutines();
 
         StartCoroutine(ToggleAnimation(goal));
     }

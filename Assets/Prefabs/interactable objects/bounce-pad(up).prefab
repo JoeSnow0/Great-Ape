@@ -54,7 +54,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4126519013732534}
-  - component: {fileID: 33771137579188426}
   m_Layer: 0
   m_Name: bounce-pad(up)
   m_TagString: Untagged
@@ -89,8 +88,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1466326773986660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -439.86, y: 50.7, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalPosition: {x: -405.26, y: 53.94, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4928801810073314}
   - {fileID: 4348899620267046}
@@ -106,7 +105,7 @@ Transform:
   m_GameObject: {fileID: 1254186813907730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.48, z: 0}
-  m_LocalScale: {x: 0.24662106, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4126519013732534}
   m_RootOrder: 2
@@ -119,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 1615302431668312}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.12, z: 0}
-  m_LocalScale: {x: 0.7625, y: 0.51250184, z: 1}
+  m_LocalScale: {x: 4, y: 0.2, z: 4}
   m_Children: []
   m_Father: {fileID: 4126519013732534}
   m_RootOrder: 1
@@ -132,7 +131,7 @@ Transform:
   m_GameObject: {fileID: 1433698427465554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.19, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 4126519013732534}
   m_RootOrder: 0
@@ -252,20 +251,13 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1615302431668312}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33703464629947974
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433698427465554}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &33771137579188426
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1466326773986660}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!50 &50982659344615544
 Rigidbody2D:
@@ -348,5 +340,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b95a8c2e007cd842ae3e89e1412d44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBouncePower: 200
-  otherBouncePower: 100
+  playerBouncePower: 100
+  otherBouncePower: 50

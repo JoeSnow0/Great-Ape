@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Anima2D;
 
 public class ApeSelectionController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ApeSelectionController : MonoBehaviour
     static public Player activeApe;
     public Player[] apePrefabs;
     public GameObject arrowObject;
+    static int apeCount = 0;
 
     private void Start()
     {
@@ -25,20 +27,20 @@ public class ApeSelectionController : MonoBehaviour
         {
             SwitchApe(activeApe, false);
         }
-
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
-        {
-            AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
-        }
-        if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            AddApe(1, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
-        }
+        //For testing
+        //if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
+        //{
+        //    AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+        //}
+        //if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
+        //{
+        //    AddApe(apePrefabs[1], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+        //}
     }
     public void InitializeApes()
     {
         //Update list of apes, add all available apes in the scene
-        AddApe(0, managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
+        AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         //Target first ape in list
         apeList[0].playerInput.SetApeState(true);
         activeApe = apeList[0];
@@ -47,12 +49,27 @@ public class ApeSelectionController : MonoBehaviour
         managerConfig.mainCamera.SetTarget(activeApe.controller);
         MoveArrowToApe();
     }
-    public void AddApe(int apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
+    public void AddApe(Player apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
     {
         //Instansiate new ape, assign stats, animation etc
-        Player newApe = Instantiate(apePrefabs[apeType], SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
+        Player newApe = Instantiate(apeType, SpawnPosition, spawnRotation, managerConfig.apeHolder.transform);
+
+        Gradient colRange = newApe.colorRange;
+        Color newApeCol = colRange.Evaluate(Random.value);
+        foreach (SpriteMeshInstance smi in newApe.GetComponentsInChildren<SpriteMeshInstance>())
+        {
+            smi.sortingOrder = ++apeCount;
+            smi.color = newApeCol;
+        }
         //Add it to the ape list
         apeList.Add(newApe);
+    }
+    public void RemoveApe(Player ape)
+    {
+        //Remove ape from list
+        apeList.Remove(ape);
+        //Delete it from scene
+        Destroy(ape.gameObject);
     }
 
     // Switches ape to the next or previous depending on the bool "next"
@@ -73,6 +90,8 @@ public class ApeSelectionController : MonoBehaviour
         MoveArrowToApe();
         //Activate ape
         activeApe.playerInput.SetApeState(true);
+
+        //Activate any adjacent lever's triggers
     }
 
     public void DeselectAllOtherApes()
@@ -94,6 +113,6 @@ public class ApeSelectionController : MonoBehaviour
     private void MoveArrowToApe()
     {
         arrowObject.transform.SetParent(activeApe.transform);
-        arrowObject.transform.localPosition = Vector3.up * 4;
+        arrowObject.transform.localPosition = Vector3.up * 5;
     }
 }

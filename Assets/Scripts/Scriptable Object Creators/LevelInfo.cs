@@ -9,5 +9,5 @@ public class LevelInfo : ScriptableObject
     public string levelName;
     public Sprite thumbnail;
     [HideInInspector] public int world;
-    [Range(0, 3)] public int score;
+    [Range(0, 4)] public int score;
 }

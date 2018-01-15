@@ -16,12 +16,12 @@ public class Controller2D : RaycastController
 
     }
 
-    public void Move(Vector2 moveAmount, bool standingOnPlatform)
+    public void Move(Vector2 moveAmount, bool standOnPlatform)
     {
-        Move(moveAmount, Vector2.zero, standingOnPlatform);
+        Move(moveAmount, Vector2.zero, standOnPlatform);
     }
 
-    public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false)
+    public void Move(Vector2 moveAmount, Vector2 input, bool standOnPlatform = false)
     {
         UpdateRaycastOrigins();
 
@@ -47,7 +47,7 @@ public class Controller2D : RaycastController
 
         transform.Translate(moveAmount);
 
-        if (standingOnPlatform)
+        if (standOnPlatform)
         {
             collisions.below = true;
         }
@@ -73,7 +73,6 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
-
                 if (hit.distance == 0)
                 {
                     continue;
@@ -129,11 +128,12 @@ public class Controller2D : RaycastController
 
             Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
 
+
             if (hit)
             {
                 if (hit.collider.tag == "Through")
                 {
-                    if (directionY == 1 || hit.distance == 0)
+                    if ((directionY == 1 || hit.distance == 0))
                     {
                         continue;
                     }
@@ -144,7 +144,7 @@ public class Controller2D : RaycastController
                     if (playerInput.y == -1)
                     {
                         collisions.fallingThroughPlatform = true;
-                        Invoke("ResetFallingThroughPlatform", .5f);
+                        Invoke("ResetFallingThroughPlatform", 0.05f);
                         continue;
                     }
                 }
@@ -159,6 +159,7 @@ public class Controller2D : RaycastController
 
                 collisions.below = directionY == -1;
                 collisions.above = directionY == 1;
+
             }
         }
 
