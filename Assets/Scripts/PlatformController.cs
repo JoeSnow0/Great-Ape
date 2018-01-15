@@ -12,6 +12,7 @@ public class PlatformController : RaycastController
 
     public float speed;
     public bool cyclic;
+    public bool isOn = false;
     public float waitTime;
     [Range(0, 2)]
     public float easeAmount;
@@ -39,6 +40,11 @@ public class PlatformController : RaycastController
 
     void Update()
     {
+        //on off switch
+        if (!isOn)
+        {
+            return;
+        }
         UpdateRaycastOrigins();
 
         Vector3 velocity = CalculatePlatformMovement();
@@ -220,6 +226,11 @@ public class PlatformController : RaycastController
 
     public void TriggerNextMovement()
     {
+        if (!isOn)
+        {
+            isOn = true;
+            return;
+        }
         if (globalWaypoints == null)
             return;
 
