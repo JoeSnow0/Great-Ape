@@ -17,13 +17,17 @@ public class ComponentManager : MonoBehaviour
     [SerializeField]
     Transform componentValueListHolder;
 
-    GameObject currentObject;
-
     delegate void TypeBindDelegate();
     Dictionary<System.Type, TypeBindDelegate> typeBindFunctions = new Dictionary<System.Type, TypeBindDelegate>();
 
-    [SerializeField]
-    LevelEditorTransformGizmo transformGizmo;
+    // The object that's currently being edited
+    GameObject m_currentObject;
+
+    // The Transform input fields of the current object
+    InputField[] m_positionFields;
+    InputField m_rotationField;
+    InputField[] m_scaleFields;
+
 
 #region Inspector Prefabs
     [SerializeField]
@@ -67,13 +71,13 @@ public class ComponentManager : MonoBehaviour
     // Gets the components of the current GameObject and tries to create a list of most of them
     public void GenerateComponentValueList(GameObject obj)
     {
-        currentObject = obj;
+        m_currentObject = obj;
 
         // Starts off by binding GameObject values at the top of the custom Inspector
         BindValuesGameObject();
 
         // Loops through all the components of the current GameObject
-        foreach(Component c in currentObject.GetComponents<Component>())
+        foreach(Component c in m_currentObject.GetComponents<Component>())
         {
             // Identifies the spcific type of the component
             System.Type t = c.GetType();
@@ -97,9 +101,9 @@ public class ComponentManager : MonoBehaviour
         
         // Gets the input field for changing the GameObject's name
         InputField nameInput = objEntry.GetComponentInChildren<InputField>();
-        nameInput.onEndEdit.AddListener((string s) => currentObject.name = s);
+        nameInput.onEndEdit.AddListener((string s) => m_currentObject.name = s);
         // Sets the start value
-        nameInput.text = currentObject.name;
+        nameInput.text = m_currentObject.name;
 
         //TODO: Make it so you can deactivate object while still seeing it
         //GameObject field = CreateBoolInputField(currentObject.activeSelf, (bool b) => currentObject.SetActive(b));
@@ -109,7 +113,7 @@ public class ComponentManager : MonoBehaviour
     // Creates input fields for the Transform class' position, rotation and scale values
     private void BindValuesTransform()
     {
-        Transform trans = currentObject.transform;
+        Transform trans = m_currentObject.transform;
 
         GameObject componentEntry = Instantiate(componentEntryPrefab, componentValueListHolder);
         componentEntry.GetComponentInChildren<Text>().text = "Transform";
@@ -130,6 +134,7 @@ public class ComponentManager : MonoBehaviour
             trans.position = new Vector3(trans.position.x, y, trans.position.z);
         });
         SetupInputField(field, "Position", componentEntry.transform);
+        m_positionFields = field.GetComponentsInChildren<InputField>();
         #endregion
 
         // Binds the rotation of the selected object's transform and adds the vector3 input field as a child to the componentEntry
@@ -142,6 +147,7 @@ public class ComponentManager : MonoBehaviour
             trans.rotation = Quaternion.Euler(trans.eulerAngles.x, trans.eulerAngles.y, z);
         });
         SetupInputField(field, "Rotation", componentEntry.transform);
+        m_rotationField = field.GetComponentInChildren<InputField>();
         #endregion
 
         // Binds the scale of the selected object's transform and adds the vector3 input field as a child to the componentEntry
@@ -160,7 +166,12 @@ public class ComponentManager : MonoBehaviour
             trans.localScale = new Vector3(trans.localScale.x, y, trans.localScale.z);
         });
         SetupInputField(field, "Scale", componentEntry.transform);
+
+        m_scaleFields = field.GetComponentsInChildren<InputField>();
+
         #endregion
+
+        UpdateTransformText(trans);
     }
 
     #endregion
@@ -237,4 +248,16 @@ public class ComponentManager : MonoBehaviour
         return boolInput;
     }
     #endregion
+
+    // Sets the transform text values
+    public void UpdateTransformText(Transform t)
+    {
+        m_rotationField.text = System.Math.Round(t.eulerAngles.z, 2).ToString();
+        for(int i = 0; i < m_positionFields.Length; i++)
+        {
+            m_positionFields[i].text = System.Math.Round(t.position[i], 2).ToString();
+
+            m_scaleFields[i].text = System.Math.Round(t.localScale[i], 2).ToString();
+        }
+    }
 }

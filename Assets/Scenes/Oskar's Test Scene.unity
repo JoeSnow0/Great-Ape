@@ -360,8 +360,8 @@ GameObject:
   m_Component:
   - component: {fileID: 161159648}
   - component: {fileID: 161159651}
-  - component: {fileID: 161159649}
   - component: {fileID: 161159650}
+  - component: {fileID: 161159649}
   - component: {fileID: 161159652}
   m_Layer: 5
   m_Name: Level Editor View
@@ -446,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e12282215cdd634fb062f17fff81371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 273391487}
   stateText: {fileID: 1734610534}
   translateKey: 119
   rotationKey: 101
@@ -530,33 +531,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 194952246}
---- !u!84 &252244882
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1405
-  m_Height: 1030
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &273391482
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +626,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentValueListHolder: {fileID: 771468266}
-  transformGizmo: {fileID: 0}
   gameObjectEntryPrefab: {fileID: 1512790141411580, guid: f6fa2fa19b5dbc2438a6906c2db5b073,
     type: 2}
   componentEntryPrefab: {fileID: 1811378772099398, guid: 0c829ccb07748f44f98440532fcc1d98,
@@ -1123,33 +1096,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 668691594}
---- !u!84 &679683353
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1405
-  m_Height: 1030
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &693612696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,7 +1950,7 @@ Prefab:
     - target: {fileID: 224222294280894744, guid: 44b172cf8cd24de429c9d51f7601cc44,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -185
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224222294280894744, guid: 44b172cf8cd24de429c9d51f7601cc44,
         type: 2}
@@ -3029,6 +2975,33 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1497597943}
+--- !u!84 &1519607192
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1405
+  m_Height: 1030
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1562465389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3339,7 +3312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1734610533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3347,7 +3320,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1734610532}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -544.61, y: 452.28, z: 0}
+  m_LocalPosition: {x: -406.70004, y: 447.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 889888879}
@@ -3355,8 +3328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -544.61, y: 452.28}
-  m_SizeDelta: {x: 200, y: 75}
+  m_AnchoredPosition: {x: -406.70004, y: 447.84}
+  m_SizeDelta: {x: 475.8, y: 83.878}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1734610534
 MonoBehaviour:
@@ -3384,10 +3357,10 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 54
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 0
   m_Text: 'Position
@@ -3636,8 +3609,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 1766460416}
   outlineCamera: {fileID: 1843001769}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 679683353}
-  extraRenderTexture: {fileID: 252244882}
+  renderTexture: {fileID: 2079641030}
+  extraRenderTexture: {fileID: 1519607192}
 --- !u!124 &1766460415
 Behaviour:
   m_ObjectHideFlags: 0
@@ -3733,7 +3706,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 679683353}
+  m_TargetTexture: {fileID: 2079641030}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -3940,6 +3913,33 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_Width: 1188
   m_Height: 809
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+--- !u!84 &2079641030
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 1405
+  m_Height: 1030
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 0

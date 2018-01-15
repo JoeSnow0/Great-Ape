@@ -184,7 +184,7 @@ public class LevelEditor : MonoBehaviour
     // Handles when the Middle mouse button is down
     private void MiddleMouse()
     {
-        Vector2 mDelta = MouseHelper.delta / 75;
+        Vector2 mDelta = MouseHelper.delta / 75f;
         levelCamera.transform.position -= new Vector3(-mDelta.x, -mDelta.y, 0);
         m_followingObject = false;
     }
