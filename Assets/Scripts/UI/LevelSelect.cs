@@ -145,6 +145,37 @@ public class LevelSelect : MonoBehaviour {
         //SceneManager.LoadScene(levels[scene].scene.name);
     }
 
+    public void LoadNextScene()
+    {
+        for (int i = 0; i < levels.Length; i++)
+        {
+            if (SceneManager.GetActiveScene().name == levels[i].levelName)
+            {
+                LoadScene(levels[i + 1].levelName);
+            }
+        }
+    }
+
+    public void UpdateScore(int newScore)
+    {
+        for (int i = 0; i < levels.Length; i++)
+        {
+            if (levels[i].levelName == SceneManager.GetActiveScene().name)
+            {
+                if (levels[i].score < newScore)
+                {
+                    levels[i].score = newScore;
+                }
+            }
+        }
+        
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public int GetLast()
     {
         for (int i = 0; i < levels.Length; i++)
