@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 public class PlatformController : RaycastController
 {
@@ -59,7 +58,6 @@ public class PlatformController : RaycastController
 
     Vector3 CalculatePlatformMovement()
     {
-
         if (Time.time < nextMoveTime || !canMove)
         {
             return Vector3.zero;
@@ -79,7 +77,7 @@ public class PlatformController : RaycastController
             percentBetweenWaypoints = 0;
             fromWaypointIndex++;
 
-            if (!cyclic)
+            if (!cyclic && !manualMovement)
             {
                 if (fromWaypointIndex >= globalWaypoints.Length - 1)
                 {
@@ -87,10 +85,17 @@ public class PlatformController : RaycastController
                     System.Array.Reverse(globalWaypoints);
                 }
             }
-            nextMoveTime = Time.time + waitTime;
+            
 
             if (manualMovement)
+            {
                 canMove = false;
+                nextMoveTime = Time.time;
+            }
+            else
+            {
+                nextMoveTime = Time.time + waitTime;
+            }
         }
 
         return newPos - transform.position;
@@ -215,15 +220,18 @@ public class PlatformController : RaycastController
 
     public void TriggerNextMovement()
     {
-        if (canMove)
-        {
-            if (globalWaypoints == null)
-                return;
+        if (globalWaypoints == null)
+            return;
 
-            List<Vector3> reversedWaypoints = globalWaypoints.ToList();
-            reversedWaypoints.Reverse();
-            globalWaypoints = reversedWaypoints.ToArray();
-        }
+        nextMoveTime = Time.time;
+        fromWaypointIndex = 0;
+        System.Array.Reverse(globalWaypoints);
+
+        int toWaypointIndex = (fromWaypointIndex + 1) % globalWaypoints.Length;
+        float distanceBetweenWaypoints = Vector3.Distance(globalWaypoints[fromWaypointIndex], globalWaypoints[toWaypointIndex]);
+        float currentDistance = Vector3.Distance(globalWaypoints[toWaypointIndex], transform.position);
+        percentBetweenWaypoints = 1 - currentDistance / distanceBetweenWaypoints;
+
         canMove = true;
     }
 
