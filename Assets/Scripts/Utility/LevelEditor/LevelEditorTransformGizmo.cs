@@ -8,6 +8,9 @@ public class LevelEditorTransformGizmo : MonoBehaviour
     private Transform m_currentTransform;
 
     [SerializeField]
+    ComponentManager manager;
+
+    [SerializeField]
     Text stateText;
 
     [SerializeField]
@@ -40,19 +43,25 @@ public class LevelEditorTransformGizmo : MonoBehaviour
         if (m_currentTransform == null)
             return;
 
+        // Checks which transform tool the player wants to use
         UpdateTransformState();
 
+        // Writes the correctly chosen tool and shows the current value being transformed
+        UpdateText();
+
         // Calls the currently selected tool update method
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && MouseHelper.delta.magnitude != 0)
         {
             updateMethods[state]();
+            manager.UpdateTransformText(m_currentTransform);
         }
     }
 
     // The translate tool
     void UpdateTranslateTool()
     {
-        m_currentTransform.Translate(-new Vector3(MouseHelper.delta.x / 75, MouseHelper.delta.y / 75, 0));
+        Vector3 posDelta = new Vector3(MouseHelper.worldDelta.x, MouseHelper.worldDelta.y, 0);
+        m_currentTransform.Translate(-posDelta, Space.World);
     }
 
     // The rotation tool
@@ -66,14 +75,11 @@ public class LevelEditorTransformGizmo : MonoBehaviour
     // The scaling tool
     void UpdateScaleTool()
     {
-        Vector3 newScale = m_currentTransform.localScale;
-
         // Scales with mouse movement
-        newScale -= new Vector3(MouseHelper.delta.x / 30, MouseHelper.delta.y / 30, 0);
+        Vector3 scaleDelta = new Vector3(MouseHelper.worldDelta.x, MouseHelper.worldDelta.y, 0);
+        m_currentTransform.localScale -= scaleDelta;
         // Clamps scale to not go under 1 in the scaleable axis'
-        newScale = new Vector3(Mathf.Max(newScale.x, 1), Mathf.Max(newScale.y, 1), newScale.z);
-
-        m_currentTransform.localScale = newScale;
+        m_currentTransform.localScale = new Vector3(Mathf.Max(m_currentTransform.localScale.x, 1), Mathf.Max(m_currentTransform.localScale.y, 1), m_currentTransform.localScale.z);
     }
 
     // Checks what Transform tool the user wants
@@ -82,20 +88,33 @@ public class LevelEditorTransformGizmo : MonoBehaviour
         if (Input.GetKeyDown(translateKey))
         {
             state = TransformState.translate;
-            stateText.text = "Position";
         }
         else if (Input.GetKeyDown(rotationKey))
         {
             state = TransformState.rotation;
-            stateText.text = "Rotation";
         }
         else if (Input.GetKeyDown(scaleKey))
         {
             state = TransformState.scale;
-            stateText.text = "Scale";
         }
     }
     
+    void UpdateText()
+    {
+        switch(state)
+        {
+            case TransformState.translate:
+                stateText.text = "Position";
+                break;
+            case TransformState.rotation:
+                stateText.text = "Rotation";
+                break;
+            case TransformState.scale:
+                stateText.text = "Scale";
+                break;
+        }
+    }
+
 
     public void SetTransform(Transform t)
     {
