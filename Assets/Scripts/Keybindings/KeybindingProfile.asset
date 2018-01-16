@@ -18,21 +18,15 @@ MonoBehaviour:
   - actionName: Right
     actionMap: 1
     keyValue: 100
-  - actionName: Duck
-    actionMap: 3
-    keyValue: 115
   - actionName: Jump
     actionMap: 2
     keyValue: 32
-  - actionName: Action
+  - actionName: Interact
     actionMap: 4
-    keyValue: 306
-  - actionName: Switch >
+    keyValue: 101
+  - actionName: Switch
     actionMap: 5
     keyValue: 9
-  - actionName: Switch <
-    actionMap: 6
-    keyValue: 304
-  - actionName: Exit
+  - actionName: Menu
     actionMap: 7
     keyValue: 27

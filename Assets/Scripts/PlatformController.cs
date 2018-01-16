@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 public class PlatformController : RaycastController
 {
@@ -13,6 +12,7 @@ public class PlatformController : RaycastController
 
     public float speed;
     public bool cyclic;
+    public bool isOn = false;
     public float waitTime;
     [Range(0, 2)]
     public float easeAmount;
@@ -40,6 +40,11 @@ public class PlatformController : RaycastController
 
     void Update()
     {
+        //on off switch
+        if (!isOn)
+        {
+            return;
+        }
         UpdateRaycastOrigins();
 
         Vector3 velocity = CalculatePlatformMovement();
@@ -59,7 +64,6 @@ public class PlatformController : RaycastController
 
     Vector3 CalculatePlatformMovement()
     {
-
         if (Time.time < nextMoveTime || !canMove)
         {
             return Vector3.zero;
@@ -79,7 +83,7 @@ public class PlatformController : RaycastController
             percentBetweenWaypoints = 0;
             fromWaypointIndex++;
 
-            if (!cyclic)
+            if (!cyclic && !manualMovement)
             {
                 if (fromWaypointIndex >= globalWaypoints.Length - 1)
                 {
@@ -87,10 +91,17 @@ public class PlatformController : RaycastController
                     System.Array.Reverse(globalWaypoints);
                 }
             }
-            nextMoveTime = Time.time + waitTime;
+            
 
             if (manualMovement)
+            {
                 canMove = false;
+                nextMoveTime = Time.time;
+            }
+            else
+            {
+                nextMoveTime = Time.time + waitTime;
+            }
         }
 
         return newPos - transform.position;
@@ -215,15 +226,23 @@ public class PlatformController : RaycastController
 
     public void TriggerNextMovement()
     {
-        if (canMove)
+        if (!isOn)
         {
-            if (globalWaypoints == null)
-                return;
-
-            List<Vector3> reversedWaypoints = globalWaypoints.ToList();
-            reversedWaypoints.Reverse();
-            globalWaypoints = reversedWaypoints.ToArray();
+            isOn = true;
+            return;
         }
+        if (globalWaypoints == null)
+            return;
+
+        nextMoveTime = Time.time;
+        fromWaypointIndex = 0;
+        System.Array.Reverse(globalWaypoints);
+
+        int toWaypointIndex = (fromWaypointIndex + 1) % globalWaypoints.Length;
+        float distanceBetweenWaypoints = Vector3.Distance(globalWaypoints[fromWaypointIndex], globalWaypoints[toWaypointIndex]);
+        float currentDistance = Vector3.Distance(globalWaypoints[toWaypointIndex], transform.position);
+        percentBetweenWaypoints = 1 - currentDistance / distanceBetweenWaypoints;
+
         canMove = true;
     }
 
