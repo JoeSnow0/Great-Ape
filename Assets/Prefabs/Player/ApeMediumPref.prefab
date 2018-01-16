@@ -1411,7 +1411,7 @@ MonoBehaviour:
   weight: 2
   colorRange:
     serializedVersion: 2
-    key0: {r: 0.5376298, g: 0.6001262, b: 0.8308824, a: 1}
+    key0: {r: 0.3584559, g: 0.40076545, b: 0.5735294, a: 1}
     key1: {r: 0.24902679, g: 0.34905487, b: 0.7205882, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
