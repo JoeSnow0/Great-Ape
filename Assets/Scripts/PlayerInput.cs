@@ -28,9 +28,13 @@ public class PlayerInput : MonoBehaviour
                 player.OnJumpInputDown();
                 anim.SetTrigger("Jump");
             }
-            if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonDown("Jump"))
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("Jump"))
             {
                 player.OnJumpInputUp();
+            }
+            if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.T))
+            {
+                player.TogglePickUpItem();
             }
         }
         else

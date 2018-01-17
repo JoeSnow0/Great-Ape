@@ -1,12 +1,4 @@
-﻿/////////////////////
-///
-/// Authored by: Oskar Svensson (Dec xx, 2017)
-/// 
-/// oskar0svensson@gmail.com
-/// 
-////////////////////
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,6 +50,12 @@ public class LevelEditor : MonoBehaviour
     [SerializeField]
     DropdownMenu dropDown;
 
+    [SerializeField]
+    [Range(0.0001f, 0.01f)]
+    float cameraSpeed;
+
+    const int MIN_ORTHO_SIZE = 10;
+    const int MAX_ORTHO_SIZE = 300;
 
     private void Awake()
     {
@@ -121,15 +119,12 @@ public class LevelEditor : MonoBehaviour
 
         Vector2 mouseInRect;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(m_RT, Input.mousePosition, canvasCamera, out mouseInRect);
-        // Shoots a ray from the screen with the mouse position
         Ray mouseRay = levelCamera.ScreenPointToRay(mouseInRect);
-        RaycastHit hit;
         // Checks if the ray hit an object
-        if (Physics.Raycast(mouseRay, out hit))
+        RaycastHit2D hit = Physics2D.Raycast(mouseRay.origin, mouseRay.direction);
+        
+        if(hit.collider != null)
         {
-            // If we hit a gizmo with our ray, we do nothing
-            if (hit.collider.gameObject.layer == 12)
-                return;
             currentObject = hit.collider.gameObject;
             LevelObjectEditor.current.ChangeSelection(currentObject);
         }
@@ -148,6 +143,7 @@ public class LevelEditor : MonoBehaviour
             // Checks if we can place a block prefab
             if (currentBlock == null)
                 return;
+
             // Creates a plane which has a normal towards the camera and we place it on the level's position
             Plane rayPlane = new Plane(-levelCamera.transform.forward, m_currentLevel.transform.position);
             float enter;
@@ -184,7 +180,7 @@ public class LevelEditor : MonoBehaviour
     // Handles when the Middle mouse button is down
     private void MiddleMouse()
     {
-        Vector2 mDelta = MouseHelper.delta / 75f;
+        Vector2 mDelta = (MouseHelper.delta * levelCamera.orthographicSize) * cameraSpeed;
         levelCamera.transform.position -= new Vector3(-mDelta.x, -mDelta.y, 0);
         m_followingObject = false;
     }
@@ -192,7 +188,8 @@ public class LevelEditor : MonoBehaviour
     // Handles when the mouse was scrolled
     private void MouseScrolled(float scrollDelta)
     {
-        float orthoSize = Mathf.Clamp(levelCamera.orthographicSize - scrollDelta, 1, 100);
+        scrollDelta *= levelCamera.orthographicSize / MIN_ORTHO_SIZE;
+        float orthoSize = Mathf.Clamp(levelCamera.orthographicSize - scrollDelta, MIN_ORTHO_SIZE, MAX_ORTHO_SIZE);
         levelCamera.orthographicSize = orthoSize;
     }
 
@@ -241,7 +238,7 @@ public class LevelEditor : MonoBehaviour
         }
 
         // Creates new Level and sets a parent to it
-        GameObject levelObj = Instantiate(Resources.Load("Level Prefabs/Empty Level", typeof(Object)) as GameObject);
+        GameObject levelObj = Instantiate(Resources.Load("Level Prefabs/EmptyLevelPrefab", typeof(Object)) as GameObject);
         m_currentLevel = levelObj.AddComponent<Level>();
         levelObj.transform.SetParent(levelHolder.transform);
        

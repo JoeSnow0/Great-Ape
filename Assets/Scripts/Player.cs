@@ -37,6 +37,12 @@ public class Player : MonoBehaviour
     public Controller2D controller;
     public PlayerInput playerInput;
     PlayerAnimation playerAnimation;
+    public GameObject itemHolder;
+
+    GameObject heldItem;
+
+    [Header("Manager ref")]
+    public ManagerConfig managerConfig;
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -104,7 +110,7 @@ public class Player : MonoBehaviour
     {
         directionalInput = input;
     }
-    public void BouncePadJump(float bouncePower)
+    public void BouncePadJump(Vector2 bouncePower)
     {
         if (controller.collisions.below)
         {
@@ -118,7 +124,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                velocity.y = bouncePower;
+                velocity = bouncePower * (4f - weight);
             }
         }
     }
@@ -202,6 +208,35 @@ public class Player : MonoBehaviour
 
         }
 
+    }
+
+    public void TogglePickUpItem()
+    {
+        if(itemHolder != null)
+        {
+            if (heldItem != null)
+            {
+                heldItem.transform.SetParent(managerConfig.Mainground.transform);
+                heldItem.GetComponent<Collider2D>().enabled = true;
+                heldItem.GetComponent<Rigidbody2D>().simulated = true;
+                heldItem.transform.position += Vector3.up * 5;
+                heldItem = null;
+            }
+
+            //If hand is not empty
+            GameObject item = itemHolder.GetComponentInChildren<PickupTrigger>().availableItem;
+            if (item == null)
+                return;
+
+            itemHolder.GetComponentInChildren<PickupTrigger>().availableItem = null;
+            //if hand is empty
+            heldItem = item;
+            heldItem.transform.SetParent(itemHolder.transform);
+            heldItem.transform.localPosition = Vector3.zero;
+
+            heldItem.GetComponent<Collider2D>().enabled = false;
+            heldItem.GetComponent<Rigidbody2D>().simulated = false;
+        }
     }
 
     void CalculateVelocity()

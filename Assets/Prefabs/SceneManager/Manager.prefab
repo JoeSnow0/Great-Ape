@@ -794,6 +794,7 @@ MonoBehaviour:
   lookAheadDstX: 4
   lookSmoothTimeX: 0.2
   verticalSmoothTime: 0.2
+  horizontalSmoothTime: 0.1
   focusAreaSize: {x: 16, y: 24}
 --- !u!114 &114889110199956322
 MonoBehaviour:
@@ -813,6 +814,9 @@ MonoBehaviour:
   ingameMenu: {fileID: 1902508217232854, guid: 51646c34be2ad3942991e8eeb9b8ad55, type: 2}
   mainCamera: {fileID: 114663237233909540}
   GameEnd: {fileID: 1276054361216122}
+  Background: {fileID: 0}
+  Mainground: {fileID: 0}
+  Foreground: {fileID: 0}
 --- !u!114 &114973548006325564
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -345,5 +345,5 @@ MonoBehaviour:
   rayLength: 1.5
   mask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   indicatorText: {fileID: 102329473598197082}

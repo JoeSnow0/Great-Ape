@@ -1397,8 +1397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 60
-  maxJumpHeight: 30
-  minJumpHeight: 15
+  maxJumpHeight: 15
+  minJumpHeight: 3
   timeToJumpApex: 0.4
   wallJumpClimb: {x: 0, y: 0}
   wallJumpOff: {x: 0, y: 0}
@@ -1407,6 +1407,8 @@ MonoBehaviour:
   wallStickTime: 0
   controller: {fileID: 114652506493106154}
   playerInput: {fileID: 114090786626428392}
+  itemHolder: {fileID: 0}
+  managerConfig: {fileID: 0}
   apeAnim: {fileID: 95191195124899374}
   weight: 2
   colorRange:
