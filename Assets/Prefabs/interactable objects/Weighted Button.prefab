@@ -333,16 +333,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3eda573bc5570a4d8c2165178467d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredWeight: 4
-  canTriggerOnce: 0
-  rayAmount: 3
-  rayLength: 0.5
-  mask:
-    serializedVersion: 2
-    m_Bits: 512
-  indicatorText: {fileID: 102329473598197082}
-  buttonMethods:
+  on: 0
+  triggerMethods:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  requiredWeight: 4
+  canTriggerOnce: 0
+  rayAmount: 3
+  rayLength: 1.5
+  mask:
+    serializedVersion: 2
+    m_Bits: 768
+  indicatorText: {fileID: 102329473598197082}
