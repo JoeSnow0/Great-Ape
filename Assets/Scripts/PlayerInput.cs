@@ -32,7 +32,7 @@ public class PlayerInput : MonoBehaviour
             {
                 player.OnJumpInputUp();
             }
-            if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.T))
             {
                 player.TogglePickUpItem();
             }

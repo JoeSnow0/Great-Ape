@@ -245,7 +245,10 @@ public class PlatformController : RaycastController
 
         canMove = true;
     }
-
+    public void ToggleOnOff(bool state)
+    {
+        isOn = state;
+    }
     void OnDrawGizmos()
     {
         if (localWaypoints != null)
