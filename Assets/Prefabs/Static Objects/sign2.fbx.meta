@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 388b93fce360aaf40ae5aaec50f1006b
-timeCreated: 1516097831
+guid: c12f15d5783dcd24fad3eedd7ca4dbc7
+timeCreated: 1516192770
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -9,18 +9,18 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Icosphere
+    4300000: Cube
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 2e66659ab5c820949a3ee5b5569cfcd2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.001
     second: {fileID: 2100000, guid: 7c1dd72b7864e7a4a8a7762adac0b539, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.002
-    second: {fileID: 2100000, guid: 4e9e21e02891ead49b2125accf763b03, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

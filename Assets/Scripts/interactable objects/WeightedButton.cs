@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class WeightedButton : TriggerObject
 {
@@ -24,7 +25,10 @@ public class WeightedButton : TriggerObject
     LayerMask mask;
 
     [SerializeField]
-    TextMesh indicatorText;
+    Text indicatorText;
+
+    [SerializeField]
+    Image fillImage;
 
     List<Ray2D> m_rays = new List<Ray2D>();
 
@@ -70,17 +74,29 @@ public class WeightedButton : TriggerObject
     {
         UpdateRaycasts();
 
-        float weightPercentage = Mathf.Min((m_currentWeight / requiredWeight), 1);
+        UpdateButtonIndicators(0.1f);
+    }
+
+    void UpdateButtonIndicators(float lerpScale)
+    {
+        float weightPercentage = Mathf.Min(((float)m_currentWeight / (float)requiredWeight), 1);
         //Debug.Log(weightPercentage);
         // Updates the text showcasing total weight on and needed for the button
-        indicatorText.text = m_currentWeight + " / " + requiredWeight;
-        indicatorText.color = new Color(1 - weightPercentage, weightPercentage, 0, 1);
+        Color weightColor = new Color(1 - weightPercentage, weightPercentage, 0, .6f);
+        if (fillImage != null)
+        {
+            fillImage.color = weightColor;
+            fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount, weightPercentage, lerpScale);
+        }
+        if (indicatorText != null)
+        {
+            indicatorText.text = m_currentWeight + "/" + requiredWeight;
+        }
 
         newPos = transform.localPosition;
         newPos.y = weightPercentage * m_buttonGoalHeight;
         transform.localPosition = newPos;
     }
-
 
     void UpdateRaycasts()
     {
@@ -140,6 +156,9 @@ public class WeightedButton : TriggerObject
         triggerMethods.Invoke();
 
         if (canTriggerOnce)
+        {
+            UpdateButtonIndicators(1f);
             enabled = false;
+        }
     }
 }
