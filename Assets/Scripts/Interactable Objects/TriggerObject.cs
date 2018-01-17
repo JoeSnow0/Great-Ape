@@ -22,9 +22,9 @@ public class TriggerObject : MonoBehaviour
         int i_max = triggerMethods.GetPersistentEventCount();
         for (int i = 0; i < i_max; i++)
         {
-            GameObject target = (triggerMethods.GetPersistentTarget(i) as Component).gameObject;
+            //GameObject target = (triggerMethods.GetPersistentTarget(i) as Component).gameObject;
 
-            Gizmos.DrawLine(transform.position, target.transform.position);
+            //Gizmos.DrawLine(transform.position, target.transform.position);
         }
     }
 }
