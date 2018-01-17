@@ -1,15 +1,22 @@
 fileFormatVersion: 2
-guid: 388b93fce360aaf40ae5aaec50f1006b
-timeCreated: 1516097831
+guid: db6162b7c170c264d9d252a2abf14f3c
+timeCreated: 1516105533
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cylinder
+    100004: Plane
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Icosphere
+    400002: Cylinder
+    400004: Plane
+    2300000: Cylinder
+    2300002: Plane
+    3300000: Cylinder
+    3300002: Plane
+    4300000: Plane
+    4300002: Cylinder
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -21,6 +28,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material.002
     second: {fileID: 2100000, guid: 4e9e21e02891ead49b2125accf763b03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 7ec258cd3318c9047a9a9af9977bd16d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
