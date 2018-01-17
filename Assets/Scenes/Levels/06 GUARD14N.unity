@@ -5080,12 +5080,12 @@ Prefab:
     - target: {fileID: 224008337631693228, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 821.5
+      value: 789.5
       objectReference: {fileID: 0}
     - target: {fileID: 224008337631693228, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 513.5
+      value: 493.5
       objectReference: {fileID: 0}
     - target: {fileID: 224008337631693228, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
@@ -8485,7 +8485,6 @@ Transform:
   - {fileID: 1888840689}
   - {fileID: 1432085591}
   - {fileID: 93076756}
-  - {fileID: 1969656903}
   m_Father: {fileID: 1001193847}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11979,74 +11978,6 @@ Prefab:
     - {fileID: 61221070959188896, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1956738020
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1212928110}
-    m_Modifications:
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -311.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -33.267
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_RootOrder
-      value: 46
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 72.16137
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1993011569224574, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_Name
-      value: Ground (27)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 61221070959188896, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 541599b7b01ac0246a46be931fb0738c, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &1969656903 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4502746941742140, guid: 541599b7b01ac0246a46be931fb0738c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1956738020}
 --- !u!4 &1987724875 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4649828956082538, guid: 923bdcc18dfbb0f4d9de91d5b99e78a3,
