@@ -107,4 +107,14 @@ public class ApeSelectionController : MonoBehaviour
         arrowObject.transform.SetParent(activeApe.transform);
         arrowObject.transform.localPosition = Vector3.up * 5;
     }
+
+    public  void RemoveAllApes()
+    {
+        activeApe = null;
+        foreach(Player ape in apeList)
+        {
+            Destroy(ape.gameObject);
+        }
+        apeList.Clear();
+    }
 }

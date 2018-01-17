@@ -48,13 +48,18 @@ public class WeightedButton : TriggerObject
         // Calculates spacing between rays
         float spacing = width / (rayAmount - 1);
 
+        int middleIndex = Mathf.CeilToInt(rayAmount / 2);
+        float yRot = transform.eulerAngles.y;
         // Creates the specified amount of rays, spacing them apart
         for (int i = 0; i < rayAmount; i++)
         {
             Vector3 newOrigin = transform.position - Vector3.right * width / 2;
             newOrigin.x += i * spacing;
+            Debug.Log(transform.eulerAngles.z / 360);
+            newOrigin.y -= (middleIndex - i) * (transform.eulerAngles.z / 360);
+            Debug.Log(newOrigin.y);
 
-            m_rays.Add(new Ray2D(newOrigin, Vector3.up));
+            m_rays.Add(new Ray2D(newOrigin, transform.rotation * Vector3.up));
         }
 
         // How far the button should be pressed down
@@ -65,7 +70,7 @@ public class WeightedButton : TriggerObject
     {
         UpdateRaycasts();
 
-        float weightPercentage = (m_currentWeight / requiredWeight);
+        float weightPercentage = Mathf.Min((m_currentWeight / requiredWeight), 1);
         //Debug.Log(weightPercentage);
         // Updates the text showcasing total weight on and needed for the button
         indicatorText.text = m_currentWeight + " / " + requiredWeight;
