@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class WeightedButton : TriggerObject
 {
@@ -24,11 +25,14 @@ public class WeightedButton : TriggerObject
     LayerMask mask;
 
     [SerializeField]
-    TextMesh indicatorText;
+    Text indicatorText;
+
+    [SerializeField]
+    Image fillImage;
 
     List<Ray2D> m_rays = new List<Ray2D>();
 
-    List<GameObject> m_apesOnButton = new List<GameObject>();
+    List<GameObject> m_objectsOnButton = new List<GameObject>();
 
     // How far the button should be pressed when it's completely pressed down
     float m_buttonGoalHeight = 0;
@@ -38,18 +42,28 @@ public class WeightedButton : TriggerObject
 
     void Awake ()
     {
+        if (canTriggerOnce)
+        {
+            MeshRenderer rend = GetComponent<MeshRenderer>();
+            rend.material.color = Color.green;
+        }
         Bounds bounds = GetComponent<Collider2D>().bounds;
         float width = bounds.size.x;
         // Calculates spacing between rays
         float spacing = width / (rayAmount - 1);
 
+        int middleIndex = Mathf.CeilToInt(rayAmount / 2);
+        float yRot = transform.eulerAngles.y;
         // Creates the specified amount of rays, spacing them apart
         for (int i = 0; i < rayAmount; i++)
         {
             Vector3 newOrigin = transform.position - Vector3.right * width / 2;
             newOrigin.x += i * spacing;
+            Debug.Log(transform.eulerAngles.z / 360);
+            newOrigin.y -= (middleIndex - i) * (transform.eulerAngles.z / 360);
+            Debug.Log(newOrigin.y);
 
-            m_rays.Add(new Ray2D(newOrigin, Vector3.up));
+            m_rays.Add(new Ray2D(newOrigin, transform.rotation * Vector3.up));
         }
 
         // How far the button should be pressed down
@@ -60,17 +74,29 @@ public class WeightedButton : TriggerObject
     {
         UpdateRaycasts();
 
-        float weightPercentage = (m_currentWeight / requiredWeight);
+        UpdateButtonIndicators(0.1f);
+    }
+
+    void UpdateButtonIndicators(float lerpScale)
+    {
+        float weightPercentage = Mathf.Min(((float)m_currentWeight / (float)requiredWeight), 1);
         //Debug.Log(weightPercentage);
         // Updates the text showcasing total weight on and needed for the button
-        indicatorText.text = m_currentWeight + " / " + requiredWeight;
-        indicatorText.color = new Color(1 - weightPercentage, weightPercentage, 0, 1);
+        Color weightColor = new Color(1 - weightPercentage, weightPercentage, 0, .6f);
+        if (fillImage != null)
+        {
+            fillImage.color = weightColor;
+            fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount, weightPercentage, lerpScale);
+        }
+        if (indicatorText != null)
+        {
+            indicatorText.text = m_currentWeight + "/" + requiredWeight;
+        }
 
         newPos = transform.localPosition;
         newPos.y = weightPercentage * m_buttonGoalHeight;
         transform.localPosition = newPos;
     }
-
 
     void UpdateRaycasts()
     {
@@ -82,15 +108,28 @@ public class WeightedButton : TriggerObject
             Debug.DrawRay(ray.origin, ray.direction, Color.green, 0.1f);
             foreach(RaycastHit2D hit in Physics2D.RaycastAll(ray.origin, ray.direction, rayLength, mask))
             {
-                if (m_apesOnButton.Find((x) => hit.collider.gameObject == x))
-                    continue;
-                m_apesOnButton.Add(hit.collider.gameObject);
+                GameObject current = hit.collider.gameObject;
+                int weight = 0;
+                if(current.layer == 8)
+                {
+                    if (!current.CompareTag("MovableObject"))
+                        continue;
+                    weight = (int)current.GetComponent<Rigidbody2D>().mass;
+                }
+                else
+                {
+                    weight = current.GetComponent<Player>().weight;
+                }
 
-                totalWeight += hit.collider.GetComponent<Player>().weight;
+                if (m_objectsOnButton.Find((x) => current == x))
+                    continue;
+                m_objectsOnButton.Add(current);
+
+                totalWeight += weight;
             }
         }
 
-        m_apesOnButton.Clear();
+        m_objectsOnButton.Clear();
 
         m_currentWeight = totalWeight;
 
@@ -117,6 +156,9 @@ public class WeightedButton : TriggerObject
         triggerMethods.Invoke();
 
         if (canTriggerOnce)
+        {
+            UpdateButtonIndicators(1f);
             enabled = false;
+        }
     }
 }

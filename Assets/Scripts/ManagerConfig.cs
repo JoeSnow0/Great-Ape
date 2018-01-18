@@ -13,4 +13,7 @@ public class ManagerConfig : MonoBehaviour {
     public GameObject ingameMenu;
     public CameraFollow mainCamera;
     public GameObject GameEnd;
+    public GameObject Background;
+    public GameObject Mainground;
+    public GameObject Foreground;
 }

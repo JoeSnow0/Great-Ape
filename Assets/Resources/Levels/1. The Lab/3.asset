@@ -9,10 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28eaa22c41a03de45a996094f25f6c88, type: 3}
-  m_Name: Level 4
+  m_Name: 3
   m_EditorClassIdentifier: 
-  levelName: Sewer
+  levelName: 03 The Wall
   thumbnail: {fileID: 21300000, guid: 0c75ad79c20608d418c16becbbd2f078, type: 3}
-  scene: {fileID: 102900000, guid: 23b1baa7c1fb1b34595e45aefc6b8d0b, type: 3}
   world: 0
   score: 0

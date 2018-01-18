@@ -10,6 +10,7 @@ public class CameraFollow : MonoBehaviour
     public float lookAheadDstX;
     public float lookSmoothTimeX;
     public float verticalSmoothTime;
+    public float horizontalSmoothTime;
     public Vector2 focusAreaSize;
 
     FocusArea focusArea;
@@ -56,7 +57,8 @@ public class CameraFollow : MonoBehaviour
 
         focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
         focusPosition += Vector2.right * currentLookAheadX;
-        transform.position = (Vector3)focusPosition + Vector3.forward * depthOffset;
+        Vector3 newPos = (Vector3)focusPosition + Vector3.forward * depthOffset;
+        transform.position = new Vector3(Mathf.Lerp(transform.position.x, newPos.x, horizontalSmoothTime), newPos.y, newPos.z);
     }
 
     void OnDrawGizmos()
@@ -113,6 +115,7 @@ public class CameraFollow : MonoBehaviour
             velocity = new Vector2(shiftX, shiftY);
         }
     }
+
     public void SetTarget(Controller2D newTarget)
     {
         m_target = newTarget;

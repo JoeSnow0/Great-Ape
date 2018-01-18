@@ -340,5 +340,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b95a8c2e007cd842ae3e89e1412d44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBouncePower: 100
-  otherBouncePower: 50
+  playerBouncePower: 70
+  otherBouncePower: 70
