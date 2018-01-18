@@ -18,7 +18,8 @@ public class ApeSelectionController : MonoBehaviour
     }
     private void Update()
     {
-        //For testing
+        //For cheats
+        /*
         if (Input.GetKeyDown(KeyCode.Keypad7))
         {
             AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
@@ -31,6 +32,8 @@ public class ApeSelectionController : MonoBehaviour
         {
             AddApe(apePrefabs[2], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
         }
+        */
+
         //previous ape
         if (Input.GetKeyDown(KeyCode.Joystick1Button5) || Input.GetKey(KeyCode.LeftControl))
         {

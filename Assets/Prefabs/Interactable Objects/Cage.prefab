@@ -1080,6 +1080,7 @@ MonoBehaviour:
   m_apeToSpawn: {fileID: 114534724101239146, guid: fa4a674edc1a2dc4ca8199e04ed1b0f3,
     type: 2}
   m_modelTransform: {fileID: 4273179483623654}
+  cageOpenSFX: {fileID: 8300000, guid: 25bd895928e36e84187f6a4234f27de1, type: 3}
 --- !u!136 &136074583589784826
 CapsuleCollider:
   m_ObjectHideFlags: 1
