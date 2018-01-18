@@ -817,12 +817,6 @@ MonoBehaviour:
   Background: {fileID: 0}
   Mainground: {fileID: 0}
   Foreground: {fileID: 0}
-  soundManagerPrefab: {fileID: 114176864941848854, guid: 08763bb4e717762409d05705f0c06097,
-    type: 2}
-  musicManagerPrefab: {fileID: 114693415065745816, guid: 7691ccfd40b737543bb421a70b1a7f2f,
-    type: 2}
-  soundManager: {fileID: 0}
-  musicManager: {fileID: 0}
 --- !u!114 &114973548006325564
 MonoBehaviour:
   m_ObjectHideFlags: 1

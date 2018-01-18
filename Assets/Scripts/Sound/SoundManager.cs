@@ -5,15 +5,34 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
-    private static AudioSource m_Source;
-    void Awake()
+    public static SoundManager instance
     {
-        DontDestroyOnLoad(transform.gameObject);
-        m_Source = GetComponent<AudioSource>();
-        UpdateVolume();
+        get
+        {
+            // If an instance of this script doesn't exist already
+            if (m_instance == null)
+            {
+                // Creates a GameObject based of this class
+                GameObject prefab = (GameObject)Resources.Load("SingletonPrefabs/SoundManager");
+                // Instantiates the created GameObject
+                GameObject created = Instantiate(prefab);
+                // Prevents the object from being destroyed when changing scenes
+                DontDestroyOnLoad(created);
+                // Assigns an instance of this script
+                m_instance = created.GetComponent<SoundManager>();
+                m_instance.m_Source = created.GetComponent<AudioSource>();
+                m_instance.UpdateVolume();
+            }
+
+            return m_instance;
+        }
     }
 
-    public static void UpdateVolume()
+    private static SoundManager m_instance;
+
+    private AudioSource m_Source;
+
+    public void UpdateVolume()
     {
         if (m_Source.volume <= 0)
         {
@@ -23,17 +42,17 @@ public class SoundManager : MonoBehaviour
             m_Source.mute = false;
     }
 
-    public static void PlaySound(AudioClip clip, float volMod = 1)
+    public void PlaySound(AudioClip clip, float volMod = 1)
     {
         m_Source.pitch = 1;
         m_Source.PlayOneShot(clip, m_Source.volume * volMod);
     }
-    public static void PlayPitched(AudioClip clip, float minPitch, float maxPitch, float volMod = 1)
+    public void PlayPitched(AudioClip clip, float minPitch, float maxPitch, float volMod = 1)
     {
         m_Source.pitch = Random.Range(minPitch, maxPitch);
         m_Source.PlayOneShot(clip, m_Source.volume * volMod);
     }
-    public static void PlayDelayed(AudioClip clip, float delay)
+    public void PlayDelayed(AudioClip clip, float delay)
     {
         m_Source.clip = clip;
         m_Source.PlayDelayed(delay);

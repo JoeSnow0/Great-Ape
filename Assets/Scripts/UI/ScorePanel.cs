@@ -58,19 +58,19 @@ public class ScorePanel : MonoBehaviour {
                 switch (currentScore)
                 {
                     case 1:
-                        SoundManager.PlaySound(score1);
+                        SoundManager.instance.PlaySound(score1);
                         m_soundPlayed = true;
                         break;
                     case 2:
-                        SoundManager.PlaySound(score2);
+                        SoundManager.instance.PlaySound(score2);
                         m_soundPlayed = true;
                         break;
                     case 3:
-                        SoundManager.PlaySound(score3);
+                        SoundManager.instance.PlaySound(score3);
                         m_soundPlayed = true;
                         break;
                     default:
-                        SoundManager.PlaySound(score0);
+                        SoundManager.instance.PlaySound(score0);
                         m_soundPlayed = true;
                         break;
                 }
