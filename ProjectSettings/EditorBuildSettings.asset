@@ -12,44 +12,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/00 Tutorial.unity
     guid: 787193eee73f0f8498032043b71f825d
   - enabled: 1
-    path: Assets/Scenes/Levels/01 House of the Rising Sun.unity
+    path: Assets/Scenes/Levels/01 Making Friends.unity
     guid: ff1f67d8800f1964891a2ab7387cbc11
   - enabled: 1
     path: Assets/Scenes/Levels/02 Button Room.unity
     guid: f600d6911c7665a4d9cf062bf1e8aefb
   - enabled: 1
-    path: Assets/Scenes/Levels/Underground.unity
-    guid: 28200a9f66ea8904d8b23f15e9fca544
+    path: Assets/Scenes/Levels/03 The Wall.unity
+    guid: c3665d5ab446ccb4288145a0bd0ece0e
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 3.unity
-    guid: 69909c4f1af3d734eacf4902cd4e4767
+    path: Assets/Scenes/Levels/04 Breaking and Exiting.unity
+    guid: 7261db44befb89d48a3a3456879637a0
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 4.unity
-    guid: 23b1baa7c1fb1b34595e45aefc6b8d0b
+    path: Assets/Scenes/Levels/05 GUARD14N.unity
+    guid: 9a54397bbc233cd46a3383d88332ce41
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 5.unity
-    guid: f16474c386b193447a3e61d02d16cd95
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level 6.unity
-    guid: 2391509c551ce0c46ae7e6c94827a156
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level 7.unity
-    guid: 3011211cb9942f142bdaa0e8f75a2e6c
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level 8.unity
-    guid: c4ff156968881d44cafc38fd32da7baa
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level 9.unity
-    guid: 40f791e128d05f644bd228e221eef75c
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level 10.unity
-    guid: f8e87a65afd884c4f8e870f3ca45cdc2
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level 11.unity
-    guid: 372d6277615130e4db3fb40d4c8bda21
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level 12.unity
-    guid: 49f4b272186af224ea3dbfe0c312496f
-  - enabled: 1
-    path: Assets/Scenes/Test scenes/Thomas_Scene.unity
-    guid: 12198604e841d244ba538bee70cdcda8
+    path: Assets/Scenes/Levels/06 Bio-dome.unity
+    guid: 6db62a6f62508c34caea4c9e89ca7682
