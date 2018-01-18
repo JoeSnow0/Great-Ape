@@ -40,12 +40,13 @@ public class WeightedButton : TriggerObject
     // Gets updated each frame to represent how much weight is on the button
     Vector3 newPos;
 
+    [SerializeField] Color greenColor;
     void Awake ()
     {
         if (canTriggerOnce)
         {
             MeshRenderer rend = GetComponent<MeshRenderer>();
-            rend.material.color = Color.green;
+            rend.material.color = greenColor;
         }
         Bounds bounds = GetComponent<Collider2D>().bounds;
         float width = bounds.size.x;
