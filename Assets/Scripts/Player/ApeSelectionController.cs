@@ -27,15 +27,6 @@ public class ApeSelectionController : MonoBehaviour
         {
             SwitchApe(activeApe, false);
         }
-        //For testing
-        //if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.KeypadMultiply))
-        //{
-        //    AddApe(apePrefabs[0], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
-        //}
-        //if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.KeypadPlus))
-        //{
-        //    AddApe(apePrefabs[1], managerConfig.apeStart.transform.position, managerConfig.apeStart.transform.rotation);
-        //}
     }
     public void InitializeApes()
     {
@@ -47,6 +38,7 @@ public class ApeSelectionController : MonoBehaviour
         DeselectAllOtherApes();
         //Assign Camera to active ape
         managerConfig.mainCamera.SetTarget(activeApe.controller);
+        apeList[0].managerConfig = managerConfig;
         MoveArrowToApe();
     }
     public void AddApe(Player apeType, Vector3 SpawnPosition, Quaternion spawnRotation)
