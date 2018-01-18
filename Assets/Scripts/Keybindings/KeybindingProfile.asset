@@ -24,9 +24,15 @@ MonoBehaviour:
   - actionName: Interact
     actionMap: 4
     keyValue: 101
-  - actionName: Switch
+  - actionName: Select Next Ape
     actionMap: 5
     keyValue: 9
-  - actionName: Menu
+  - actionName: Select Previous Ape
+    actionMap: 6
+    keyValue: 306
+  - actionName: Pickup Object (Big Apes only)
+    actionMap: 3
+    keyValue: 116
+  - actionName: Exit
     actionMap: 7
     keyValue: 27
