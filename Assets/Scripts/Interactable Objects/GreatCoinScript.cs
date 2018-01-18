@@ -8,6 +8,7 @@ public class GreatCoinScript : MonoBehaviour {
     [SerializeField] ScorePanel mainMenu;
     [Range(0, 2)][SerializeField] int coinIndex;
     CircleCollider2D col;
+    public AudioClip collectSFX;
     
     private void Start()
     {
@@ -30,7 +31,7 @@ public class GreatCoinScript : MonoBehaviour {
         mainMenu.AddScore(coinIndex);
         coinAnimator.SetBool("collected", true);
         //sound effect
-
+        SoundManager.instance.PlayPitched(collectSFX, 0.9f, 1.1f);
         //Remove Coin from game
         col.enabled = false; 
     }
