@@ -621,6 +621,7 @@ MonoBehaviour:
     m_Bits: 768
   indicatorText: {fileID: 114161616224384984}
   fillImage: {fileID: 114461962951923404}
+  greenColor: {r: 0.59607846, g: 0.17254902, b: 0, a: 1}
 --- !u!114 &114461962951923404
 MonoBehaviour:
   m_ObjectHideFlags: 1

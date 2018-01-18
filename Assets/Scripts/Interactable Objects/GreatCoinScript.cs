@@ -7,10 +7,12 @@ public class GreatCoinScript : MonoBehaviour {
     Animator coinAnimator;
     [SerializeField] ScorePanel mainMenu;
     [Range(0, 2)][SerializeField] int coinIndex;
+    CircleCollider2D col;
     
     private void Start()
     {
         coinAnimator = GetComponentInChildren<Animator>();
+        col = GetComponent<CircleCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -26,9 +28,10 @@ public class GreatCoinScript : MonoBehaviour {
     {
         //Update score with collected coin
         mainMenu.AddScore(coinIndex);
+        coinAnimator.SetBool("collected", true);
         //sound effect
 
         //Remove Coin from game
-        gameObject.SetActive(false);   
+        col.enabled = false; 
     }
 }
