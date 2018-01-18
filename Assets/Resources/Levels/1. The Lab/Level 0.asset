@@ -14,4 +14,4 @@ MonoBehaviour:
   levelName: 00 Tutorial
   thumbnail: {fileID: 21300000, guid: 0a911fdabe10aad4bb06a262ac92efa9, type: 3}
   world: 0
-  score: 0
+  score: 1
