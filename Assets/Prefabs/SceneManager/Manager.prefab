@@ -454,7 +454,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 30
   m_Depth: -1
@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalOffset: 1
-  depthOffset: -60
+  depthOffset: -100
   lookAheadDstX: 4
   lookSmoothTimeX: 0.2
   verticalSmoothTime: 0.2
