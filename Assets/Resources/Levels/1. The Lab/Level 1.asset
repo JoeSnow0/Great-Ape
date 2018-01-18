@@ -14,4 +14,4 @@ MonoBehaviour:
   levelName: 01 Making Friends
   thumbnail: {fileID: 21300000, guid: 9de00a3ab2472274784051d2d7d459a5, type: 3}
   world: 0
-  score: 1
+  score: 0
