@@ -51,4 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56146bf0e6c9e4549809c024b9d13b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playlist: []
+  playlist:
+  - {fileID: 8300000, guid: d5f00be70a8f80049a1f63f8cd5dbc78, type: 3}
+  - {fileID: 8300000, guid: 523718cc7969f1e4db87e253e903102f, type: 3}
+  - {fileID: 8300000, guid: 1acc59253d3cb7341ae41724bd85ba80, type: 3}
+  - {fileID: 8300000, guid: 7241830d97bf63647b0f616db92b86f5, type: 3}
+  - {fileID: 8300000, guid: 3a81caabac031964c9a9edd54d6a36a6, type: 3}
+  - {fileID: 8300000, guid: f6a2dce65bdfd7649acd0777fe3e3b83, type: 3}

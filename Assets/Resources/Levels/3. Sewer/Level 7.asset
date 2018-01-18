@@ -13,6 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Monument
   thumbnail: {fileID: 21300000, guid: 0c75ad79c20608d418c16becbbd2f078, type: 3}
-  scene: {fileID: 102900000, guid: 3011211cb9942f142bdaa0e8f75a2e6c, type: 3}
   world: 2
   score: 0

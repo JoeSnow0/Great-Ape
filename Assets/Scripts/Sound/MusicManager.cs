@@ -85,8 +85,11 @@ public class MusicManager : MonoBehaviour
         Stop();
         playlist = clips;
         m_playingList = true;
-        m_listIndex = -1;
-        m_clipTimer = 0;
+        isPlaying = true;
+        m_listIndex = Random.Range(0, clips.Count);
+        m_Source.clip = playlist[m_listIndex];
+        m_clipTimer = m_Source.clip.length;
+        m_Source.Play();
     }
 
     public void Stop()

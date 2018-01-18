@@ -565,7 +565,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 25
 --- !u!58 &58332710982605456
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -580,7 +580,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 25
 --- !u!58 &58748820425828238
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -595,7 +595,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 25
 --- !u!61 &61901029243275264
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -711,13 +711,13 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0.5
+    m_NormalBias: 0.5
+    m_NearPlane: 2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
@@ -835,6 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 0}
   coinIndex: 1
+  collectSFX: {fileID: 8300000, guid: 1981060feb224fb4eb2ea43529883423, type: 3}
 --- !u!114 &114203301610846706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1036,6 +1037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 0}
   coinIndex: 0
+  collectSFX: {fileID: 8300000, guid: 1981060feb224fb4eb2ea43529883423, type: 3}
 --- !u!114 &114643868552811888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1227,6 +1229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 0}
   coinIndex: 2
+  collectSFX: {fileID: 8300000, guid: 1981060feb224fb4eb2ea43529883423, type: 3}
 --- !u!124 &124982376307133694
 Behaviour:
   m_ObjectHideFlags: 1
