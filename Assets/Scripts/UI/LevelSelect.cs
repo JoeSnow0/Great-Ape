@@ -71,7 +71,7 @@ public class LevelSelect : MonoBehaviour {
             Instantiate(levelObject, worlds[world]).GetComponent<LevelButton>().
                 Initialize(levels[i].levelName, 
                 levels[i].thumbnail, 
-                levels[(i > 0) ? i - 1 : 0].score, 
+                levels[(i > 1) ? i - 1 : 0].score, 
                 levels[i].score,
                 colors[0],
                 this,

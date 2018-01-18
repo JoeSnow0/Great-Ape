@@ -46,7 +46,7 @@ public class ScorePanel : MonoBehaviour {
             }
 
 
-            levelSelect.UpdateScore(currentScore);
+            levelSelect.UpdateScore(currentScore + 1);
 
             timer += Time.deltaTime;
 

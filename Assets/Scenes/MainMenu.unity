@@ -1011,6 +1011,31 @@ Prefab:
       value: 
       objectReference: {fileID: 12800000, guid: f7681131a54ee214e9c1ff8bbb6eb13d,
         type: 3}
+    - target: {fileID: 114992720441733314, guid: cfec26dfd09aff348a7dda0bf29f68cc,
+        type: 2}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114509482823873850, guid: cfec26dfd09aff348a7dda0bf29f68cc,
+        type: 2}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114588690075453476, guid: cfec26dfd09aff348a7dda0bf29f68cc,
+        type: 2}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114720759426828344, guid: cfec26dfd09aff348a7dda0bf29f68cc,
+        type: 2}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114159926436915104, guid: cfec26dfd09aff348a7dda0bf29f68cc,
+        type: 2}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cfec26dfd09aff348a7dda0bf29f68cc, type: 2}
   m_IsPrefabParent: 0
