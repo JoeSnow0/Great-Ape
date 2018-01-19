@@ -19,6 +19,8 @@ public class Door : MonoBehaviour
 
     bool m_isOpening = false;
 
+    Vector3 currentGoal;
+
     void Start()
     {
         Vector3 origin = transform.position;
@@ -37,17 +39,29 @@ public class Door : MonoBehaviour
     }
 
 
+    private void FixedUpdate()
+    {
+        if (!m_isOpening)
+            return;
+
+        if (Vector3.Distance(transform.position, currentGoal) > 0.5f)
+        {
+            transform.position = Vector3.Lerp(transform.position, currentGoal, openScaleAmount);
+        }
+        else
+        {
+            m_isOpening = false;
+        }
+    }
+
     public void ToggleDoor()
     {
         // Bases the goal position based on if the door was open or not when we toggled it
-        Vector3 goal = (open) ? orgPos : goalPos;
+        currentGoal = (open) ? orgPos : goalPos;
 
         open = !open;
 
-        if (m_isOpening)
-            StopAllCoroutines();
-
-        StartCoroutine(ToggleAnimation(goal));
+        m_isOpening = true;
     }
 
     private IEnumerator ToggleAnimation(Vector3 goalPos)

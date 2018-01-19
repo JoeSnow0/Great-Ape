@@ -35,7 +35,7 @@ public class ApeSelectionController : MonoBehaviour
         */
 
         //previous ape
-        if (Input.GetKeyDown(KeyCode.Joystick1Button5) || Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button5) || Input.GetKeyDown(KeyCode.LeftControl))
         {
             SwitchApe(activeApe, true);
         }

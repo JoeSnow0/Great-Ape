@@ -6,6 +6,7 @@ public class BouncePadSettings : MonoBehaviour
     [SerializeField] float playerBouncePower = 200;
     [SerializeField] float otherBouncePower = 20;
     public AudioClip bounceSFX;
+    public float volMod = 0.2f;
 
     private void OnTriggerEnter2D(Collider2D other)
         
@@ -16,7 +17,7 @@ public class BouncePadSettings : MonoBehaviour
             //if player reverce the speed of the player if the speed is downward
             Player player = other.GetComponent<Player>();
             //Play sfx
-            SoundManager.instance.PlayPitched(bounceSFX, 0.1f, 0.3f, 0.5f);
+            SoundManager.instance.PlayPitched(bounceSFX, 0.1f, 0.3f, volMod);
             //Add force upwards & account for rotation
             player.BouncePadJump(transform.rotation * Vector2.up * playerBouncePower);
         }
@@ -26,7 +27,7 @@ public class BouncePadSettings : MonoBehaviour
             if (rb2d != null)
             {
                 //play sfx
-                SoundManager.instance.PlayPitched(bounceSFX, 0.1f, 0.3f, 0.5f);
+                SoundManager.instance.PlayPitched(bounceSFX, 0.1f, 0.3f, volMod);
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 //Add force upwards & account for rotation
                 rb2d.AddForce(transform.rotation * Vector2.up * otherBouncePower, ForceMode2D.Impulse);

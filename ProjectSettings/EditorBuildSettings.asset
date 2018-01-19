@@ -29,3 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/06 Bio-dome.unity
     guid: 6db62a6f62508c34caea4c9e89ca7682
+  - enabled: 1
+    path: Assets/Scenes/Levels/The End.unity
+    guid: 9e0fe420d8465f049b85317efd8304d4

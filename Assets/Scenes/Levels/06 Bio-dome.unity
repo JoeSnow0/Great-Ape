@@ -1968,12 +1968,12 @@ Prefab:
     - target: {fileID: 224008337631693228, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 320
+      value: 436
       objectReference: {fileID: 0}
     - target: {fileID: 224008337631693228, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 240
+      value: 245.5
       objectReference: {fileID: 0}
     - target: {fileID: 224008337631693228, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
@@ -2098,12 +2098,12 @@ Prefab:
     - target: {fileID: 224594584049380102, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 224191894948285992, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1860060728666198, guid: 51646c34be2ad3942991e8eeb9b8ad55, type: 2}
       propertyPath: m_IsActive
@@ -15925,8 +15925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62fd2dbf985b3e43b8f33c0724e03b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openAmount: {x: 0, y: 19.22}
-  openScaleAmount: 0.02
+  openAmount: {x: 0, y: 20}
+  openScaleAmount: 0.025
   open: 0
 --- !u!1 &1317237723
 GameObject:
