@@ -1078,9 +1078,9 @@ MonoBehaviour:
   ingameMenu: {fileID: 1902508217232854, guid: 51646c34be2ad3942991e8eeb9b8ad55, type: 2}
   mainCamera: {fileID: 203312243}
   GameEnd: {fileID: 1729766622}
-  Background: {fileID: 0}
-  Mainground: {fileID: 0}
-  Foreground: {fileID: 0}
+  Background: {fileID: 1303321595}
+  Mainground: {fileID: 1001193846}
+  Foreground: {fileID: 751572575}
 --- !u!4 &268216233
 Transform:
   m_ObjectHideFlags: 0

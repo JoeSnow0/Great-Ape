@@ -2434,6 +2434,21 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -15
       objectReference: {fileID: 0}
+    - target: {fileID: 114889110199956322, guid: cc88d26a5c93902449df8284f24be5ef,
+        type: 2}
+      propertyPath: Background
+      value: 
+      objectReference: {fileID: 1303321595}
+    - target: {fileID: 114889110199956322, guid: cc88d26a5c93902449df8284f24be5ef,
+        type: 2}
+      propertyPath: Mainground
+      value: 
+      objectReference: {fileID: 1001193846}
+    - target: {fileID: 114889110199956322, guid: cc88d26a5c93902449df8284f24be5ef,
+        type: 2}
+      propertyPath: Foreground
+      value: 
+      objectReference: {fileID: 751572575}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc88d26a5c93902449df8284f24be5ef, type: 2}
   m_IsPrefabParent: 0

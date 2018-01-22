@@ -1045,12 +1045,12 @@ Prefab:
     - target: {fileID: 224594584049380102, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 224191894948285992, guid: 51646c34be2ad3942991e8eeb9b8ad55,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114706464527276154, guid: 51646c34be2ad3942991e8eeb9b8ad55, type: 2}
@@ -1815,14 +1815,14 @@ Transform:
   - {fileID: 151738291}
   - {fileID: 244666003}
   - {fileID: 1318308399}
+  - {fileID: 747655106}
   - {fileID: 1379470219}
   - {fileID: 47275817}
   - {fileID: 1783035013}
-  - {fileID: 747655106}
+  - {fileID: 144440414}
   - {fileID: 1674128746}
   - {fileID: 979410453}
   - {fileID: 315484016}
-  - {fileID: 144440414}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         controller = GetComponent<Controller2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        managerConfig = FindObjectOfType<ManagerConfig>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
