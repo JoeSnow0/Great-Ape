@@ -6695,12 +6695,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a38000d665b3e04fb3e5f093a908f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainground: {fileID: 4980161362466502}
-  background: {fileID: 4462207105404970}
+  mainground: {fileID: 1016865226972846}
+  background: {fileID: 1076551953798948}
+  menuHolder: {fileID: 1931164791777886}
   coins:
   - {fileID: 114389366619021644}
   - {fileID: 114626440972612926}
   - {fileID: 114642129558949024}
+  startText: {fileID: 102549340827850140}
+  goalText: {fileID: 102222058415117066}
+  apeScript: {fileID: 114495298001278530}
+  gameCamera: {fileID: 20063923720344966}
+  apeArrow: {fileID: 1360787655363696}
 --- !u!114 &114402957966570392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9543,7 +9549,7 @@ MonoBehaviour:
   id: 
   idParent: 
   dontSave: 0
-  componentSaveMode: 3
+  componentSaveMode: 0
   componentTypesToSave: []
 --- !u!114 &114912776487396748
 MonoBehaviour:

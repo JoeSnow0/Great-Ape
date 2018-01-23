@@ -13,6 +13,8 @@ public class CageTrigger : MonoBehaviour
     private Transform m_modelTransform;
     private BoxCollider2D m_collider2d;
 
+    public AudioClip cageOpenSFX;
+
     bool m_canUse;
 
     GameObject m_currentApe;
@@ -47,6 +49,8 @@ public class CageTrigger : MonoBehaviour
         //Spawn Ape
         m_managerConfig.apeSelectionController.AddApe(m_apeToSpawn, m_modelTransform.position, m_modelTransform.rotation);
         m_modelTransform.gameObject.SetActive(false);
+        //play sound
+        SoundManager.instance.PlayPitched(cageOpenSFX, 0.3f, 0.4f,0.2f);
         //Disable cage
         m_collider2d.enabled = false;
     }

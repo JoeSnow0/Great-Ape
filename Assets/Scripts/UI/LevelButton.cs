@@ -18,7 +18,7 @@ public class LevelButton : MonoBehaviour {
     public void SetScore(int score, Color color)
     {
         if(scoreImages.Length <= 0)
-        scoreImages = scoreParent.GetComponentsInChildren<Image>();
+            scoreImages = scoreParent.GetComponentsInChildren<Image>();
 
         if(score > 0)
         {
@@ -35,12 +35,12 @@ public class LevelButton : MonoBehaviour {
             return;
         }
 
-        if (score > 3)
+        if (score > 4)
         {
-            score = 3;
+            score = 4;
         }
 
-        for (int i = 0; i < score; i++)
+        for (int i = 0; i < (score - 1); i++)
         {
             scoreImages[i].color = color;
         }

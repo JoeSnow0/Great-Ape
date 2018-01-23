@@ -18,21 +18,21 @@ MonoBehaviour:
   - actionName: Right
     actionMap: 1
     keyValue: 100
-  - actionName: Duck
-    actionMap: 3
-    keyValue: 115
   - actionName: Jump
     actionMap: 2
     keyValue: 32
-  - actionName: Action
-    actionMap: 4
-    keyValue: 306
-  - actionName: Switch >
+  - actionName: Interact
+    actionMap: 5
+    keyValue: 101
+  - actionName: Select Next Ape
     actionMap: 5
     keyValue: 9
-  - actionName: Switch <
+  - actionName: Select Previous Ape
     actionMap: 6
     keyValue: 304
+  - actionName: Pickup Object (Big Apes only)
+    actionMap: 4
+    keyValue: 116
   - actionName: Exit
     actionMap: 7
     keyValue: 27

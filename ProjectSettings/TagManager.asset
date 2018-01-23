@@ -8,6 +8,8 @@ TagManager:
   - Through
   - MovableObject
   - Menu
+  - Sound
+  - Music
   layers:
   - Default
   - TransparentFX

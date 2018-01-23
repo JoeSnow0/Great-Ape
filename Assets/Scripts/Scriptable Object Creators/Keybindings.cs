@@ -10,7 +10,7 @@ public class Keybindings : ScriptableObject {
 }
 [Serializable] public class Keybinding
 {
-    public enum ActionMapping { left, right, jump, duck, action, switchF, switchB, exit}
+    public enum ActionMapping { left, right, jump, specialAction, interact, switchF, switchB, exit}
     public string actionName;
     public ActionMapping actionMap;
     public KeyCode keyValue;

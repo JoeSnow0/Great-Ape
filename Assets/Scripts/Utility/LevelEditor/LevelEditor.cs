@@ -238,10 +238,17 @@ public class LevelEditor : MonoBehaviour
         }
 
         // Creates new Level and sets a parent to it
-        GameObject levelObj = Instantiate(Resources.Load("Level Prefabs/EmptyLevelPrefab", typeof(Object)) as GameObject);
+        GameObject levelObj = Instantiate(Resources.Load("Level Prefabs/Empty Level", typeof(Object)) as GameObject);
         m_currentLevel = levelObj.AddComponent<Level>();
-        levelObj.transform.SetParent(levelHolder.transform);
+        
+        foreach(Transform child in levelObj.transform.GetAllChildren())
+        {
+            ObjectIdentifier objID = child.gameObject.AddComponent<ObjectIdentifier>(); 
+            objID.prefabName = child.name;
+            objID.componentSaveMode = ObjectIdentifier.ComponentSaveMode.All;
+        }
        
+        levelObj.transform.SetParent(levelHolder.transform);
         // Resets the position of the level to be at 0,0,0 locally
         m_currentLevel.transform.localPosition = Vector3.zero;
 

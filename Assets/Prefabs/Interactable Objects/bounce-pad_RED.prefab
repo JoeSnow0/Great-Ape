@@ -342,3 +342,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBouncePower: 90
   otherBouncePower: 90
+  bounceSFX: {fileID: 8300000, guid: baeef6c0f7d492340ab8d1d843857ca9, type: 3}
+  volMod: 0.05

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class UnityExtensionMethods
@@ -26,5 +27,19 @@ public static class UnityExtensionMethods
         }
 
         return count;
+    }
+
+    // Gets all children and sub-children
+    public static List<Transform> GetAllChildren(this Transform trans)
+    {
+        List<Transform> children = new List<Transform>();
+        
+        foreach(Transform child in trans)
+        {
+            children.Add(child);
+            children.AddRange(child.GetAllChildren());
+        }
+
+        return children;
     }
 }

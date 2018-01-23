@@ -6128,6 +6128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709040e9521b21449b052845fa76922a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score0: {fileID: 8300000, guid: ad41d94b4c4267b4b962e3af041d4283, type: 3}
+  score1: {fileID: 8300000, guid: c569fca229fb6734095efba60f92cfc9, type: 3}
+  score2: {fileID: 8300000, guid: 5e0e1fe3c8908494a9838bd75b98f604, type: 3}
+  score3: {fileID: 8300000, guid: 0987a48aa9f04c84bb26f56ae04a25a1, type: 3}
   scorePanel: {fileID: 224595662814736272}
   scoreEndPanel: {fileID: 224197942574952254}
   endPanel: {fileID: 1499201568240428}
