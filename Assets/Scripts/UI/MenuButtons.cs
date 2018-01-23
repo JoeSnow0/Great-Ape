@@ -66,6 +66,7 @@ public class MenuButtons : MonoBehaviour {
 
     public void ExitApplication()
     {
+        Debug.Log("shutdown successful");
         Application.Quit();
     }
 
