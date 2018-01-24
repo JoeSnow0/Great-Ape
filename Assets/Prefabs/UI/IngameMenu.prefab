@@ -1042,7 +1042,6 @@ GameObject:
   - component: {fileID: 224724628472678126}
   - component: {fileID: 114792932467670154}
   - component: {fileID: 95708875193022810}
-  - component: {fileID: 114706464527276154}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -7827,21 +7826,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114706464527276154
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1490291554914804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Text: {fileID: 114038446641386512}
-  m_Image: {fileID: 0}
-  m_RectTransform: {fileID: 224724628472678126}
-  m_Toggle: {fileID: 114792932467670154}
 --- !u!114 &114708780086479876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15733,7 +15717,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 242}
+  m_SizeDelta: {x: 0, y: 340}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224688168010861790
 RectTransform:
